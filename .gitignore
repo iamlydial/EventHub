@@ -22,9 +22,8 @@ node_modules/
 .DS_Store
 
 # Compiled JavaScript/TypeScript files
-*.js
-*.js.map
-*.d.ts
+# *.js.map
+# *.d.ts
 
 # Dependency lock files
 package-lock.json
