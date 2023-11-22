@@ -29,4 +29,7 @@ body {
 }
 
 .app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure app takes full height of viewport */
 }
