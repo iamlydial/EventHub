@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+
+# Build output
+/build/
+/dist/
+/out/
+
+# Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.iml
+*.log
+
+# macOS
+.DS_Store
+
+# Compiled JavaScript/TypeScript files
+*.js
+*.js.map
+*.d.ts
+
+# Dependency lock files
+package-lock.json
+yarn.lock
+
+# Tailwind CSS cache
+.cache/
+.next/
