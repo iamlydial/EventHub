@@ -5,6 +5,9 @@ import Navbar from "./scenes/global/Navbar";
 import Footer from "./scenes/global/Footer";
 import Signup from "./scenes/signup/Signup";
 import Login from "./scenes/login/Login";
+import ContactUs from "./scenes/contactus/ContactUs";
+import Services from "./scenes/services/Services";
+import Gallery from "./scenes/gallery/Gallery";
 
 const App: React.FC = () => {
   const ScrollToTop = () => {
@@ -22,6 +25,9 @@ const App: React.FC = () => {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/services" element={<Gallery />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>
