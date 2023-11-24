@@ -15,7 +15,7 @@ const Nav: React.FC<NavProps> = () => {
       {isAboveMediumScreens ? (
         <nav className="flex justify-between font-mukta items-center max-container">
           <a href="/">
-            <img src={logoNavbar} alt="Logo" width={100} height="auto" />
+            <img src={logoNavbar} alt="Logo" width={95} height="auto" />
           </a>
           <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden">
             {navLinks.map((link, index) => (

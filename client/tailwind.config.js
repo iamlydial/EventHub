@@ -23,6 +23,7 @@ export default {
         nyanza: "#E1F4CB",
         sage: "#BACBA9",
         "dutch-white": "#e9dab2",
+        onyx: "#393E41",
       },
       boxShadow: {
         "3xl": "0 10px 40px rgba(0, 0, 0, 0.1)",
