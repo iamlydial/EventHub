@@ -4,7 +4,7 @@ const mysql = require('mysql');
 // Create a connection pool
 const pool = mysql.createPool({
     host: 'localhost',
-    user: 'yroot',
+    user: 'root',
     password: '123456789',
     database: 'test',
     waitForConnections: true,
@@ -12,5 +12,5 @@ const pool = mysql.createPool({
     queueLimit: 0,
 });
 
-// Export the pool to be used in other parts of the application
+// Export the pool to be used in other parts of the eventhub project
 module.exports = pool.promise();

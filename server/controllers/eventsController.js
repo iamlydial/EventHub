@@ -25,4 +25,4 @@ module.exports = {
   createEvent,
 };
 
-// We are assuming if there is a successful insertion into database, a JavaScript object is created with details about the new event.
+// We are assuming if there is a successful insertion into eventhub database, a JavaScript object is created with details about the new event.
