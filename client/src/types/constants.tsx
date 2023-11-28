@@ -27,7 +27,7 @@ export const footerLinks = [
       links: [
           { name: "Birthday", link: "/gallery" },
           { name: "Kids Birthday", link: "/gallery" },
-          { name: "bbay Shower", link: "/gallery" },
+          { name: "Baby Shower", link: "/gallery" },
           { name: "Bridal Party", link: "/gallery" },
       ],
   },
