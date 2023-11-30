@@ -1,7 +1,7 @@
 # EventHub
 All your event needs under one roof.
 
-# :tada: EventHub :admission_tickets:
+# :tada: EventHub 
 ## Team Names List:
 - :woman: Nasra Hussein 
 - :woman: Lydia Lavecchia 
