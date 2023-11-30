@@ -1,24 +1,56 @@
-//This is our main Backend file.
+//This is the main backend file 
 
 const express = require("express");
+const session = require('express-session');
 const app = express();
-const mysql = require('mysql')
+const db = require('./db'); 
 const userController = require('./controllers/userController');
-const eventsController = require('./controllers/eventsController'); 
+const bookingController = require('./controllers/bookingController');
 const authController = require('./controllers/authController');
+const confirmationController = require('./controllers/confirmationController');
+const helpController = require('./controllers/helpController');
+const homeController = require('./controllers/homeController');
+const dashboardController = require('./controllers/dahsboardController');
+
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
+const router = express.Router();
 
-// This is middleware configuration from the Express application. It allows us to parse incoming JSON payload.
+// Middleware configuration from the Express application. It allows us to parse incoming JSON payload.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Here are the controllers routes: 
-app.use('/users', userController);
-app.use('/events', eventsController);
-app.use('/auth', authController);
+// Use express-session middleware
+  app.use(session({
+  secret: '123456789',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }, 
+}));
 
-// Here is a route for the userController file and inserts users data into users table in database: 
+// Controllers routes for all our controller/router files:
+app.use('/users', userController);
+app.use('/events', bookingController);
+pp.use('/auth', authController);
+app.use('/confirmation', confirmationController);
+app.use('/help', helpController);
+app.use('/home', homeController);
+app.use('/dashboard', dashboardController);
+
+
+// Testing endpoint to check the database connection:
+app.get('/testdbconnection', async (req, res) => {
+  try {
+    const [rows, fields] = await db.execute('SELECT 1');
+    res.json({ message: 'Database connection successful' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Database connection error' });
+  }
+});
+
+
+// Route for retrieving users data from the database
 app.get('/users', async (req, res) => {
   try {
     const [rows, fields] = await db.execute('SELECT * FROM users');
@@ -29,28 +61,23 @@ app.get('/users', async (req, res) => {
   }
 });
 
-// Here is the route for the eventController file:
-app.post('/events/create', (req, res) => {
- 
-  const jsonData = req.body;
+// Route for creating events using the eventsController
+app.post('/events/create', async (req, res) => {
+  try {
+    const jsonData = req.body;
 
-  const formData = req.body;
+    // Call the createEvent method from bookingController
+    const createdEvent = await bookingController.createEvent(jsonData);
 
-  // This uses the method createEvent in the eventController file:
-  eventsController.createEvent(jsonData)
-    .then((createdEvent) => {
-      res.status(201).json({ message: 'Your Event has been created successfully', event: createdEvent });
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json({ message: 'Internal Server Error' });
-    });
+    res.status(201).json({ message: 'Your Event has been created successfully', event: createdEvent });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
-
-
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-
+module.exports = router;
