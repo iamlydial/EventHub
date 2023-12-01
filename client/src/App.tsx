@@ -43,7 +43,7 @@ const App: React.FC = () => {
         <li>
           Why: Gardening is a calming and deeply relaxing activity that brings peace to my mind. During the lockdown, I discovered the joy of baking, and it has become a passion ever since. Taking care of my well-being is a priority, so I strive to stay active as much as possible.
         </li>
-      </ul>
+      </ul><br></br>
 
       <h2>Minka Ansa</h2>
       <ul>
@@ -52,25 +52,25 @@ const App: React.FC = () => {
         <li>
           Why: I was raised listening to music. I used to play the harp when I was younger
         </li>
-      </ul>
+      </ul><br></br>
 
-      <h2>Nasra</h2>
+      <h2>Nasra Hussein</h2>
       <ul>
-        <li>Name: Mimi Brown</li>
-        <li>Favorite Hobby: Gardening, baking, and fitness.</li>
+        <li>Name: Nasra Hussein</li>
+        <li>Favorite Hobby: Cooking.</li>
         <li>
-          Why: Gardening is a calming and deeply relaxing activity that brings peace to my mind. During the lockdown, I discovered the joy of baking, and it has become a passion ever since. Taking care of my well-being is a priority, so I strive to stay active as much as possible.
+          Why: I enjoy the challenge and I love trying different cuisines.
         </li>
-      </ul>
+      </ul><br></br>
 
-      <h2>Jessica</h2>
+      <h2>Jessica Palmer</h2>
       <ul>
-        <li>Name: Mimi Brown</li>
-        <li>Favorite Hobby: Gardening, baking, and fitness.</li>
+        <li>Name: Jessica Palmer</li>
+        <li>Favorite Hobby: Cycling.</li>
         <li>
-          Why: Gardening is a calming and deeply relaxing activity that brings peace to my mind. During the lockdown, I discovered the joy of baking, and it has become a passion ever since. Taking care of my well-being is a priority, so I strive to stay active as much as possible.
+          Why: I like staying active. I even cycle to work. One day I'd like to participate a cycling event.
         </li>
-      </ul>
+      </ul><br></br>
 
       <h2>Lydia</h2>
       <ul>
@@ -79,7 +79,7 @@ const App: React.FC = () => {
         <li>
           Why: It's tasty and it relaxes me!
         </li>
-      </ul>
+      </ul><br></br>
       <Footer />
       </div>
   );
