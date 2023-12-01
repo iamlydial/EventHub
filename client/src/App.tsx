@@ -44,6 +44,42 @@ const App: React.FC = () => {
           Why: Gardening is a calming and deeply relaxing activity that brings peace to my mind. During the lockdown, I discovered the joy of baking, and it has become a passion ever since. Taking care of my well-being is a priority, so I strive to stay active as much as possible.
         </li>
       </ul>
+
+      <h2>Minka Ansa</h2>
+      <ul>
+        <li>Name: Minka Ansa</li>
+        <li>Favorite Hobby: Drawing, Listening to Music.</li>
+        <li>
+          Why: I was raised listening to music. I used to play the harp when I was younger
+        </li>
+      </ul>
+
+      <h2>Nasra</h2>
+      <ul>
+        <li>Name: Mimi Brown</li>
+        <li>Favorite Hobby: Gardening, baking, and fitness.</li>
+        <li>
+          Why: Gardening is a calming and deeply relaxing activity that brings peace to my mind. During the lockdown, I discovered the joy of baking, and it has become a passion ever since. Taking care of my well-being is a priority, so I strive to stay active as much as possible.
+        </li>
+      </ul>
+
+      <h2>Jessica</h2>
+      <ul>
+        <li>Name: Mimi Brown</li>
+        <li>Favorite Hobby: Gardening, baking, and fitness.</li>
+        <li>
+          Why: Gardening is a calming and deeply relaxing activity that brings peace to my mind. During the lockdown, I discovered the joy of baking, and it has become a passion ever since. Taking care of my well-being is a priority, so I strive to stay active as much as possible.
+        </li>
+      </ul>
+
+      <h2>Lydia</h2>
+      <ul>
+        <li>Name: Mimi Brown</li>
+        <li>Favorite Hobby: Gardening, baking, and fitness.</li>
+        <li>
+          Why: Gardening is a calming and deeply relaxing activity that brings peace to my mind. During the lockdown, I discovered the joy of baking, and it has become a passion ever since. Taking care of my well-being is a priority, so I strive to stay active as much as possible.
+        </li>
+      </ul>
       <Footer />
       </div>
   );
