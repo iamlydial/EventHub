@@ -8,6 +8,7 @@ import Login from "./scenes/login/Login";
 import ContactUs from "./scenes/contactus/ContactUs";
 import Services from "./scenes/services/Services";
 import Gallery from "./scenes/gallery/Gallery";
+import CreateEvent from "./scenes/createevent/CreateEvent";
 
 const App: React.FC = () => {
   const ScrollToTop = () => {
@@ -28,6 +29,8 @@ const App: React.FC = () => {
           <Route path="/services" element={<Services />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/services" element={<Gallery />} />
+          <Route path="/create-event" element={<CreateEvent />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>
