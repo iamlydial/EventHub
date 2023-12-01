@@ -18,7 +18,7 @@ const Home: React.FC<Props> = () => {
 
   return (
     <div className="mt-24">
-      <h1 className="text-3xl font-bold underline">Test Pull request!</h1>
+      {/* <h1 className="text-3xl font-bold underline">Test Pull request!</h1>
       <h1 className="text-3xl font-bold underline">Test Pull request!</h1>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
       <h1 className="font-roboto font-bold"> H1 Roboto - Hello world!</h1>
@@ -30,10 +30,10 @@ const Home: React.FC<Props> = () => {
       <h3 className="font-muktao font-bold">H3 Roboto - Hello world!</h3>
       <p className="font-roboto">Paragraph Mukta</p>
       {typeof backendData.users === "undefined" ? (
-        <p>Loading...</p>
+        <p></p>
       ) : (
         backendData.users.map((user, i) => <p key={i}>{user}</p>)
-      )}
+      )} */}
     </div>
   );
 };
