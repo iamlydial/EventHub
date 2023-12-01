@@ -44,6 +44,15 @@ const App: React.FC = () => {
           Why: Gardening is a calming and deeply relaxing activity that brings peace to my mind. During the lockdown, I discovered the joy of baking, and it has become a passion ever since. Taking care of my well-being is a priority, so I strive to stay active as much as possible.
         </li>
       </ul>
+      <h2>Nasra Hussein</h2>
+      <ul>
+        <li>Name: Nasra Hussein</li>
+        <li>Favorite Hobby: Cooking</li>
+        <li>
+          Why: I love cooking all kinds of food from different cuisines and experimenting because its theraputic and the whole process is very relaxing.
+        </li>
+      </ul>
+
       <Footer />
       </div>
   );
