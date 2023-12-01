@@ -15,7 +15,7 @@ The EventHub project is an event management platform that facilitates the planni
 ## UX Figma Overview:
 Here is a link to our design section on figma:
 
-[(https://www.figma.com/file/IkQjL8tpUL9WjmPR9uxu9k/Presentation?type=design&node-id=0-1&mode=design&t=zosZogPahM1ekNBh-0)]
+[https://www.figma.com/file/tjMTJEJkeDQKC6ULVxvhnf/Group-6?type=design&node-id=0-1&mode=design&t=IQ5wtea6arPtbKj6-0]
 
 ## Planning Overview:
 Here is our powerpoint doc in which we planned our project before starting it:
@@ -24,8 +24,8 @@ Here is our powerpoint doc in which we planned our project before starting it:
 
 
 ## Final Presentation Progress:
+[(https://www.figma.com/file/IkQjL8tpUL9WjmPR9uxu9k/Presentation?type=design&node-id=0-1&mode=design&t=zosZogPahM1ekNBh-0)]
 
-[Link to GitHub file where the final presentation progress is tracked]
 
 ## Tech Stack:
 ### Frontend:
