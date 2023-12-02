@@ -1,7 +1,61 @@
-import React from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import loginImage from "../../assets/images/marc-babin-aQWmCH_b3MU-unsplash 1.png";
+import validation from "./SignupValidation";
+import axios from "axios";
+
+interface FormValues {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  telephone_number: string; // Adding telephone field to FormValues interface
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  telephone_number?: string; // Adding telephone field to FormErrors interface
+}
 
 const Signup: React.FC = () => {
+  const [values, setValues] = useState<FormValues>({
+    name: "",
+    telephone_number: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setValues((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value, // Remove the square brackets around event.target.value
+    }));
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setErrors(validation(values));
+
+    // Wait for state to update, then check for errors
+    setTimeout(() => {
+      if (
+        Object.values(errors).every(
+          (error) => error === undefined || error === ""
+        )
+      ) {
+        axios
+          .post("http://localhost:3000/auth/signup", values)
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
+      }
+    }, 0);
+  };
+
   return (
     <div className="pt-20 flex flex-col lg:flex-row lg:h-screen">
       <div className="flex flex-col w-full lg:w-6/12 p-20 gap-y-1">
@@ -9,20 +63,55 @@ const Signup: React.FC = () => {
           Create<br></br> an account
         </h1>
 
-        <form className="flex flex-col gap-5 w-full lg:w-8/12">
+        <form
+          action=""
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-5 w-full lg:w-8/12"
+        >
           <input
-            placeholder="Email"
+            placeholder="Name"
+            onChange={handleInput}
+            name="name"
             className="border border-onyx p-3 rounded-md placeholder:font-roboto"
           />
+          {errors.name && <span className="text-red-500">{errors.name}</span>}
+          <input
+            placeholder="Telephone"
+            onChange={handleInput}
+            name="telephone"
+            className="border border-onyx p-3 rounded-md placeholder:font-roboto"
+          />
+          {errors.telephone_number && (
+            <span className="text-red-500">{errors.telephone_number}</span>
+          )}
+          <input
+            placeholder="Email"
+            onChange={handleInput}
+            name="email"
+            className="border border-onyx p-3 rounded-md placeholder:font-roboto"
+          />
+          {errors.email && <span className="text-red-500">{errors.email}</span>}
           <input
             placeholder="Password"
+            type="password"
+            onChange={handleInput}
+            name="password"
             className=" border border-onyx p-3 rounded-md placeholder:font-roboto"
           />
+          {errors.password && (
+            <span className="text-red-500">{errors.password}</span>
+          )}
           <input
             placeholder="Retype Password"
-            className="  border border-onyx p-3 rounded-md placeholder:font-roboto"
+            onChange={handleInput}
+            name="confirmPassword"
+            type="password"
+            className="border border-onyx p-3 rounded-md placeholder:font-roboto"
           />
-          <div className="flex text-onyx flex-row gap-5 items-center">
+          {errors.confirmPassword && (
+            <span className="text-red-500">{errors.confirmPassword}</span>
+          )}
+          {/* <div className="flex text-onyx flex-row gap-5 items-center">
             <input type="checkbox" className="h-7 w-7" />
             <p className="font-roboto">
               I accept{" "}
@@ -34,8 +123,11 @@ const Signup: React.FC = () => {
                 Terms & Conditions
               </span>
             </p>
-          </div>
-          <button className=" bg-dutch-white hover:bg-rosy-brown hover:text-black p-3 rounded-md text-white font-roboto">
+          </div> */}
+          <button
+            type="submit"
+            className=" bg-dutch-white hover:bg-rosy-brown hover:text-black p-3 rounded-md text-white font-roboto"
+          >
             SIGN UP
           </button>
         </form>
