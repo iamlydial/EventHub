@@ -10,7 +10,9 @@ const authController = require('./controllers/authController');
 const confirmationController = require('./controllers/confirmationController');
 const helpController = require('./controllers/helpController');
 const homeController = require('./controllers/homeController');
-const dashboardController = require('./controllers/dahsboardController');
+const dashboardController = require('./controllers/dashboardController');
+
+
 
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
@@ -31,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Controllers routes for all our controller/router files:
 app.use('/users', userController);
 app.use('/events', bookingController);
-pp.use('/auth', authController);
+app.use('/auth', authController);
 app.use('/confirmation', confirmationController);
 app.use('/help', helpController);
 app.use('/home', homeController);
