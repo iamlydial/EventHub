@@ -19,11 +19,12 @@ export default {
         mukta: ["Mukta", "sans-serif"],
       },
       colors: {
-        "rosy-brown": "#DA9F93",
+        rosyBrown: "#DA9F93",
         nyanza: "#E1F4CB",
         sage: "#BACBA9",
-        "dutch-white": "#e9dab2",
+        dutchWhite: "#e9dab2",
         onyx: "#393E41",
+        hoverBg: "#464b4f",
       },
       boxShadow: {
         "3xl": "0 10px 40px rgba(0, 0, 0, 0.1)",
