@@ -40,7 +40,6 @@ const App: React.FC = () => {
           <Route path="/account-dashboard" element={<AccountDashboard />} />
         </Routes>
       </BrowserRouter>
-      
       <Footer />
       </div>
   );

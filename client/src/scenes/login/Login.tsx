@@ -1,7 +1,37 @@
-import React from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import loginImage2 from "../../assets/images/tuva-mathilde-loland-7hhn4SmbnT8-unsplash 1.png";
+import validation from "./LoginValidation";
+
+interface FormValues {
+  email: string;
+  password: string;
+}
+
+interface FormErrors {
+  email?: string;
+  password?: string;
+}
 
 const Login: React.FC = () => {
+  const [values, setValues] = useState<FormValues>({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setValues((prev) => ({
+      ...prev,
+      [event.target.name]: [event.target.value],
+    }));
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setErrors(validation(values));
+  };
+
   return (
     <div className="pt-20 flex flex-col lg:flex-row h- lg:h-screen">
       <div className="flex flex-col w-full lg:w-6/12 p-20 gap-y-10">
@@ -9,16 +39,34 @@ const Login: React.FC = () => {
           Login
         </h1>
 
-        <form className="flex flex-col gap-5 w-full lg:w-8/12">
+        <form
+          action=""
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-5 w-full lg:w-8/12"
+        >
           <input
             placeholder="Email"
+            onChange={handleInput}
+            name="email"
             className="border border-onyx p-3 rounded-md placeholder:font-roboto"
           />
+
+          {errors.email && <span className="text-red-500">{errors.email}</span>}
+
           <input
+            type="password"
             placeholder="Password"
+            onChange={handleInput}
+            name="password"
             className=" border border-onyx p-3 rounded-md placeholder:font-roboto"
           />
-          <button className=" bg-dutch-white hover:bg-rosy-brown hover:text-black p-3 rounded-md text-white font-roboto">
+          {errors.password && (
+            <span className="text-red-500">{errors.password}</span>
+          )}
+          <button
+            type="submit"
+            className=" bg-dutch-white hover:bg-rosy-brown hover:text-black p-3 rounded-md text-white font-roboto"
+          >
             LOGIN
           </button>
         </form>
