@@ -14,6 +14,7 @@ export const navLinks: NavLink[] = [
   { href: "/services", label: "Services" },
   { href: "/contact-us", label: "Contact Us" },
   { href: "/our-work", label: "Our Work" },
+  {href: "/account-dashboard", label: "Account Dashboard"},
 ];
 
 export const logLinks: LogLinks[] = [

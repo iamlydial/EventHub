@@ -9,6 +9,10 @@ import ContactUs from "./scenes/contactus/ContactUs";
 import Services from "./scenes/services/Services";
 import Gallery from "./scenes/gallery/Gallery";
 import CreateEvent from "./scenes/createevent/CreateEvent";
+import AccountDashboard from "./scenes/componants/accoundashboard/accountdashboard";
+import Heading from "./scenes/componants/Heading /heading";
+import AccountDashboardSideNav from "./scenes/componants/AccDashboardSideNav/accountdashboardsidenav"
+import AccountDashboardTabs from "./scenes/componants/AccDashboardTabs/accountdashboardtabs"
 
 const App: React.FC = () => {
   const ScrollToTop = () => {
@@ -33,17 +37,10 @@ const App: React.FC = () => {
           <Route path="/create-event" element={<CreateEvent />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/account-dashboard" element={<AccountDashboard />} />
         </Routes>
       </BrowserRouter>
-
-      <h2>Mimi Brown</h2>
-      <ul>
-        <li>Name: Mimi Brown</li>
-        <li>Favorite Hobby: Gardening, baking, and fitness.</li>
-        <li>
-          Why: Gardening is a calming and deeply relaxing activity that brings peace to my mind. During the lockdown, I discovered the joy of baking, and it has become a passion ever since. Taking care of my well-being is a priority, so I strive to stay active as much as possible.
-        </li>
-      </ul>
+      
       <Footer />
       </div>
   );
