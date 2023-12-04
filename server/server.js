@@ -9,7 +9,6 @@ const userController = require("./controllers/userController");
 const bookingController = require("./controllers/bookingController");
 const authController = require("./controllers/authController");
 const confirmationController = require("./controllers/confirmationController");
-const helpController = require("./controllers/helpController");
 const homeController = require("./controllers/homeController");
 const dashboardController = require("./controllers/dashboardController");
 
@@ -38,7 +37,6 @@ app.use("/users", userController);
 app.use("/events", bookingController);
 app.use("/auth", authController);
 app.use("/confirmation", confirmationController);
-app.use("/help", helpController);
 app.use("/home", homeController);
 app.use("/dashboard", dashboardController);
 
@@ -99,7 +97,7 @@ app.post("/auth/signup", async (req, res) => {
   }
 });
 
-// Route for creating events using the eventsController
+// Route for creating events using the bookingController
 app.post("/events/create", async (req, res) => {
   try {
     const jsonData = req.body;

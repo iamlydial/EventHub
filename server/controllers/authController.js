@@ -4,7 +4,7 @@ const express = require("express");
 const session = require("express-session");
 const router = express.Router();
 const db = require("../db");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 //This is the registration router:
 

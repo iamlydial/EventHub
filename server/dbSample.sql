@@ -5,6 +5,7 @@ USE eventhub;
 
 CREATE TABLE IF NOT EXISTS Events (
     ID INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT, -- Foreign key referencing Users table
     event_name VARCHAR(255) NOT NULL,
     event_theme ENUM('Birthday for Her', 'Birthday for Him', 'Birthday for Little Her', 'Birthday for Little Him', 'Baby Shower', 'Bridal Party'),
     event_date DATE,
@@ -46,11 +47,10 @@ SELECT * from EVENTS;
 
 
 CREATE TABLE IF NOT EXISTS Users (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     telephone_number VARCHAR(20),
-    -- Define other necessary columns...
     events INT,
     FOREIGN KEY (events) REFERENCES Events(ID) ON DELETE SET NULL -- Change this to match the Events table primary key and define appropriate ON DELETE behavior
 );
