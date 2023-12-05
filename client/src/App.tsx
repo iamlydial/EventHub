@@ -9,10 +9,11 @@ import ContactUs from "./scenes/contactus/ContactUs";
 import Services from "./scenes/services/Services";
 import Gallery from "./scenes/gallery/Gallery";
 import CreateEvent from "./scenes/createevent/CreateEvent";
-import AccountDashboard from "./scenes/componants/accoundashboard/accountdashboard";
-import Heading from "./scenes/componants/Heading /heading";
-import AccountDashboardSideNav from "./scenes/componants/AccDashboardSideNav/accountdashboardsidenav"
-import AccountDashboardTabs from "./scenes/componants/AccDashboardTabs/accountdashboardtabs"
+import AccountDashboard from "./scenes/AccountInformation/accoundashboard/accountdashboard";
+import Heading from "./scenes/AccountInformation/Heading /heading";
+import AccountDashboardSideNav from "./scenes/AccountInformation/AccDashboardSideNav/accountdashboardsidenav";
+import AccountDashboardTabs from "./scenes/AccountInformation/AccDashboardTabs/accountdashboardtabs";
+
 
 const App: React.FC = () => {
   const ScrollToTop = () => {

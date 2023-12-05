@@ -4,6 +4,8 @@ import AccountDashboardSideNav from "../AccDashboardSideNav/accountdashboardside
 import AccountDashboardTabs from "../AccDashboardTabs/accountdashboardtabs";
 
 
+
+
 const backgroundStyle = {
   backgroundImage: 'url("/dutch-whiteSplash.jpg")',
   backgroundRepeat: 'no-repeat',

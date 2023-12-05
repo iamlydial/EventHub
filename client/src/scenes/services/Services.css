@@ -1,0 +1,47 @@
+.gridContainer {
+    margin-top: 5%;
+    margin-bottom: 10%;
+    padding: 10%
+
+}
+
+.serviceTab {
+    background-color: #393E41;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    padding: 10%;
+    margin-left: 10%;
+    margin: 5%;
+    width: 200px;
+}
+
+.title {
+    text-align: center;
+}
+
+.strapLine {
+    text-align: center;
+}
+
+.strapLine2 {
+    text-align: center;
+    padding: 5%;
+    margin-bottom: 6%;
+}
+
+button {
+    margin-left: 40%;
+    margin-top: 20%;
+}
+
+.submitText {
+    background-color: #393E41;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    padding: 5%;
+    margin-top: 5%;
+    margin-left: 12%;
+    width: 80%;
+}
