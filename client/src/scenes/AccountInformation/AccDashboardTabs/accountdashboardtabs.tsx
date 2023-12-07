@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../Buttons/button";
+import '/Users/mimibrown/Documents/EventHubGroup6Project/EventHub/client/src/scenes/AccountInformation/AccDashboardTabs/accountdashboardtabs.css';
 import "./accountdashboardtabs.css";
 
 const AccountDashboardTabs: React.FC = () => {

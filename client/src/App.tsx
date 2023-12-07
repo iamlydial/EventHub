@@ -9,12 +9,16 @@ import ContactUs from "./scenes/contactus/ContactUs";
 import Services from "./scenes/services/Services";
 import Gallery from "./scenes/gallery/Gallery";
 import CreateEvent from "./scenes/createevent/CreateEvent";
+import AccountDashboard from "./scenes/AccountInformation/accoundashboard/accountdashboard";
+import Heading from "./scenes/AccountInformation/Heading /heading";
+import AccountDashboardSideNav from "./scenes/AccountInformation/AccDashboardSideNav/accountdashboardsidenav";
+import AccountDashboardTabs from "./scenes/AccountInformation/AccDashboardTabs/accountdashboardtabs";
 import Location from "./scenes/createevent/Location";
 import Catering from "./scenes/createevent/Catering";
 import Theme from "./scenes/createevent/Theme";
 import Date from "./scenes/createevent/Date";
 import OccasionConfirmed from "./scenes/createevent/OccasionConfirmed";
-import AccountDashboard from "./scenes/AccountInformation/accoundashboard/accountdashboard";
+
 
 const App: React.FC = () => {
   const ScrollToTop = () => {
