@@ -3,7 +3,7 @@ import React from "react";
 
 const AccountDashboardSideNav: React.FC = () => {
     return (
-        <div style={{ marginLeft: "5%", fontSize: "20px", color: "onyx"}}>
+        <div style={{ marginLeft: "5%", fontSize: "25px", color: "onyx", fontWeight: "bold"}}>
             <table className="border-separate border-spacing-2 p-5 mt-100">
   <thead>
     <tr>

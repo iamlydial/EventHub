@@ -2,12 +2,12 @@ import React from "react";
 import Heading from "../Heading /heading";
 import AccountDashboardSideNav from "../AccDashboardSideNav/accountdashboardsidenav";
 import AccountDashboardTabs from "../AccDashboardTabs/accountdashboardtabs";
-
+// import CreateEvent from "./scenes/createevent/CreateEvent";
 
 
 
 const backgroundStyle = {
-  backgroundImage: 'url("/dutch-whiteSplash.jpg")',
+  backgroundImage: 'url("/Users/mimibrown/Documents/EventHubGroup6Project/EventHub/client/src/assets/images/dutch-whiteSplash.jpg")',
   backgroundRepeat: 'no-repeat',
   backgroundPositionX: 'right',
   backgroundPositionY: 'bottom',

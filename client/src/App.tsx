@@ -13,6 +13,8 @@ import AccountDashboard from "./scenes/AccountInformation/accoundashboard/accoun
 import Heading from "./scenes/AccountInformation/Heading /heading";
 import AccountDashboardSideNav from "./scenes/AccountInformation/AccDashboardSideNav/accountdashboardsidenav";
 import AccountDashboardTabs from "./scenes/AccountInformation/AccDashboardTabs/accountdashboardtabs";
+import Image from "./assets/images/profilePicture.jpg"
+import YourEventHistory from "./scenes/YourEventHistory/YourEventHistory";
 
 
 const App: React.FC = () => {
@@ -39,6 +41,7 @@ const App: React.FC = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/account-dashboard" element={<AccountDashboard />} />
+          <Route path="/your-event-history" element={<YourEventHistory />} />
         </Routes>
       </BrowserRouter>
       

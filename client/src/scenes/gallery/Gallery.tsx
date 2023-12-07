@@ -1,65 +1,93 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import '../gallery/Gallery.css';
 import Button from "../AccountInformation/Buttons/button";
+import image1 from "../../assets/images/GalleryComponent/image1.jpg";
+import image2 from "../../assets/images/GalleryComponent/image2.jpg";
+import image3 from "../../assets/images/GalleryComponent/image3.jpg";
+import image4 from "../../assets/images/GalleryComponent/image4.jpg";
+import image5 from "../../assets/images/GalleryComponent/image5.jpg";
+import image6 from "../../assets/images/GalleryComponent/image6.jpg";
+import image7 from "../../assets/images/GalleryComponent/image7.jpg";
+import image8 from "../../assets/images/GalleryComponent/image8.jpg";
 
-type Props = {};
 
-const backgroundStyle = {
-  backgroundImage: 'url("dave-lastovskiy-RygIdTavhkQ-unsplash.jpg")',
-  width: "100%",
-  height: "25vh",
-}
 
-const Gallery = (props: Props) => {
-  return (
-  <div>
-      <div className="pageContainer">  
-      <div style={backgroundStyle}>
-      <img
-          src='client/src/assets/images/ian-schneider-PAykYb-8Er8-unsplash.jpg'
-          alt="Event"
-          className="w-full"
-        />
+// type Props = {};
+
+ const GalleryComponent = () => { 
+   const imagesList = [
+     {
+       id: 1,
+       src: image1,
+       alt: "Image 1",
+    },
+    {
+    id: 2,
+    src: image2,
+    alt: "Image 2",
+    },
+    {
+      id: 3,
+      src: image3,
+      alt: "Image 3",
+      },
+      {
+        id: 4,
+        src: image4,
+        alt: "Image 4",
+        },
+        {
+          id: 5,
+          src: image5,
+          alt: "Image 5",
+          },
+          {
+            id: 6,
+            src: image6,
+            alt: "Image 6",
+            },
+            {
+              id: 7,
+              src: image7,
+              alt: "Image 7",
+              },
+              {
+                id: 8,
+                src: image8,
+                alt: "Image 8",
+                },
+                
+   ];
+
+   const imageStyles = {
+    width: '48%', 
+    height: '60%', 
+    display: 'inline-block',
+    borderRadius: '50%',
+  };
+
+    return (
+      
+      <div>
+        <div className="gHeading">
+        <h1 className="gTitle">Gallery</h1>
+       <p className="gStrapLine">Here is a taste of what one your of your events could look like</p>
+       </div>
+        {imagesList.map((image) => (
+          <img key={image.id} src={image.src} alt={image.alt} style={imageStyles}/>
+        ))}
+        <Link to="/createevent">
+       <Button text="Click to Create Your Event" />
+    </Link>
         </div>
-        <h1 className="title">Gallery</h1>
-      <p className="strapLine">Some of the highlights from the events we have been a part of this season</p>
-      <div className="flex overflow-x-auto">
-      <div className="flex-none w-full flex-shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
-          alt="Event"
-          className="w-full"
-        />
-      </div>
-      <div className="flex-none w-full flex-shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
-          alt="Event"
-          className="w-full"
-        />
-      </div>
-      <div className="flex-none w-full flex-shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
-          alt="Event"
-          className="w-full"
-        />
-      </div>
-      <div className="flex-none w-full flex-shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
-          alt="Event"
-          className="w-full"
-        />
-        <Button text="Click to Create Your Event" />
-      </div>
-    </div>
-    </div>
-    </div>
-  );
-};
+        
+      );
+    };
+      
 
-export default Gallery;
+export default GalleryComponent;
+
 
 
 
