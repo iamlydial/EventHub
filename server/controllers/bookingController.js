@@ -4,6 +4,7 @@ const db = require('../db');
 const express = require('express');
 const session = require('express-session');
 const router = express.Router();
+const bcrypt = require("bcryptjs");
 
 // function to start events table creation in the database
 async function createEventInDatabase(eventData) {
