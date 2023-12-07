@@ -1,2 +1,49 @@
-# EventHub
+
+# :tada: EventHub 
 All your event needs under one roof.
+
+## Team Names List:
+- :woman: Nasra Hussein 
+- :woman: Lydia Lavecchia 
+- :woman: Mimi Brown
+- :woman: Jessica Palmer
+- :woman: Minka Ansa
+
+## Project Description:
+The EventHub project is an event management platform that facilitates the planning and organization of various events. Users can select the type of event, choose specific details such as themes, locations, date and time, catering, and decorations. The platform aims to streamline the event booking process for different occasions like bridal showers, birthdays, kids' birthdays, and baby showers.
+
+## UX Figma Overview:
+Here is a link to our design section on figma:
+
+[https://www.figma.com/file/tjMTJEJkeDQKC6ULVxvhnf/Group-6?type=design&node-id=0-1&mode=design&t=IQ5wtea6arPtbKj6-0]
+
+## Planning Overview:
+Here is our powerpoint doc in which we planned our project before starting it:
+
+[(https://docs.google.com/presentation/d/1XY7c55uOMsoosoC0eXq3H3jMy2LrED0KebV25QEKYTo/edit?usp=sharing)]
+
+
+## Final Presentation Progress:
+[(https://www.figma.com/file/IkQjL8tpUL9WjmPR9uxu9k/Presentation?type=design&node-id=0-1&mode=design&t=zosZogPahM1ekNBh-0)]
+
+
+## Tech Stack:
+### Frontend:
+- React.js
+- Tailwind
+- HTML
+- CSS
+- Material UI
+
+  
+### Backend:
+- Node.js with Express
+- MySQl workbench
+
+
+
+Here is a preview of our Frontend: 
+
+Contact page: 
+![React App (1)](https://github.com/iamlydial/EventHub/assets/131040199/b49cd450-fecc-4476-b287-b4a68d4bfc59)
+
