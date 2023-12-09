@@ -13,7 +13,7 @@ const homeController = require("./controllers/homeController");
 const dashboardController = require("./controllers/dashboardController");
 
 const bodyParser = require("body-parser");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const router = express.Router();
 
 app.use(cors());
@@ -78,6 +78,7 @@ app.get("/events", async (req, res) => {
   }
 });
 
+// User signup route
 app.post("/auth/signup", async (req, res) => {
   try {
     const { name, email, telephone_number, events } = req.body;
@@ -91,6 +92,78 @@ app.post("/auth/signup", async (req, res) => {
     connection.release(); // Release the connection back to the pool
 
     res.json({ message: "User created successfully", userId: result.insertId });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+// signup get
+
+// User signup GET route to retrieve user information by ID
+app.get("/auth/signup/:id", async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    // Fetch user data based on the provided ID from the request parameters
+    const connection = await pool.getConnection();
+    const [user] = await connection.query("SELECT * FROM Users WHERE id = ?", [
+      userId,
+    ]);
+    connection.release(); // Release the connection back to the pool
+
+    if (user.length === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ message: "User retrieved successfully", user: user[0] });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+// User login route
+app.post("/auth/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const connection = await pool.getConnection();
+    const [user] = await connection.query(
+      "SELECT * FROM Users WHERE email = ?",
+      [email]
+    );
+    connection.release();
+
+    if (user.length === 0) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    const storedPassword = user[0].password; // Assuming the password field is stored in the 'password' column
+    if (typeof password === "string" && typeof storedPassword === "string") {
+      const isPasswordValid = await bcrypt.compare(password, storedPassword);
+      if (isPasswordValid) {
+        // Authentication successful
+        res.json({ message: "Login successful" });
+      } else {
+        // Invalid credentials
+        res.status(401).json({ error: "Invalid credentials" });
+      }
+    } else {
+      // Invalid password format or storedPassword retrieval issue
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+// User logout route
+app.post("/auth/logout", async (req, res) => {
+  try {
+    // optional logout checks
+
+    res.json({ message: "Logout successful" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
