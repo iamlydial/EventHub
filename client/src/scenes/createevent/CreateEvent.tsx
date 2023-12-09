@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import GreySquiggle from "../../assets/images/GreySquiggle.jpg";
+import axios from 'axios'
 
 const CreateEvent = () => {
   const location = useLocation();
