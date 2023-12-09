@@ -16,10 +16,11 @@ interface FormErrors {
 
 function validation(values: FormValues): FormErrors {
   let errors: FormErrors = {};
-  const namePattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const namePattern = /^[A-Za-z\d\s\-']+$/;
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
-  const telephonePattern = /^(?:(?:\+|00)44|0)7(?:\d\s?){9}$/; // UK telephone pattern
+  const passwordPattern =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+|{}[\]:";'<>?,./])(?=.*[^\s]).{8,}$/;
+  // const telephonePattern = /^(?:(?:\+|00)44|0)7(?:\d\s?){9}$/; // UK telephone pattern
 
   if (values.name.trim() === "") {
     errors.name = "Username should not be empty";
@@ -46,11 +47,11 @@ function validation(values: FormValues): FormErrors {
     errors.confirmPassword = "Passwords do not match";
   }
 
-  if (values.telephone_number.trim() === "") {
-    errors.telephone_number = "Telephone number should not be empty";
-  } else if (!telephonePattern.test(values.telephone_number)) {
-    errors.telephone_number = "Invalid UK telephone number format";
-  }
+  // if (values.telephone_number.trim() === "") {
+  //   errors.telephone_number = "Telephone number should not be empty";
+  // } else if (!telephonePattern.test(values.telephone_number)) {
+  //   errors.telephone_number = "Invalid UK telephone number format";
+  // }
 
   return errors;
 }

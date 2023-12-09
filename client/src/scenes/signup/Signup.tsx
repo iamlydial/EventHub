@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import loginImage from "../../assets/images/marc-babin-aQWmCH_b3MU-unsplash 1.png";
 import validation from "./SignupValidation";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface FormValues {
   name: string;
@@ -27,7 +28,7 @@ const Signup: React.FC = () => {
     password: "",
     confirmPassword: "",
   });
-
+  const navigate = useNavigate();
   const [errors, setErrors] = useState<FormErrors>({});
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -39,18 +40,24 @@ const Signup: React.FC = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setErrors(validation(values));
+    const validationErrors = validation(values);
+    setErrors(validationErrors);
 
     // Wait for state to update, then check for errors
     setTimeout(() => {
       if (
-        Object.values(errors).every(
-          (error) => error === undefined || error === ""
+        !Object.values(validationErrors).some(
+          (error) => error !== undefined && error !== ""
         )
       ) {
         axios
-          .post("http://localhost:3000/auth/signup", values)
-          .then((res) => console.log(res))
+          .post("http://localhost:3001/auth/signup", values)
+          .then((res) => {
+            console.log(res);
+            if (res.status === 200) {
+              navigate("/login"); // Redirect to the login page
+            }
+          })
           .catch((err) => console.log(err));
       }
     }, 0);
@@ -126,7 +133,7 @@ const Signup: React.FC = () => {
           </div> */}
           <button
             type="submit"
-            className=" bg-dutch-white hover:bg-rosy-brown hover:text-black p-3 rounded-md text-white font-roboto"
+            className=" bg-dutchWhite hover:bg-rosyBrown hover:text-black p-3 rounded-md text-white font-roboto"
           >
             SIGN UP
           </button>

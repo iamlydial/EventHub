@@ -1,6 +1,8 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useEffect, useState, ChangeEvent, FormEvent } from "react";
 import loginImage2 from "../../assets/images/tuva-mathilde-loland-7hhn4SmbnT8-unsplash 1.png";
 import validation from "./LoginValidation";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface FormValues {
   email: string;
@@ -13,6 +15,7 @@ interface FormErrors {
 }
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
   const [values, setValues] = useState<FormValues>({
     email: "",
     password: "",
@@ -23,17 +26,48 @@ const Login: React.FC = () => {
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setValues((prev) => ({
       ...prev,
-      [event.target.name]: [event.target.value],
+      [event.target.name]: event.target.value,
     }));
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setErrors(validation(values));
+    const validationErrors = validation(values);
+    setErrors(validationErrors);
+
+    // Wait for state to update, then check for errors
+    setTimeout(() => {
+      if (
+        !Object.values(validationErrors).some(
+          (error) => error !== undefined && error !== ""
+        )
+      ) {
+        axios
+          .post("http://localhost:3001/auth/login", values)
+          .then((res) => {
+            console.log(res);
+            // Check for successful login response and redirect
+            if (res.data && res.data.message === "Login successful") {
+              // Redirect user to the home page
+              navigate("/"); // Replace "/home" with your home page route
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            if (err.response && err.response.status === 401) {
+              // Handle 401 error (Unauthorized)
+              console.log("Unauthorized access");
+            } else {
+              // Handle other error scenarios
+              // setLoginError("An error occurred during login");
+            }
+          });
+      }
+    }, 0);
   };
 
   return (
-    <div className="pt-20 flex flex-col lg:flex-row h- lg:h-screen">
+    <div className="pt-20 flex flex-col lg:flex-row lg:h-screen">
       <div className="flex flex-col w-full lg:w-6/12 p-20 gap-y-10">
         <h1 className="font-mukta items-center text-onyx text-4xl font-bold">
           Login
@@ -65,7 +99,7 @@ const Login: React.FC = () => {
           )}
           <button
             type="submit"
-            className=" bg-dutch-white hover:bg-rosy-brown hover:text-black p-3 rounded-md text-white font-roboto"
+            className="bg-dutchWhite hover:bg-rosyBrown hover:text-black p-3 rounded-md text-white font-roboto"
           >
             LOGIN
           </button>
