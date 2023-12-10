@@ -3,6 +3,9 @@ import loginImage2 from "../../assets/images/tuva-mathilde-loland-7hhn4SmbnT8-un
 import validation from "./LoginValidation";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hooks";
+import { setUserLoggedInState } from "../../redux/userSlice";
+import { loginUser } from "../../redux/userSlice";
 
 interface FormValues {
   email: string;
@@ -22,6 +25,8 @@ const Login: React.FC = () => {
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
+
+  const dispatch = useAppDispatch();
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setValues((prev) => ({
@@ -49,6 +54,10 @@ const Login: React.FC = () => {
             // Check for successful login response and redirect
             if (res.data && res.data.message === "Login successful") {
               // Redirect user to the home page
+              dispatch(
+                loginUser({ email: values.email, password: values.password })
+              );
+              localStorage.setItem("isLoggedIn", "true");
               navigate("/"); // Replace "/home" with your home page route
             }
           })
