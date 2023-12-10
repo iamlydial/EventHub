@@ -1,36 +1,42 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import Button from "../Buttons/button";
-import "./accountdashboardtabs.css";
+
 
 const AccountDashboardTabs: React.FC = () => {
   return (
-    <div className="accountTabs">
-      <div className="eventTab">
-        <h1 className="tabHeading">Create Your Event</h1>
-        <p className="eventPText">
-          Select a theme for the event, create a to-do list, and choose vendors
-          for each item.
+    <div className="flex flex-col items-center space-y-8 mb-20">
+      <div className="w-1/2 bg-gray-700 rounded-lg text-white text-center p-4 m-4">
+        <h1 className="text-2xl font-bold mb-4">Create Your Event</h1>
+        <p className="text-lg">
+          Select a theme for the event, create a to-do list, and choose vendors for each item.
         </p>
-        <Button text="Start Here" />
+        <Link to="/create-event">
+          <Button text="Start Here" />
+        </Link>
       </div>
-      <div className="eventTab">
-        <h1 className="tabHeading">Your Event History</h1>
-        <p className="eventPText">
-          Check in with the status of your current event and browse through your
-          previous events.
+
+      <div className="w-1/2 bg-gray-700 rounded-lg text-white text-center p-4 m-4">
+        <h1 className="text-2xl font-bold mb-4">Your Event History</h1>
+        <p className="text-lg">
+          Check in with the status of your current event and browse through your previous events.
         </p>
-        <Button text="Check Here" />
+        <Link to="/your-event-history">
+          <Button text="Check Here" />
+        </Link>
       </div>
-      <div className="eventTab">
-        <h1 className="tabHeading">Create Your Event</h1>
-        <p className="eventPText">
-          If you need help with your event, don't hesitate to contact our Event
-          planner assistants and book a call.
+
+      <div className="w-1/2 bg-gray-700 rounded-lg text-white text-center p-4 m-4">
+        <h1 className="text-2xl font-bold mb-4">Need Help?</h1>
+        <p className="text-lg">
+          If you need help with your event, don't hesitate to contact our Event planner assistants and book a call.
         </p>
-        <Button text="Get in touch" />
+        <Link to="/contact-us">
+          <Button text="Get in touch" />
+        </Link>
       </div>
     </div>
   );
-};
+}
 
 export default AccountDashboardTabs;

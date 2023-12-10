@@ -1,68 +1,59 @@
 import React from "react";
-import '../gallery/Gallery.css';
+import { Link } from 'react-router-dom';
 import Button from "../AccountInformation/Buttons/button";
+import image1 from "../../assets/images/GalleryComponent/image1.jpg";
+import image2 from "../../assets/images/GalleryComponent/image2.jpg";
+import image3 from "../../assets/images/GalleryComponent/image3.jpg";
+import image4 from "../../assets/images/GalleryComponent/image4.jpg";
+import image5 from "../../assets/images/GalleryComponent/image5.jpg";
+import image6 from "../../assets/images/GalleryComponent/image6.jpg";
+import image7 from "../../assets/images/GalleryComponent/image7.jpg";
+import image8 from "../../assets/images/GalleryComponent/image8.jpg";
+import ianSchneiderPAykYb8Er8Unsplash from "../../assets/images/ian-schneider-PAykYb-8Er8-unsplash.jpg";
 
-type Props = {};
+const GalleryComponent: React.FC = () => {
+  const imagesList = [
+    { id: 1, src: image1, alt: "Image 1" },
+    { id: 2, src: image2, alt: "Image 2" },
+    { id: 3, src: image3, alt: "Image 3" },
+    { id: 4, src: image4, alt: "Image 4" },
+    { id: 5, src: image5, alt: "Image 5" },
+    { id: 6, src: image6, alt: "Image 6" },
+    { id: 7, src: image7, alt: "Image 7" },
+    { id: 8, src: image8, alt: "Image 8" },
+  ];
 
-const backgroundStyle = {
-  backgroundImage: 'url("dave-lastovskiy-RygIdTavhkQ-unsplash.jpg")',
-  width: "100%",
-  height: "25vh",
-}
-
-const Gallery = (props: Props) => {
   return (
-  <div>
-      <div className="pageContainer">  
-      <div style={backgroundStyle}>
-      <img
-          src='client/src/assets/images/ian-schneider-PAykYb-8Er8-unsplash.jpg'
-          alt="Event"
-          className="w-full"
-        />
+    <div className="flex flex-col justify-between min-h-screen">
+      <div className="gHeading bg-cover bg-no-repeat h-3/4">
+      <img src={ianSchneiderPAykYb8Er8Unsplash} alt="" className="w-full h-full object-cover z-0 mt-20 pt-3 mb-5" />
+      <div className="z-10 relative">
+        <h1 className="gTitle text-center text-9xl text-onyx font-bold pt-8 z-5">Gallery</h1>
+        <p className="gStrapLine text-center text-2xl text-onyx p-5">
+          Here is a taste of what one of your events could look like
+        </p>
         </div>
-        <h1 className="title">Gallery</h1>
-      <p className="strapLine">Some of the highlights from the events we have been a part of this season</p>
-      <div className="flex overflow-x-auto">
-      <div className="flex-none w-full flex-shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
-          alt="Event"
-          className="w-full"
-        />
       </div>
-      <div className="flex-none w-full flex-shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
-          alt="Event"
-          className="w-full"
-        />
+
+      <div className="grid grid-cols-2 gap-8 mt-8 mx-4">
+        {imagesList.map((image) => (
+          <img
+            key={image.id}
+            src={image.src}
+            alt={image.alt}
+            className="w-full rounded-md"
+          />
+        ))}
       </div>
-      <div className="flex-none w-full flex-shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
-          alt="Event"
-          className="w-full"
-        />
+
+      <div className="text-center mt-8">
+        <Link to="/create-event">
+          <Button text="Click to Create Your Event" />
+        </Link>
       </div>
-      <div className="flex-none w-full flex-shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80"
-          alt="Event"
-          className="w-full"
-        />
-        <Button text="Click to Create Your Event" />
-      </div>
-    </div>
-    </div>
     </div>
   );
 };
 
-export default Gallery;
-
-
-
-
-
+export default GalleryComponent;
 
