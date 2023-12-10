@@ -1,48 +1,48 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import '../YourEventHistory/YourEventHistory.css';
 import Button from "../AccountInformation/Buttons/button";
-import "/Users/mimibrown/Documents/EventHubGroup6Project/EventHub/client/src/scenes/YourEventHistory/YourEventHistory.css"
 
 const YourEventHistory: React.FC = () => {
-    return (
-      <div className="allEventTabs">
-        <div className="eventHistoryTitle">
-        <h1 className="eventHistoryHeading">Event History</h1>
-        <p className="eventHistoryP">All your Events current and past history all in one place</p>
+  return (
+    <div className="mt-10 p-5">
+      <div className="text-center py-5">
+        <h1 className="text-5xl font-bold mt-10 mb-10">Event History</h1>
+        <p className="text-xl mb-10">All your current and past events in one place</p>
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <div className="bg-gray-200 p-8 rounded-md">
+          <h1 className="text-3xl font-bold">Your Current Event</h1>
+          <p className="text-lg mt-4">
+            Check in to see all the current details and status updates of your event.
+          </p>
+          <Link to="/account-dashboard">
+            <Button text="Start Here" />
+          </Link>
         </div>
-      <div className="eventTab">
-        <h1 className="tabHeading" >Your Current Event</h1>
-         <p className="eventPText">
-             Check in to see all the current details and status updates of your current event.
-           </p> <Link to="/accoundashboard">
-           <Button text="Start Here" />
-    </Link>
+        <div className="bg-gray-200 p-8 rounded-md">
+          <h1 className="text-3xl font-bold">Your Previous Event</h1>
+          <p className="text-lg mt-4">
+            Check to see all the details from your previous event.
+          </p>
+          <Link to="/account-dashboard">
+            <Button text="Check Here" />
+          </Link>
+        </div>
+        <div className="bg-gray-200 p-8 rounded-md">
+          <h1 className="text-3xl font-bold">Event History Log</h1>
+          <p className="text-lg mt-4">
+            Click to see the history of all your events.
+          </p>
+          <Link to="/account-dashboard">
+            <Button text="Get in touch" />
+          </Link>
+        </div>
       </div>
-      <div className="eventTab">
-        <h1 className="tabHeading" >Your Previous Event</h1>
-         <p className="eventPText">
-         Check to see all the details from your previous event.
-           </p>
-           <Link to="/accoundashboardy">
-           <Button text="Check Here" />
-           </Link>
-      </div>
-      <div className="eventTab">
-        <h1 className="tabHeading" >Event History Log</h1>
-         <p className="eventPText">
-         Click to see the history of all the events you have done.
-           </p>
-           <Link to="/accoundashboard">
-           <Button text="Get in touch"  />
-    </Link>
-      </div>
-      <Link to="/accountdashboard.tsx">
-           <Button text="Back to Dashboard"  />
-    </Link>
-      </div>
-    )
-}
-      
-export default YourEventHistory;
+      <Link to="/account-dashboard" className="block mt-5 p-5">
+        <Button text="Back to Dashboard" />
+      </Link>
+    </div>
+  );
+};
 
+export default YourEventHistory;
