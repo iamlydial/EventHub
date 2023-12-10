@@ -1,5 +1,5 @@
 import React from "react";
-import Heading from "../Heading /heading";
+import Heading from "../Heading/heading";
 import AccountDashboardSideNav from "../AccDashboardSideNav/accountdashboardsidenav";
 import AccountDashboardTabs from "../AccDashboardTabs/accountdashboardtabs";
 
