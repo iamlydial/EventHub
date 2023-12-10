@@ -6,7 +6,7 @@ import { useMediaQuery } from "@react-hook/media-query";
 
 interface NavProps {}
 
-const Nav: React.FC<NavProps> = () => {
+const Navbar: React.FC<NavProps> = () => {
   const isAboveMediumScreens: boolean = useMediaQuery("(min-width: 1060px)");
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
 
@@ -15,7 +15,7 @@ const Nav: React.FC<NavProps> = () => {
       {isAboveMediumScreens ? (
         <nav className="flex justify-between font-mukta items-center max-container">
           <a href="/">
-            <img src={logoNavbar} alt="Logo" width={95} height="auto" />
+            <img src={logoNavbar} alt="Logo" width={100} height="auto" />
           </a>
           <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden">
             {navLinks.map((link, index) => (
@@ -52,7 +52,7 @@ const Nav: React.FC<NavProps> = () => {
       )}
       {/* MOBILE MENU */}
       {!isAboveMediumScreens && isMenuToggled && (
-        <div className="fixed right-0 bottom-0 z-40 h-full w-[300px]  bg-dutch-white drop-shadow-xl ">
+        <div className="fixed right-0 bottom-0 z-40 h-full w-[300px]  bg-dutchWhite drop-shadow-xl ">
           {/* CLOSE ICON */}
           <div className="flex justify-end p-12">
             <button onClick={() => setIsMenuToggled(!isMenuToggled)}>
@@ -88,5 +88,4 @@ const Nav: React.FC<NavProps> = () => {
     </header>
   );
 };
-
-export default Nav;
+export default Navbar;

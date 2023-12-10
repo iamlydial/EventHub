@@ -16,7 +16,8 @@ import Catering from "./scenes/createevent/Catering";
 import Theme from "./scenes/createevent/Theme";
 import Date from "./scenes/createevent/Date";
 import OccasionConfirmed from "./scenes/createevent/OccasionConfirmed";
-
+import { selectIsLoggedIn, setUserLoggedInState } from "./redux/userSlice";
+import { useDispatch } from "react-redux";
 
 
 const App: React.FC = () => {
@@ -27,6 +28,14 @@ const App: React.FC = () => {
     }, [pathname]);
     return null;
   };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (isLoggedIn) {
+      dispatch(setUserLoggedInState(true));
+    }
+  }, [dispatch]);
 
   return (
     <div className="app">
