@@ -1,15 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import GreySquiggle from "../../assets/images/GreySquiggle.jpg";
 import axios from 'axios'
+
 
 const CreateEvent = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  console.log("Current route:", location.pathname);
-
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [eventTypes, setEventTypes] = useState<string[]>([]);
+  const [nextClicked, setNextClicked] = useState(false);
+
+  useEffect(() => {
+    // Fetch event types for our frontend
+    axios.get("http://localhost:3001/event-types")
+      .then(response => {
+        setEventTypes(response.data.eventTypes);
+      })
+      .catch(error => {
+        console.error("Error fetching event types:", error);
+      });
+  }, []);
+
+  console.log("Current route:", location.pathname);
 
   const handleOptionClick = (option: string) => {
     console.log("Selected Option:", option);
@@ -22,10 +36,27 @@ const CreateEvent = () => {
       return;
     }
 
-    console.log("Selected Option:", selectedOption);
+    setNextClicked(true);
 
-    navigate("/location");
+    axios.post("http://localhost:3001/create-event", { event_name: selectedOption })
+      .then(response => {
+        console.log(response.data.message);
+        // Navigate to the next route after successfully updating on the backend
+        navigate("/location");
+      })
+      .catch(error => {
+        console.error("Error creating event:", error);
+        
+      });
   };
+
+  useEffect(() => {
+    if (nextClicked) {
+      navigate("/location");
+    }
+  }, [nextClicked, navigate]);
+   
+   
   return (
     <div className="relative pt-20 flex flex-col items-center justify-center h-screen">
       <h3
@@ -104,4 +135,5 @@ const CreateEvent = () => {
     </div>
   );
 };
+
 export default CreateEvent;

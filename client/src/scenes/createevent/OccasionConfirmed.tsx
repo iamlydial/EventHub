@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const OccasionConfirmed = () => {
+  const navigate = useNavigate();
+  const [eventDetails, setEventDetails] = useState(null);
+
+  useEffect(() => {
+    // Fetch event details when the component mounts
+    axios.get("http://localhost:3001/occasion-details")
+      .then(response => {
+        setEventDetails(response.data.eventDetails);
+      })
+      .catch(error => {
+        console.error("Error fetching event details:", error);
+      });
+  }, []);
+
   return (
     <div className="relative pt-20 flex flex-col items-center justify-center h-screen">
       <h1 className="text-3xl font-mukta mb-4" style={{ color: "#000000" }}>

@@ -1,12 +1,31 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Location = () => {
   const navigate = useNavigate();
+
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [locationTypes, setLocationTypes] = useState<string[]>([]);
+  const [nextClicked, setNextClicked] = useState(false);
+
+  useEffect(() => {
+    // Fetch location types for our frontend
+    axios.get("http://localhost:3001/location-options")
+      .then(response => {
+        setLocationTypes(response.data.locationTypes);
+      })
+      .catch(error => {
+        console.error("Error fetching location types:", error);
+      });
+  }, []);
 
   const handleBackClick = () => {
     navigate(-1);
+  };
+
+  const handleOptionClick = (option: string) => {
+    setSelectedOption(option);
   };
 
   const handleNextClick = () => {
@@ -15,13 +34,24 @@ const Location = () => {
       return;
     }
 
-    console.log("Selected Location:", selectedOption);
-    navigate("/catering");
+    setNextClicked(true);
+
+    // Assuming you have a corresponding backend route to handle location selection
+    axios.post("http://localhost:3001/choose-location", { location_type: selectedOption })
+      .then(response => {
+        console.log(response.data.message);
+      })
+      .catch(error => {
+        console.error("Error choosing location:", error);
+      });
   };
 
-  const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
-  };
+  useEffect(() => {
+    if (nextClicked) {
+      navigate("/catering");
+    }
+  }, [nextClicked, navigate]);
+
 
   return (
     <div className="relative pt-20 flex flex-col items-center justify-center h-screen">

@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Date = () => {
   const navigate = useNavigate();
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [duration, setDuration] = useState("");
+  const [dateOptions, setDateOptions] = useState([]);
+  const [nextClicked, setNextClicked] = useState(false);
 
-  const numericPattern = /^[0-9]*$/;
+  useEffect(() => {
+    // Fetch date options for our frontend
+    axios.get("http://localhost:3001/choose-date-time")
+      .then(response => {
+        setDateOptions(response.data.dateOptions);
+      })
+      .catch(error => {
+        console.error("Error fetching date options:", error);
+      });
+  }, []);
 
   const handleBackClick = () => {
     navigate(-1);
@@ -19,8 +31,29 @@ const Date = () => {
       return;
     }
 
-    navigate("/occasion-confirmed");
+    setNextClicked(true);
+
+    axios.post("http://localhost:3001/choose-date", {
+      date: date,
+      time: time,
+      duration: duration,
+    })
+      .then(response => {
+        console.log(response.data.message);
+        // Navigate to the next route after successfully updating on the backend
+        navigate("/occasion-confirmed");
+      })
+      .catch(error => {
+        console.error("Error choosing date and time:", error);
+        
+      });
   };
+
+  useEffect(() => {
+    if (nextClicked) {
+      navigate("/occasion-confirmed");
+    }
+  }, [nextClicked, navigate]);
 
   return (
     <div className="relative pt-20 flex flex-col items-center justify-center h-screen">
@@ -64,6 +97,7 @@ const Date = () => {
           onChange={(e) => setDuration(e.target.value)}
         />
       </div>
+
       <div className="absolute bottom-10 right-10 lg:right-10 flex flex-col items-center">
         <p
           className="font-mukta font-bold text-center mb-1"
@@ -78,6 +112,7 @@ const Date = () => {
           Finish
         </button>
       </div>
+
       <div className="absolute bottom-10 left-10 lg:left-10 flex flex-col items-center">
         <p
           className="font-mukta font-bold text-center mb-1"

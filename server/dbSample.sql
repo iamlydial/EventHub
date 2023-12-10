@@ -71,5 +71,14 @@ VALUES
 
 ALTER TABLE users ADD COLUMN password VARCHAR(255);
 
+ALTER TABLE Users
+ADD COLUMN selected_location ENUM('Grand Venue', 'Bar', 'Garden', 'Intimate Venue');
+
+
+UPDATE Users
+SET selected_location = 'Chosen Location'
+WHERE user_id = userId;
+
+
 
 SELECT * from Users;

@@ -5,6 +5,8 @@ const cors = require("cors");
 const session = require("express-session");
 const app = express();
 const { pool } = require("./db");
+const bcrypt = require("bcryptjs");
+
 const userController = require("./controllers/userController");
 const bookingController = require("./controllers/bookingController");
 const authController = require("./controllers/authController");
@@ -187,6 +189,135 @@ app.post("/events/create", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+// Define a route handler for the root path
+app.get('/', (req, res) => {
+  res.send('Hello, this is the EventHub backend!');
+});
+
+// BookingController.js file endpoints: 
+
+// Get all EventHub available event types
+app.get('/event-types',  (req, res) => {
+  const eventTypes = ['Bridal Shower', 'Birthday', 'Kids Birthday', 'Baby Shower'];
+  res.json({ eventTypes });
+});
+
+// Select the type of event and create an event and add to database
+app.post('/create-event',  async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+    const eventData = req.body;
+
+    // Call the createEventInDatabase method with the user ID
+    const createdEvent = await createEventInDatabase(userId, eventData);
+
+    res.status(201).json({ message: 'Event created successfully', event: createdEvent });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// Choose the location type (Grand Venue, Bar, Garden, Intimate Venue)
+app.get('/choose-location',  (req, res) => {
+  const locationTypes = ['Grand Venue', 'Bar', 'Garden', 'Intimate Venue'];
+
+  res.json({ locationTypes });
+});
+
+// Update the endpoint to handle the selected location
+app.post('/choose-location', async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+    const selectedLocation = req.body.location_type;
+
+    // Assuming you have a database query to store the selected location in the Events table
+    const updateQuery = 'UPDATE Events SET location = ? WHERE user_id = ?';
+    await db.execute(updateQuery, [selectedLocation, userId]);
+
+    res.status(200).json({ message: 'Location selected successfully' });
+  } catch (error) {
+    console.error('Error choosing location:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// Choose the date and time for the event
+app.get('/choose-date-time',  (req, res) => {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+
+  // Generate date options for the entire year
+  const dateOptions = [];
+  for (let month = 0; month < 12; month++) {
+    for (let day = 1; day <= new Date(currentYear, month + 1, 0).getDate(); day++) {
+      const formattedDate = `${currentYear}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+      dateOptions.push(formattedDate);
+    }
+  }
+
+  // Generate time options for each hour in a 24-hour format
+  const timeOptions = Array.from({ length: 24 }, (_, index) => `${index.toString().padStart(2, '0')}:00`);
+
+  res.json({ dateOptions, timeOptions });
+});
+
+app.post('/choose-catering', (req, res) => {
+  try {
+    // Extract data from the request body
+    const { catering_types } = req.body;
+
+    // Process the catering_types data as needed
+    console.log('Catering types received:', catering_types);
+
+    // Respond with success
+    res.status(200).json({ message: 'Catering types received successfully' });
+  } catch (error) {
+    console.error('Error handling choose-catering request:', error);
+
+    // Respond with an error
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Add this route handler for GET requests to "/choose-catering"
+app.get('/choose-catering', (req, res) => {
+  // Handle the GET request for choose-catering
+  // You can send a simple response, for example:
+  res.status(200).json({ message: 'GET request to /choose-catering received successfully' });
+});
+
+// Get available theme options
+app.get('/theme-options', async (req, res) => {
+  try {
+    const themeOptions = ['Elegant', 'Playful', 'Boho Chic', 'Casual'];
+    res.status(200).json({ themeOptions });
+  } catch (error) {
+    console.error('Error getting theme options:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// Update the event's chosen theme
+app.post('/choose-theme', async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+    const selectedTheme = req.body.theme;
+
+    const updateQuery = 'UPDATE Events SET event_theme = ? WHERE user_id = ?';
+    await db.execute(updateQuery, [selectedTheme, userId]);
+
+    res.status(200).json({ message: 'Theme selected successfully' });
+  } catch (error) {
+    console.error('Error choosing theme:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

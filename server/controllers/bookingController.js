@@ -1,6 +1,7 @@
 // This is the file for Route handler for the Event booking and use the EVENTS table in db:
 
-const db = require('../db'); 
+const db = require('../db');
+const cors = require("cors");
 const express = require('express');
 const session = require('express-session');
 const router = express.Router();
@@ -37,12 +38,35 @@ async function createEventInDatabase(userId, eventData) {
   }
 }
 
+// isAuthenticated function (needed before we can use it)
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next(); 
+  }
+  res.status(401).json({ message: 'Unauthorized' });
+};
 
-// Select the type of event
-router.get('/choose-event', isAuthenticated, (req, res) => {
+
+// Get all EventHub available event types
+router.get('/event-types', isAuthenticated, (req, res) => {
   const eventTypes = ['Bridal Shower', 'Birthday', 'Kids Birthday', 'Baby Shower'];
-
   res.json({ eventTypes });
+});
+
+// Select the type of event and create an event and add to database
+router.post('/create-event', isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+    const eventData = req.body;
+
+    // Call the createEventInDatabase method with the user ID
+    const createdEvent = await createEventInDatabase(userId, eventData);
+
+    res.status(201).json({ message: 'Event created successfully', event: createdEvent });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
 
 
@@ -53,8 +77,27 @@ router.get('/choose-location', isAuthenticated, (req, res) => {
   res.json({ locationTypes });
 });
 
+// Update the endpoint to handle the selected location
+router.post('/choose-location', isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+    const selectedLocation = req.body.location_type;
 
-// Choose the date and time for the event
+    // Assuming you have a database query to store the selected location in the Events table
+    const updateQuery = 'UPDATE Events SET location = ? WHERE user_id = ?';
+    await db.execute(updateQuery, [selectedLocation, userId]);
+
+    res.status(200).json({ message: 'Location selected successfully' });
+  } catch (error) {
+    console.error('Error choosing location:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+
+
+// DATE AND TIME
 router.get('/choose-date-time', isAuthenticated, (req, res) => {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -75,12 +118,83 @@ router.get('/choose-date-time', isAuthenticated, (req, res) => {
   res.json({ dateOptions, timeOptions });
 });
 
+// Backend route for choosing date and time
+router.post('/choose-date', isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+    const { date, time, duration } = req.body;
+
+    // Assuming you have a database query to store the selected date and time in the Events table
+    const updateQuery = 'UPDATE Events SET event_date = ?, event_time = ?, event_duration = ? WHERE user_id = ? AND event_status = "PLANNING IN PROGRESS"';
+    await db.execute(updateQuery, [date, time, duration, userId]);
+
+    res.status(200).json({ message: 'Date and time selected successfully' });
+  } catch (error) {
+    console.error('Error choosing date and time:', error);
+    res.status(500).json({ message: `Internal Server Error: ${error.message || "Unknown error"}` });
+  }
+});
+
+
 
 // Choose the type of catering (Cold Food, Hot Food, Soft Drinks, Cakes, Alcohol and Mocktails, Sweets/Pastries)
 router.get('/choose-catering', isAuthenticated, (req, res) => {
   const cateringTypes = ['Cold Food', 'Hot Food', 'Soft Drinks', 'Cakes', 'Alcohol and Mocktails', 'Sweets/Pastries'];
 
   res.json({ cateringTypes });
+});
+
+
+// Update the endpoint to handle the selected catering types
+router.post('/choose-catering', isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+    const selectedCateringTypes = req.body.catering_types;
+
+    if (!Array.isArray(selectedCateringTypes) || selectedCateringTypes.length !== 3) {
+      return res.status(400).json({ message: 'Please provide an array of 3 catering types.' });
+    }
+
+    // Assuming you have a database query to store the selected catering types in the Events table
+    const updateQuery = 'UPDATE Events SET catering_type = ? WHERE user_id = ? AND event_status = "PLANNING IN PROGRESS"';
+    await db.execute(updateQuery, [JSON.stringify(selectedCateringTypes), userId]);
+
+    res.status(200).json({ message: 'Catering types selected successfully' });
+  } catch (error) {
+    console.error('Error choosing catering types:', error);
+    res.status(500).json({ message: `Internal Server Error: ${error.message || "Unknown error"}` });
+  }
+});
+
+
+// Get available theme options
+router.get('/theme-options', async (req, res) => {
+  try {
+    
+    const themeOptions = ['Elegant', 'Playful', 'Boho Chic', 'Casual'];
+
+    res.status(200).json({ themeOptions });
+  } catch (error) {
+    console.error('Error getting theme options:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// Update the event's chosen theme
+router.post('/choose-theme', isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+    const selectedTheme = req.body.theme;
+
+    
+    const updateQuery = 'UPDATE Events SET event_theme = ? WHERE user_id = ?';
+    await db.execute(updateQuery, [selectedTheme, userId]);
+
+    res.status(200).json({ message: 'Theme selected successfully' });
+  } catch (error) {
+    console.error('Error choosing theme:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
 
 
@@ -101,6 +215,21 @@ router.post('/confirm-booking', isAuthenticated, async (req, res) => {
   }
 });
 
+// Fetch event details for the occasion confirmed page
+router.get('/occasion-details', isAuthenticated, async (req, res) => {
+  try {
+    // Get the user ID from the session
+    const userId = req.session.user.user_id;
+
+    // Call the getEventDetailsFromDatabase method with the user ID
+    const eventDetails = await getEventDetailsFromDatabase(userId);
+
+    res.status(200).json({ eventDetails });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 
 
