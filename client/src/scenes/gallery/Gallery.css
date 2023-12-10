@@ -1,29 +1,27 @@
-body {
-    background-image: url'("/client/src/assets/images/ian-schneider-PAykYb-8Er8-unsplash.jpg")';
-    background-repeat: no-repeat;
+.gHeading {
+    background-image: url("/Users/mimibrown/Documents/EventHubGroup6Project/EventHub/client/src/assets/images/ian-schneider-PAykYb-8Er8-unsplash.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
+    height: 70vh;
 }
-
-img.w-full {
-    display: block;
-    margin-top: 10%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10%;
-    width: 70%;
-}
-
-.pageContainer {
-    margin-top: 10%;
-    margin-bottom: 5%;
+.gTitle {
     text-align: center;
-}
-
-.title {
     font-size: 5rem;
+    margin-top: 8%;
     padding: 3%;
+    color: white;
+    
 }
 
-.strapLine {
-    font-size: 1.5rem;
-}
+.gStrapLine {
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+} 
+
+
+
+
+
+
+
