@@ -232,7 +232,7 @@ app.post('/choose-location', async (req, res) => {
     const userId = req.session.user.user_id;
     const selectedLocation = req.body.location_type;
 
-    // Assuming you have a database query to store the selected location in the Events table
+   
     const updateQuery = 'UPDATE Events SET location = ? WHERE user_id = ?';
     await db.execute(updateQuery, [selectedLocation, userId]);
 
@@ -283,8 +283,7 @@ app.post('/choose-catering', (req, res) => {
 
 // Add this route handler for GET requests to "/choose-catering"
 app.get('/choose-catering', (req, res) => {
-  // Handle the GET request for choose-catering
-  // You can send a simple response, for example:
+  
   res.status(200).json({ message: 'GET request to /choose-catering received successfully' });
 });
 
@@ -314,8 +313,6 @@ app.post('/choose-theme', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-
-
 
 
 

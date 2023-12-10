@@ -36,11 +36,11 @@ const Theme = () => {
   
     setNextClicked(true);
   
-    // Assuming you have a corresponding backend route to handle theme selection
+   
     axios.post("http://localhost:3001/choose-theme", { theme: selectedOption })
       .then(response => {
         console.log(response.data.message);
-        // Navigate to the next route after successfully updating on the backend
+        
         navigate("/date");
       })
       .catch(error => {

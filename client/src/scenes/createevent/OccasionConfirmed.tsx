@@ -7,7 +7,7 @@ const OccasionConfirmed = () => {
   const [eventDetails, setEventDetails] = useState(null);
 
   useEffect(() => {
-    // Fetch event details when the component mounts
+   
     axios.get("http://localhost:3001/occasion-details")
       .then(response => {
         setEventDetails(response.data.eventDetails);

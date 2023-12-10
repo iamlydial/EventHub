@@ -83,7 +83,7 @@ router.post('/choose-location', isAuthenticated, async (req, res) => {
     const userId = req.session.user.user_id;
     const selectedLocation = req.body.location_type;
 
-    // Assuming you have a database query to store the selected location in the Events table
+    
     const updateQuery = 'UPDATE Events SET location = ? WHERE user_id = ?';
     await db.execute(updateQuery, [selectedLocation, userId]);
 
@@ -124,7 +124,7 @@ router.post('/choose-date', isAuthenticated, async (req, res) => {
     const userId = req.session.user.user_id;
     const { date, time, duration } = req.body;
 
-    // Assuming you have a database query to store the selected date and time in the Events table
+    
     const updateQuery = 'UPDATE Events SET event_date = ?, event_time = ?, event_duration = ? WHERE user_id = ? AND event_status = "PLANNING IN PROGRESS"';
     await db.execute(updateQuery, [date, time, duration, userId]);
 
@@ -155,7 +155,7 @@ router.post('/choose-catering', isAuthenticated, async (req, res) => {
       return res.status(400).json({ message: 'Please provide an array of 3 catering types.' });
     }
 
-    // Assuming you have a database query to store the selected catering types in the Events table
+    
     const updateQuery = 'UPDATE Events SET catering_type = ? WHERE user_id = ? AND event_status = "PLANNING IN PROGRESS"';
     await db.execute(updateQuery, [JSON.stringify(selectedCateringTypes), userId]);
 

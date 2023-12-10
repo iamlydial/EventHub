@@ -41,7 +41,7 @@ const CreateEvent = () => {
     axios.post("http://localhost:3001/create-event", { event_name: selectedOption })
       .then(response => {
         console.log(response.data.message);
-        // Navigate to the next route after successfully updating on the backend
+        
         navigate("/location");
       })
       .catch(error => {

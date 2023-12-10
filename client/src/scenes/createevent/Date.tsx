@@ -40,7 +40,7 @@ const Date = () => {
     })
       .then(response => {
         console.log(response.data.message);
-        // Navigate to the next route after successfully updating on the backend
+        
         navigate("/occasion-confirmed");
       })
       .catch(error => {

@@ -32,22 +32,22 @@ const Catering = () => {
   
     setNextClicked(true);
   
-    // Update the selected catering types on the backend
+    
     axios.post("http://localhost:3001/choose-catering", { catering_types: selectedOption })
       .then(response => {
         console.log(response.data.message);
-        // Navigate to the next route after successfully updating on the backend
+        
         navigate("/theme");
       })
       .catch(error => {
         console.error("Error choosing catering types:", error);
-        console.log("Error response:", error.response); // Log the error response
+        console.log("Error response:", error.response); 
         alert("An error occurred. Please try again.");
       });
   };
 
   const handleOptionClick = (option: string) => {
-    // Allow up to three selections
+    // up to three selections
     if (selectedOption.includes(option)) {
       setSelectedOption((prevSelected) => prevSelected.filter((selected) => selected !== option));
     } else {

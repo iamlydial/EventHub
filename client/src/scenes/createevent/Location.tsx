@@ -36,7 +36,7 @@ const Location = () => {
 
     setNextClicked(true);
 
-    // Assuming you have a corresponding backend route to handle location selection
+    
     axios.post("http://localhost:3001/choose-location", { location_type: selectedOption })
       .then(response => {
         console.log(response.data.message);
