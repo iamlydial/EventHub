@@ -1,0 +1,22 @@
+.allEventTabs {
+    margin-top: 10%;
+}
+
+.eventHistoryTitle {
+    text-align: center;
+    padding: 5%;
+}
+
+.eventHistoryHeading {
+    font-size: 5rem;
+    font-weight: bold;
+    padding: 2%;
+
+
+}
+
+.eventHistoryP {
+    font-size: 2rem;
+    line-height: 1.6;
+
+}

@@ -12,8 +12,11 @@ export const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/gallery", label: "Gallery" },
   { href: "/services", label: "Services" },
+  { href: "/create-event", label: "Create Event" },
   { href: "/contact-us", label: "Contact Us" },
   { href: "/our-work", label: "Our Work" },
+  {href: "/account-dashboard", label: "Account Dashboard"},
+  {href: "/your-event-history", label: "Your Event History",}
 ];
 
 export const logLinks: LogLinks[] = [
@@ -23,30 +26,30 @@ export const logLinks: LogLinks[] = [
 
 export const footerLinks = [
   {
-      title: "Event Themes",
-      links: [
-          { name: "Birthday", link: "/gallery" },
-          { name: "Kids Birthday", link: "/gallery" },
-          { name: "Baby Shower", link: "/gallery" },
-          { name: "Bridal Party", link: "/gallery" },
-      ],
+    title: "Event Themes",
+    links: [
+      { name: "Birthday", link: "/gallery" },
+      { name: "Kids Birthday", link: "/gallery" },
+      { name: "Baby Shower", link: "/gallery" },
+      { name: "Bridal Party", link: "/gallery" },
+    ],
   },
   {
-      title: "Links",
-      links: [
-          { name: "About us", link: "/" },
-          { name: "FAQs", link: "/" },
-          { name: "How it works", link: "/" },
-          { name: "Privacy policy", link: "/" },
-          { name: "Payment policy", link: "/" },
-      ],
+    title: "Links",
+    links: [
+      { name: "About us", link: "/" },
+      { name: "FAQs", link: "/" },
+      { name: "How it works", link: "/" },
+      { name: "Privacy policy", link: "/" },
+      { name: "Payment policy", link: "/" },
+    ],
   },
   {
-      title: "Get in touch",
-      links: [
-          { name: "customer@eventhub.com", link: "mailto:customer@eventhub.com" },
-          { name: "+92554862354", link: "tel:+92554862354" },
-      ],
+    title: "Get in touch",
+    links: [
+      { name: "customer@eventhub.com", link: "mailto:customer@eventhub.com" },
+      { name: "+92554862354", link: "tel:+92554862354" },
+    ],
   },
 ];
 

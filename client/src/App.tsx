@@ -9,6 +9,16 @@ import ContactUs from "./scenes/contactus/ContactUs";
 import Services from "./scenes/services/Services";
 import Gallery from "./scenes/gallery/Gallery";
 import CreateEvent from "./scenes/createevent/CreateEvent";
+import AccountDashboard from "./scenes/AccountInformation/accoundashboard/accountdashboard";
+import YourEventHistory from "./scenes/YourEventHistory/YourEventHistory";
+import Location from "./scenes/createevent/Location";
+import Catering from "./scenes/createevent/Catering";
+import Theme from "./scenes/createevent/Theme";
+import Date from "./scenes/createevent/Date";
+import OccasionConfirmed from "./scenes/createevent/OccasionConfirmed";
+import { selectIsLoggedIn, setUserLoggedInState } from "./redux/userSlice";
+import { useDispatch } from "react-redux";
+
 
 const App: React.FC = () => {
   const ScrollToTop = () => {
@@ -18,6 +28,14 @@ const App: React.FC = () => {
     }, [pathname]);
     return null;
   };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (isLoggedIn) {
+      dispatch(setUserLoggedInState(true));
+    }
+  }, [dispatch]);
 
   return (
     <div className="app">
@@ -31,21 +49,20 @@ const App: React.FC = () => {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/services" element={<Gallery />} />
           <Route path="/create-event" element={<CreateEvent />} />
+          <Route path="/location" element={<Location />} />
+          <Route path="/catering" element={<Catering />} />
+          <Route path="/theme" element={<Theme />} />
+          <Route path="/date" element={<Date />} />
+          <Route path="/occasion-confirmed" element={<OccasionConfirmed />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/account-dashboard" element={<AccountDashboard />} />
+          <Route path="/your-event-history" element={<YourEventHistory />} />
+
         </Routes>
       </BrowserRouter>
-
-      <h2>Mimi Brown</h2>
-      <ul>
-        <li>Name: Mimi Brown</li>
-        <li>Favorite Hobby: Gardening, baking, and fitness.</li>
-        <li>
-          Why: Gardening is a calming and deeply relaxing activity that brings peace to my mind. During the lockdown, I discovered the joy of baking, and it has become a passion ever since. Taking care of my well-being is a priority, so I strive to stay active as much as possible.
-        </li>
-      </ul>
       <Footer />
-      </div>
+    </div>
   );
 };
 
