@@ -1,7 +1,7 @@
 import React from "react";
-import profilePicture from "/Users/mimibrown/Documents/EventHubGroup6Project/EventHub/client/src/assets/images/GalleryComponent/profilePicture.jpg";
+import profilePicture from "../../../GalleryComponent/profilePicture.jpg"
 
-
+// profilePicture from "../../../assets/images/GalleryComponent/profilePicture.jpg";
 const Heading: React.FC = () => {
   return (
     <div className="flex items-center mt-10">

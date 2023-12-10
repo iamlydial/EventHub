@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import Button from "../AccountInformation/Buttons/button";
-import image1 from "../../assets/images/GalleryComponent/image1.jpg";
-import image2 from "../../assets/images/GalleryComponent/image2.jpg";
-import image3 from "../../assets/images/GalleryComponent/image3.jpg";
-import image4 from "../../assets/images/GalleryComponent/image4.jpg";
-import image5 from "../../assets/images/GalleryComponent/image5.jpg";
-import image6 from "../../assets/images/GalleryComponent/image6.jpg";
-import image7 from "../../assets/images/GalleryComponent/image7.jpg";
-import image8 from "../../assets/images/GalleryComponent/image8.jpg";
+import image1 from "../../GalleryComponent/image1.jpg"
+import image2 from "../../GalleryComponent/image2.jpg";
+import image3 from "../../GalleryComponent/image3.jpg";
+import image4 from "../../GalleryComponent/image4.jpg";
+import image5 from "../../GalleryComponent/image5.jpg";
+import image6 from "../../GalleryComponent/image6.jpg";
+import image7 from "../../GalleryComponent/image7.jpg";
+import image8 from "../../GalleryComponent/image8.jpg";
+// import image8 from "../../assets/images/GalleryComponent/image8.jpg";
 import ianSchneiderPAykYb8Er8Unsplash from "../../assets/images/ian-schneider-PAykYb-8Er8-unsplash.jpg";
 
 const GalleryComponent: React.FC = () => {
