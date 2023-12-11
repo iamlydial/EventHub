@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import arrowRight from "../../assets/images/GalleryComponent/arrowRight.jpg";
-import arrowLeft from "../../assets/images/GalleryComponent/arrowLeft.jpg";
-import arrowDown from "../../assets/images/GalleryComponent/arrowDown.jpg";
-import arrowDownCurveLeft from "../../assets/images/GalleryComponent/arrowDownCurveLeft.jpg";
-import arrowDownCurveRight from "../../assets/images/GalleryComponent/arrowDownCurveRight.jpg";
+import arrowRight from "../../GalleryComponent/arrowRight.jpg";
+import arrowLeft from "../../GalleryComponent/arrowLeft.jpg";
+import arrowDown from "../../GalleryComponent/arrowDown.jpg";
+import arrowDownCurveLeft from "../../GalleryComponent/arrowDownCurveLeft.jpg";
+import arrowDownCurveRight from "../../GalleryComponent/arrowDownCurveRight.jpg";
 import Button from "../AccountInformation/Buttons/button";
 
 
