@@ -6,7 +6,7 @@ const YourEventHistory: React.FC = () => {
   return (
     <div className="mt-10 p-5">
       <div className="text-center py-5">
-        <h1 className="text-5xl font-bold mt-10 mb-10">Event History</h1>
+        <h1 className="text-5xl font-bold mt-12 pt-20 mb-10">Event History</h1>
         <p className="text-xl mb-10">All your current and past events in one place</p>
       </div>
       <div className="grid grid-cols-3 gap-4">
