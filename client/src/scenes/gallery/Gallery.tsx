@@ -9,8 +9,8 @@ import image5 from "../../GalleryComponent/image5.jpg";
 import image6 from "../../GalleryComponent/image6.jpg";
 import image7 from "../../GalleryComponent/image7.jpg";
 import image8 from "../../GalleryComponent/image8.jpg";
-// import image8 from "../../assets/images/GalleryComponent/image8.jpg";
-import ianSchneiderPAykYb8Er8Unsplash from "../../assets/images/ian-schneider-PAykYb-8Er8-unsplash.jpg";
+import galleryMbg from "../../GalleryComponent/galleryMbg.jpg"
+
 
 const GalleryComponent: React.FC = () => {
   const imagesList = [
@@ -24,19 +24,20 @@ const GalleryComponent: React.FC = () => {
     { id: 8, src: image8, alt: "Image 8" },
   ];
 
+
   return (
+    <div className="PageBg bg-cover bg center bg-no-repeat opacity-95" style={{ backgroundImage: `url(${galleryMbg})` }} >
     <div className="flex flex-col justify-between min-h-screen">      
-    <img src={ianSchneiderPAykYb8Er8Unsplash} alt="" className="w-full h-72 object-cover bg-fixed z-0 pt-9 mt-20 mb-5" />
       <div className="gHeading bg-cover bg-no-repeat h-3/4">
       <div className="z-10 relative">
-        <h1 className="gTitle text-center text-9xl text-onyx font-bold">Gallery</h1>
-        <p className="gStrapLine text-center text-2xl text-onyx p-5">
+        <h1 className="gTitle text-center mt-40 text-4xl text-onyx font-bold">Gallery</h1>
+        <p className="gStrapLine text-center font-bold text-2xl text-onyx p-5">
           Here is a taste of what one of your events could look like
         </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mt-5 mx-4">
+      <div className="grid grid-cols-4 gap-6 mt-5 mx-4 m-10 h-92">
         {imagesList.map((image) => (
           <img
             key={image.id}
@@ -53,6 +54,9 @@ const GalleryComponent: React.FC = () => {
         </Link>
       </div>
     </div>
+    </div>
+  
+    
   );
 };
 

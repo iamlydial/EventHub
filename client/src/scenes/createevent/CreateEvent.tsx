@@ -94,7 +94,7 @@ const CreateEvent = () => {
           Location
         </p>
         <button
-          className="w-36 rounded-md p-2 font-roboto bg-dutch-white hover:bg-sage font-black"
+          className="w-36 rounded-md p-2 font-roboto bg-dutchWhite hover:bg-sage font-black"
           onClick={handleNextClick}
         >
           Next
