@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom';
 interface ButtonProps {
   onClick?: () => void;
   text: string;
+  className?: string; //this allows us to accept another className prop
 }
 
-const Button: React.FC<ButtonProps> = ({ onClick, text }) => {
+const Button: React.FC<ButtonProps> = ({ onClick, text, className = "" }) => {
+  // Add className prop to the button element
   return (
     <button
       onClick={onClick}

@@ -1,4 +1,5 @@
 import React from "react";
+import glitterGlass from "../../GalleryComponent/glitterGlass.jpg"
 
 type Props = {};
 
@@ -6,10 +7,10 @@ const ContactUs = (props: Props) => {
   return (
     <div className="pt-20  flex flex-col lg:flex-row h- lg:h-screen">
       <div
-        className="p-10 w-full
-      "
+        className="p-10 w-full gridContainer bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${glitterGlass})` }}
+      
       >
-        <div className="flex flex-col lg:flex-row bg-gray-300 w-full rounded-md h-auto p-20 mt-20 gap-x-10">
+        <div className="flex flex-col lg:flex-row bg-gray-300 w-full rounded-md h-auto p-20 mt-20 gap-x-10 opacity-80">
           <div className="flex lg:flex-col justify-center w-full lg:w-4/12">
             <p className="flex flex-row pb-5 leading-loose font-roboto lg:text-2xl">
               Our Amazing Event Team is ready to help you anytime. Just fill in

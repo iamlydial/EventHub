@@ -17,7 +17,7 @@ const Navbar: React.FC<NavProps> = () => {
           <a href="/">
             <img src={logoNavbar} alt="Logo" width={100} height="auto" />
           </a>
-          <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden p-2">
+          <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden p-2 ml-3">
             {navLinks.map((link, index) => (
               <li key={index}>
                 <a href={link.href}>{link.label}</a>
