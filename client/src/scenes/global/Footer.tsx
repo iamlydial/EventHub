@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import { copyright } from "../../assets/icons";
-import logo from "../../assets/images/EventHubNoBg.png";
+import logo from "../../assets/images/EventHub-Logo1.jpg";
 import { footerLinks, socialMedia } from "../../types/constants";
 
 const Footer: FC = () => {
   return (
-    <footer className="flex-row justify-center  border-red-500 bg-gray-700 p-10">
+    <footer className="flex-row justify-center  border-red-500 bg-onyx p-10">
       <div className="flex items-start  w-full gap-10 lg:gap-20 flex-wrap max-md:flex-row">
         <div className="flex flex-col items-start">
           <a href="/">

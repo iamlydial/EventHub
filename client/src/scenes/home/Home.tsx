@@ -30,9 +30,9 @@ const Home: React.FC<Props> = () => {
 
   return (
     <div className="mt-20">
-      <div className="bg-[url('assets/images/al-elmes-ULHxWq8reao-unsplash.jpg')] bg-fixed bg-cover p-40 h-auto">
+      <div className="bg-[url('https://images.unsplash.com/photo-1534768368122-aa9bbb3a8d62?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fHBhc3RlbCUyMHBhcnR5fGVufDB8fDB8fHwy')] bg-fixed bg-cover p-40 h-auto">
         <h1 className="text-8xl text-white text-center font-mukta font-bold p-5 ">
-          {userData?.user?.name}, Curate your perfect Event with EventHub
+          {userData?.user?.name} Curate your perfect Event with EventHub
         </h1>
         <p className="font-roboto text-white text-4xl text-center p-3">
           EventHub facilitates the planning and organization of various events
@@ -66,31 +66,30 @@ const Home: React.FC<Props> = () => {
         Previous events by EventHub
       </h1>
 
-      <div className="flex items-center justify-center mt-5 mb-10">
-        <div className="flex h-72 w-96">
+      <div className="flex items-center justify-center mb-10">
+        
+        <div className="flex relative overflow-hidden h-52 w-96 rounded-lg sm:h-64 xl:h-80 2xl:h-96" >
           <Carousel slideInterval={4000} pauseOnHover>
             <img
-              src="https://flowbite.com/docs/images/carousel/carousel-1.svg"
-              alt="Image 1"
+
+              src={require("../../assets/images/al-elmes-ULHxWq8reao-unsplash.jpg")}
+              alt="Wedding"
             />
             <img
-              src="https://flowbite.com/docs/images/carousel/carousel-2.svg"
-              alt="Image 2"
+              src={require("../../assets/images/Feature-Hens.jpg")}
+              alt="Hen Do"
             />
             <img
-              src="https://flowbite.com/docs/images/carousel/carousel-3.svg"
-              alt="Image 3"
+              src={require("../../assets/images/Hen-party-ideas.jpg")}
+              alt="Hen Do 2"
             />
             <img
-              src="https://flowbite.com/docs/images/carousel/carousel-4.svg"
-              alt="Image 4"
-            />
-            <img
-              src="https://flowbite.com/docs/images/carousel/carousel-5.svg"
-              alt="Image 5"
+              src={require("../../assets/images/dave-lastovskiy-RygIdTavhkQ-unsplash.jpg")}
+              alt="Pouring Champagne"
             />
           </Carousel>
         </div>
+
       </div>
       <div className="flex-grow border-t-2 border-onyx mb-5 border-opacity-10"></div>
       {/*   

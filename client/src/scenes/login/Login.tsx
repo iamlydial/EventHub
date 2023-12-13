@@ -123,3 +123,36 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+
+
+
+
+// isLoggedIn variable that represents the user's login status
+
+// Create a function to generate the navigation links based on login status
+// export const generateNavLinks = (isLoggedIn: boolean): NavLink[] => {
+//   if (isLoggedIn) {
+//     return [
+//       { href: "/", label: "Home" },
+//       { href: "/gallery", label: "Gallery" },
+//       { href: "/services", label: "Services" },
+//       { href: "/create-event", label: "Create Event" },
+//       { href: "/account-dashboard", label: "Account Dashboard" },
+//       { href: "/your-event-history", label: "Your Event History" },
+//       { href: "/contact-us", label: "Contact Us" },
+//     ];
+//   } else {
+//     return [
+//       { href: "/", label: "Home" },
+//       { href: "/gallery", label: "Gallery" },
+//       { href: "/services", label: "Services" },
+//       { href: "/contact-us", label: "Contact Us" },
+//       { href: "/login", label: "Log In", icon: login },
+//       { href: "/signup", label: "Sign Up", icon: signup },
+//     ];
+//   }
+// };
+
+// // Example usage:
+// const isLoggedIn = true; // Replace this with your actual logic to determine user login status
+// const navLinks: NavLink[] = generateNavLinks(isLoggedIn);

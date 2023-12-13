@@ -9,8 +9,8 @@ import image5 from "../../GalleryComponent/image5.jpg";
 import image6 from "../../GalleryComponent/image6.jpg";
 import image7 from "../../GalleryComponent/image7.jpg";
 import image8 from "../../GalleryComponent/image8.jpg";
-// import image8 from "../../assets/images/GalleryComponent/image8.jpg";
-import ianSchneiderPAykYb8Er8Unsplash from "../../assets/images/ian-schneider-PAykYb-8Er8-unsplash.jpg";
+import mainBgCover from "../../GalleryComponent/mainBgCover.jpg"
+
 
 const GalleryComponent: React.FC = () => {
   const imagesList = [
@@ -24,35 +24,39 @@ const GalleryComponent: React.FC = () => {
     { id: 8, src: image8, alt: "Image 8" },
   ];
 
+
   return (
-    <div className="flex flex-col justify-between min-h-screen">
+    <div  >
+    <div className="flex flex-col justify-between min-h-screen bg-cover bg center bg-no-repeat" style={{ backgroundImage: `url(${mainBgCover})` }}>      
       <div className="gHeading bg-cover bg-no-repeat h-3/4">
-      <img src={ianSchneiderPAykYb8Er8Unsplash} alt="" className="w-full h-full object-cover z-0 mt-20 pt-3 mb-5" />
-      <div className="z-10 relative">
-        <h1 className="gTitle text-center text-9xl text-onyx font-bold pt-8 z-5">Gallery</h1>
-        <p className="gStrapLine text-center text-2xl text-onyx p-5">
-          Here is a taste of what one of your events could look like
+      <div className="z-10 relative ml-10 mr-10 m-5 border-s-4">
+        <h1 className="gTitle text-center mt-40 text-4xl text-onyx font-bold">Gallery</h1>
+        <p className="gStrapLine text-center text-3xl text-onyx p-5">
+          Here is a taste of what your event could look like. We create your dream event based on the package you curated through our Create Event Journey.
         </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-8 mt-8 mx-4">
+      <div className="grid grid-cols-4 gap-1 mt-5 mx-4 PageBg">
         {imagesList.map((image) => (
           <img
             key={image.id}
             src={image.src}
             alt={image.alt}
-            className="w-full rounded-md"
+            className="w-full rounded-md h-58 p-6"
           />
         ))}
       </div>
 
       <div className="text-center mt-8">
         <Link to="/create-event">
-          <Button text="Click to Create Your Event" />
+          <Button text="Create Your Event" />
         </Link>
       </div>
     </div>
+    </div>
+  
+    
   );
 };
 

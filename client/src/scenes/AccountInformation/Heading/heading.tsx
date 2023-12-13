@@ -4,8 +4,8 @@ import profilePicture from "../../../GalleryComponent/profilePicture.jpg"
 // profilePicture from "../../../assets/images/GalleryComponent/profilePicture.jpg";
 const Heading: React.FC = () => {
   return (
-    <div className="flex items-center mt-10">
-      <h1 className="text-5xl text-gray-800 mr-16 ml-8">Welcome, userName</h1>
+    <div className="flex items-center mt-10 pt-20">
+      <h1 className="text-5xl text-gray-800 mr-16 ml-8 mb-10">Welcome, userName</h1>
       <div className="ml-auto mr-10">
       <ProfilePicture />
       </div>

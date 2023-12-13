@@ -2,6 +2,7 @@ import React from "react";
 import Heading from "../Heading/heading";
 import AccountDashboardSideNav from "../AccDashboardSideNav/accountdashboardsidenav";
 import AccountDashboardTabs from "../AccDashboardTabs/accountdashboardtabs";
+import mainBgCover from "../../../GalleryComponent/mainBgCover.jpg"
 
 const backgroundStyle: React.CSSProperties = {
   backgroundImage: 'url("/client/public/dutch-whiteSplash.jpg")',
@@ -13,12 +14,14 @@ const backgroundStyle: React.CSSProperties = {
 
 function AccountDashboard() {
   return (
-    <div className="bg-gray-100 min-h-screen" style={backgroundStyle}>
+    <div className="bg-cover bg center bg-no-repeat mt-10 " style={{ backgroundImage: `url(${mainBgCover})` }}>
       <Heading />
-      <AccountDashboardSideNav />
+      {/* <AccountDashboardSideNav /> */}
       <AccountDashboardTabs />
     </div>
   );
 }
 
 export default AccountDashboard;
+
+// bg-gray-100 min-h-screen" style={BackgroundStyle}
