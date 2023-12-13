@@ -71,6 +71,7 @@ const Home: React.FC<Props> = () => {
         <div className="flex relative overflow-hidden h-52 w-96 rounded-lg sm:h-64 xl:h-80 2xl:h-96" >
           <Carousel slideInterval={4000} pauseOnHover>
             <img
+
               src={require("../../assets/images/al-elmes-ULHxWq8reao-unsplash.jpg")}
               alt="Wedding"
             />

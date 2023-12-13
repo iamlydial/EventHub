@@ -25,6 +25,7 @@ export default {
         dutchWhite: "#e9dab2",
         onyx: "#393E41",
         hoverBg: "#464b4f",
+        navigation: "#374151",
       },
       boxShadow: {
         "3xl": "0 10px 40px rgba(0, 0, 0, 0.1)",

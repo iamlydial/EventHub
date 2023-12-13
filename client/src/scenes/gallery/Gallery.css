@@ -1,0 +1,27 @@
+.gHeading {
+    background-image: url("/Users/mimibrown/Documents/EventHubGroup6Project/EventHub/client/src/assets/images/ian-schneider-PAykYb-8Er8-unsplash.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 70vh;
+}
+.gTitle {
+    text-align: center;
+    font-size: 5rem;
+    margin-top: 8%;
+    padding: 3%;
+    color: white;
+    
+}
+
+.gStrapLine {
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+} 
+
+
+
+
+
+
+
