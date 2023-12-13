@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
 import GreySquiggle from "../../assets/images/GreySquiggle.jpg";
 import axios from 'axios'
-
 
 const CreateEvent = () => {
   const location = useLocation();
@@ -14,7 +14,7 @@ const CreateEvent = () => {
 
   useEffect(() => {
     // Fetch event types for our frontend
-    axios.get("http://localhost:3001/event-types")
+    axios.get("/event-types")
       .then(response => {
         setEventTypes(response.data.eventTypes);
       })
@@ -38,7 +38,7 @@ const CreateEvent = () => {
 
     setNextClicked(true);
 
-    axios.post("http://localhost:3001/create-event", { event_name: selectedOption })
+    axios.post("/create-event", { event_name: selectedOption })
       .then(response => {
         console.log(response.data.message);
         

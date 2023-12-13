@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const Location = () => {
@@ -11,7 +12,7 @@ const Location = () => {
 
   useEffect(() => {
     // Fetch location types for our frontend
-    axios.get("http://localhost:3001/location-options")
+    axios.get("/location-options")
       .then(response => {
         setLocationTypes(response.data.locationTypes);
       })
@@ -37,7 +38,7 @@ const Location = () => {
     setNextClicked(true);
 
     
-    axios.post("http://localhost:3001/choose-location", { location_type: selectedOption })
+    axios.post("/choose-location", { location_type: selectedOption })
       .then(response => {
         console.log(response.data.message);
       })

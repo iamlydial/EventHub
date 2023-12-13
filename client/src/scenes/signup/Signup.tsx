@@ -1,8 +1,8 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import loginImage from "../../assets/images/marc-babin-aQWmCH_b3MU-unsplash 1.png";
-import validation from "./SignupValidation";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import axios from "axios";
+import loginImage from "../../assets/images/marc-babin-aQWmCH_b3MU-unsplash 1.png";
 import { useNavigate } from "react-router-dom";
+import validation from "./SignupValidation";
 
 interface FormValues {
   name: string;
@@ -51,7 +51,7 @@ const Signup: React.FC = () => {
         )
       ) {
         axios
-          .post("http://localhost:3001/auth/signup", values)
+          .post("/auth/signup", values)
           .then((res) => {
             console.log(res);
             if (res.status === 200) {

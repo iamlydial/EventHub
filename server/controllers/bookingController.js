@@ -11,13 +11,14 @@ const bcrypt = require("bcryptjs");
 async function createEventInDatabase(userId, eventData) {
   try {
     // Insert event data into the database, including the user_id
-    const [result] = await db.execute(
-      'INSERT INTO Events (user_id, event_name, event_theme, event_date, event_time, location, catering_type, decoration_style, event_status, event_confirmed, location_new) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-      [userId, eventData.event_name, eventData.event_theme, eventData.event_date, eventData.event_time, eventData.location, eventData.catering_type, eventData.decoration_style, 'PLANNING IN PROGRESS', 'NOT CONFIRMED', eventData.location_new]
+    const connection = await db.getConnection();
+    const [result] = await connection.query(
+      'INSERT INTO Events (user_id, event_name, event_theme, event_date, event_time, event_duration, location, catering_type, event_confirmed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [userId, eventData.event_name, eventData.event_theme, eventData.event_date, eventData.event_time, eventData.event_duration, eventData.location, eventData.catering_type, 'NOT CONFIRMED']
     );
 
     // Fetch the created event from the database
-    const [createdEvent] = await db.execute('SELECT * FROM Events WHERE ID = ?', [result.insertId]);
+    const [createdEvent] = await connection.query('SELECT * FROM Events WHERE ID = ?', [result.insertId]);
 
     return {
       id: createdEvent[0].ID,
@@ -26,66 +27,64 @@ async function createEventInDatabase(userId, eventData) {
       event_theme: createdEvent[0].event_theme,
       event_date: createdEvent[0].event_date,
       event_time: createdEvent[0].event_time,
+      event_duration: createdEvent[0].event_duration,
       location: createdEvent[0].location,
       catering_type: createdEvent[0].catering_type,
-      decoration_style: createdEvent[0].decoration_style,
-      event_status: createdEvent[0].event_status,
       event_confirmed: createdEvent[0].event_confirmed,
-      location_new: createdEvent[0].location_new,
     };
   } catch (error) {
     throw error;
   }
 }
 
-// isAuthenticated function (needed before we can use it)
-const isAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next(); 
+// Middleware to check if the user is authenticated
+function isAuthenticated(req, res, next) {
+  if (req.session && req.session.user) {
+    return next();
+  } else {
+    res.status(401).json({ message: 'Unauthorized' });
   }
-  res.status(401).json({ message: 'Unauthorized' });
-};
+}
 
 
-// Get all EventHub available event types
-router.get('/event-types', isAuthenticated, (req, res) => {
+// createevent.tsx routers
+router.get('/event-types',  (req, res) => {
   const eventTypes = ['Bridal Shower', 'Birthday', 'Kids Birthday', 'Baby Shower'];
   res.json({ eventTypes });
 });
 
-// Select the type of event and create an event and add to database
-router.post('/create-event', isAuthenticated, async (req, res) => {
+
+router.post('/create-event',  async (req, res) => {
   try {
     const userId = req.session.user.user_id;
     const eventData = req.body;
 
-    // Call the createEventInDatabase method with the user ID
     const createdEvent = await createEventInDatabase(userId, eventData);
 
-    res.status(201).json({ message: 'Event created successfully', event: createdEvent });
+    res.status(201).json({ message: 'Event created successfully', eventTypes: eventData });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: error.message });
   }
 });
 
 
-// Choose the location type (Grand Venue, Bar, Garden, Intimate Venue)
-router.get('/choose-location', isAuthenticated, (req, res) => {
+// Location.tsx routers:
+router.get('/location-options', (req, res) => {
   const locationTypes = ['Grand Venue', 'Bar', 'Garden', 'Intimate Venue'];
 
   res.json({ locationTypes });
 });
 
-// Update the endpoint to handle the selected location
-router.post('/choose-location', isAuthenticated, async (req, res) => {
+
+router.post('/choose-location',   async (req, res) => {
   try {
     const userId = req.session.user.user_id;
     const selectedLocation = req.body.location_type;
 
     
     const updateQuery = 'UPDATE Events SET location = ? WHERE user_id = ?';
-    await db.execute(updateQuery, [selectedLocation, userId]);
+    const connection = await db.getConnection();
+    await connection.query(updateQuery, [selectedLocation, userId]);
 
     res.status(200).json({ message: 'Location selected successfully' });
   } catch (error) {
@@ -97,8 +96,8 @@ router.post('/choose-location', isAuthenticated, async (req, res) => {
 
 
 
-// DATE AND TIME
-router.get('/choose-date-time', isAuthenticated, (req, res) => {
+// date.tsx router:
+router.get('/choose-date-time', isAuthenticated,  (req, res) => {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
 
@@ -118,15 +117,15 @@ router.get('/choose-date-time', isAuthenticated, (req, res) => {
   res.json({ dateOptions, timeOptions });
 });
 
-// Backend route for choosing date and time
-router.post('/choose-date', isAuthenticated, async (req, res) => {
+
+router.post('/choose-date', isAuthenticated,  async (req, res) => {
   try {
     const userId = req.session.user.user_id;
     const { date, time, duration } = req.body;
 
-    
-    const updateQuery = 'UPDATE Events SET event_date = ?, event_time = ?, event_duration = ? WHERE user_id = ? AND event_status = "PLANNING IN PROGRESS"';
-    await db.execute(updateQuery, [date, time, duration, userId]);
+    const connection = await db.getConnection();
+    const updateQuery = 'UPDATE Events SET event_date = ?, event_time = ?, event_duration = ? WHERE user_id = ?';
+    await connection.query(updateQuery, [date, time, duration, userId]);
 
     res.status(200).json({ message: 'Date and time selected successfully' });
   } catch (error) {
@@ -137,16 +136,16 @@ router.post('/choose-date', isAuthenticated, async (req, res) => {
 
 
 
-// Choose the type of catering (Cold Food, Hot Food, Soft Drinks, Cakes, Alcohol and Mocktails, Sweets/Pastries)
-router.get('/choose-catering', isAuthenticated, (req, res) => {
+// Catering.tsx routers:
+router.get('/catering-options', isAuthenticated,  (req, res) => {
   const cateringTypes = ['Cold Food', 'Hot Food', 'Soft Drinks', 'Cakes', 'Alcohol and Mocktails', 'Sweets/Pastries'];
 
   res.json({ cateringTypes });
 });
 
 
-// Update the endpoint to handle the selected catering types
-router.post('/choose-catering', isAuthenticated, async (req, res) => {
+
+router.post('/choose-catering', isAuthenticated,  async (req, res) => {
   try {
     const userId = req.session.user.user_id;
     const selectedCateringTypes = req.body.catering_types;
@@ -155,9 +154,9 @@ router.post('/choose-catering', isAuthenticated, async (req, res) => {
       return res.status(400).json({ message: 'Please provide an array of 3 catering types.' });
     }
 
-    
-    const updateQuery = 'UPDATE Events SET catering_type = ? WHERE user_id = ? AND event_status = "PLANNING IN PROGRESS"';
-    await db.execute(updateQuery, [JSON.stringify(selectedCateringTypes), userId]);
+    const connection = await db.getConnection();
+    const updateQuery = 'UPDATE Events SET catering_type = ? WHERE user_id = ?';
+    await connection.query(updateQuery, [selectedCateringTypes.join(", "), userId]);
 
     res.status(200).json({ message: 'Catering types selected successfully' });
   } catch (error) {
@@ -167,8 +166,8 @@ router.post('/choose-catering', isAuthenticated, async (req, res) => {
 });
 
 
-// Get available theme options
-router.get('/theme-options', async (req, res) => {
+// theme.tsx routers:
+router.get('/theme-options',isAuthenticated,  async (req, res) => {
   try {
     
     const themeOptions = ['Elegant', 'Playful', 'Boho Chic', 'Casual'];
@@ -180,15 +179,15 @@ router.get('/theme-options', async (req, res) => {
   }
 });
 
-// Update the event's chosen theme
-router.post('/choose-theme', isAuthenticated, async (req, res) => {
+
+router.post('/choose-theme', isAuthenticated,  async (req, res) => {
   try {
     const userId = req.session.user.user_id;
     const selectedTheme = req.body.theme;
 
-    
+    const connection = await db.getConnection();
     const updateQuery = 'UPDATE Events SET event_theme = ? WHERE user_id = ?';
-    await db.execute(updateQuery, [selectedTheme, userId]);
+    await connection.query(updateQuery, [selectedTheme, userId]);
 
     res.status(200).json({ message: 'Theme selected successfully' });
   } catch (error) {
@@ -197,40 +196,19 @@ router.post('/choose-theme', isAuthenticated, async (req, res) => {
   }
 });
 
-
-// Process the confirmed booking and display a thank you message
-router.post('/confirm-booking', isAuthenticated, async (req, res) => {
+router.post('/confirm-booking',isAuthenticated,   async (req, res) => {
   try {
-    const eventData = req.body;
-    // Get the user ID from the session
     const userId = req.session.user.user_id;
 
-    // Call the createEventInDatabase method with the user ID
-    const createdEvent = await createEventInDatabase(userId, eventData);
+    const connection = await db.getConnection();
+    const updateQuery = 'UPDATE Events SET event_confirmed = ? WHERE user_id = ?';
+    await connection.query(updateQuery, ["CONFIRMED", userId]);
 
-    res.status(201).json({ message: 'YAY! Thank you for booking! Your event has been confirmed.', event: createdEvent });
+    res.status(201).json({ message: 'YAY! Thank you for booking! Your event has been confirmed.'});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-
-// Fetch event details for the occasion confirmed page
-router.get('/occasion-details', isAuthenticated, async (req, res) => {
-  try {
-    // Get the user ID from the session
-    const userId = req.session.user.user_id;
-
-    // Call the getEventDetailsFromDatabase method with the user ID
-    const eventDetails = await getEventDetailsFromDatabase(userId);
-
-    res.status(200).json({ eventDetails });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
-
-
 
 module.exports = router;

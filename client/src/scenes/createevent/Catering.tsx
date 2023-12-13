@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 
+import axios from "axios";
 
 const Catering = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const Catering = () => {
 
   useEffect(() => {
     // Fetch catering options for our frontend
-    axios.get("http://localhost:3001/catering-options")
+    axios.get("/catering-options")
       .then(response => {
         setCateringOptions(response.data.cateringOptions);
       })
@@ -33,7 +33,7 @@ const Catering = () => {
     setNextClicked(true);
   
     
-    axios.post("http://localhost:3001/choose-catering", { catering_types: selectedOption })
+    axios.post("/choose-catering", { catering_types: selectedOption })
       .then(response => {
         console.log(response.data.message);
         
@@ -42,7 +42,7 @@ const Catering = () => {
       .catch(error => {
         console.error("Error choosing catering types:", error);
         console.log("Error response:", error.response); 
-        alert("An error occurred. Please try again.");
+        
       });
   };
 

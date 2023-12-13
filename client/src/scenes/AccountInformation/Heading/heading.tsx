@@ -1,8 +1,25 @@
-import React from "react";
+import React , {useEffect, useState} from "react";
+
+import axios from "axios";
 import profilePicture from "../../../GalleryComponent/profilePicture.jpg"
+import userEvent from "@testing-library/user-event";
 
 // profilePicture from "../../../assets/images/GalleryComponent/profilePicture.jpg";
+
+
 const Heading: React.FC = () => {
+  const [loggedinUser, setLoggedinUser] = useState<Event[]>([]);
+  useEffect(() => {
+    axios.get("/dashboard/auth/signup/:id")
+      .then(response => {
+        console.log(response, "response");
+        setLoggedinUser(response.data.events);
+      })
+      .catch(error => {
+        console.error("Error fetching user events:", error);
+      });
+  }, []);
+
   return (
     <div className="flex items-center mt-10 pt-20">
       <h1 className="text-5xl text-gray-800 mr-16 ml-8 mb-10">Welcome, userName</h1>
@@ -13,6 +30,8 @@ const Heading: React.FC = () => {
     
   );
 };
+
+
 
 const ProfilePicture: React.FC = () => {
   const imageStyle: React.CSSProperties = {

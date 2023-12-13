@@ -1,11 +1,12 @@
-import React, { useEffect, useState, ChangeEvent, FormEvent } from "react";
-import loginImage2 from "../../assets/images/tuva-mathilde-loland-7hhn4SmbnT8-unsplash 1.png";
-import validation from "./LoginValidation";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../redux/hooks";
-import { setUserLoggedInState } from "../../redux/userSlice";
+import loginImage2 from "../../assets/images/tuva-mathilde-loland-7hhn4SmbnT8-unsplash 1.png";
 import { loginUser } from "../../redux/userSlice";
+import { setUser } from "../../redux/userSlice";
+import { useAppDispatch } from "../../redux/hooks";
+import { useNavigate } from "react-router-dom";
+import validation from "./LoginValidation";
 
 interface FormValues {
   email: string;
@@ -48,14 +49,14 @@ const Login: React.FC = () => {
         )
       ) {
         axios
-          .post("http://localhost:3001/auth/login", values)
+          .post("/auth/login", values)
           .then((res) => {
             console.log(res);
             // Check for successful login response and redirect
-            if (res.data && res.data.message === "Login successful") {
+            if (res.data) {
               // Redirect user to the home page
               dispatch(
-                loginUser({ email: values.email, password: values.password })
+                setUser(res.data)
               );
               localStorage.setItem("isLoggedIn", "true");
               navigate("/"); // Replace "/home" with your home page route

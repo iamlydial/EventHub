@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const Theme = () => {
@@ -11,7 +12,7 @@ const Theme = () => {
 
   useEffect(() => {
     // Fetch theme options for our frontend
-    axios.get("http://localhost:3001/theme-options")
+    axios.get("/theme-options")
       .then(response => {
         setThemeOptions(response.data.themeOptions);
       })
@@ -37,7 +38,7 @@ const Theme = () => {
     setNextClicked(true);
   
    
-    axios.post("http://localhost:3001/choose-theme", { theme: selectedOption })
+    axios.post("/choose-theme", { theme: selectedOption })
       .then(response => {
         console.log(response.data.message);
         

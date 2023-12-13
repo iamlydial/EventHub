@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Date = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Date = () => {
 
   useEffect(() => {
     // Fetch date options for our frontend
-    axios.get("http://localhost:3001/choose-date-time")
+    axios.get("/choose-date-time")
       .then(response => {
         setDateOptions(response.data.dateOptions);
       })
@@ -33,7 +34,7 @@ const Date = () => {
 
     setNextClicked(true);
 
-    axios.post("http://localhost:3001/choose-date", {
+    axios.post("/choose-date", {
       date: date,
       time: time,
       duration: duration,
