@@ -8,15 +8,13 @@ import {
   copyright,
 } from "../assets/icons";
 
-
 export const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/gallery", label: "Gallery" },
   { href: "/services", label: "Services" },
-  { href: "/create-event", label: "Create Event" },
   { href: "/contact-us", label: "Contact Us" },
-  {href: "/account-dashboard", label: "Account Dashboard"},
-  {href: "/your-event-history", label: "Your Event History",}
+  { href: "/account-dashboard", label: "Account Dashboard" },
+  { href: "/your-event-history", label: "Your Event History" },
 ];
 
 export const logLinks: LogLinks[] = [
@@ -58,8 +56,6 @@ export const socialMedia = [
   { src: twitter, alt: "twitter logo" },
   { src: instagram, alt: "instagram logo" },
 ];
-
-
 
 // import { NavLink, LogLinks } from "./interfaces";
 // import {
