@@ -7,39 +7,41 @@ const db = require('../db');
 const bcrypt = require("bcryptjs");
 
 
-// Function to get events for a user 
-async function getEventsForUser(userId) {
-    try {
-      const connection = await db.getConnection();
-      const [eventsResult] = await connection.execute('SELECT * FROM Events WHERE user_id = ?', [userId]);
-      connection.release();
-      return eventsResult;
-    } catch (error) {
-      throw new Error(`Error getting events for user: ${error.message}`);
-    }
+// Middleware to check if the user is authenticated/logged onto their account
+function isAuthenticated(req, res, next) {
+  if (req.session && req.session.user) {
+    return next();
+  } else {
+    res.status(401).json({ message: 'Unauthorized' });
   }
-  
- // View the events currently booked by the user
-router.get('/your-events', async (req, res) => {
-    try {
-      const userId = req.body.user.id; 
-      const events = await getEventsForUser(userId);
-      res.json({ events });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal Server Error' });
-    }
-  });
-  
-  // View and manage the user's dashboard
-router.get('/dashboard', async (req, res) => {
-    try {
-      const userId = req.body.user.id; 
-      res.json({ message: 'User dashboard' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal Server Error' });
-    }
-  });
+}
 
+// Function to get details of a specific event
+async function getEventDetails(eventId) {
+  try {
+    const connection = await db.getConnection();
+    const [eventDetailsResult] = await connection.query('SELECT * FROM Events WHERE user_id = ?', [eventId]);
+    connection.release();
+    return eventDetailsResult.length ? eventDetailsResult : null;
+  } catch (error) {
+    throw new Error(`Error getting event details: ${error.message}`);
+  }
+}
+
+// View the details of a specific event
+router.get('/event-details/:id', isAuthenticated, async (req, res) => {
+  try {
+    const eventId = req.params.id;
+    const eventDetails = await getEventDetails(eventId);
+    
+    if (eventDetails) {
+      res.json({ eventDetails });
+    } else {
+      res.status(404).json({ message: 'Event not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 module.exports = router;

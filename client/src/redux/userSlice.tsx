@@ -1,29 +1,30 @@
 import {
-  createSlice,
   createAsyncThunk,
   createSelector,
+  createSlice,
 } from "@reduxjs/toolkit";
+
 import type { RootState } from "./store";
 
 interface UserData {
-  message: string;
-  user: {
-    ID: number;
-    email: string;
-    events: any; // Change 'any' to the appropriate type
-    name: string;
-    telephone_number: string;
-  };
+  user_id: number;
+  name: string;
+  email: any; 
+  telephone_number: string;
+  events: string;
+  password: number; 
 }
 
 export interface UserState {
   isLoggedIn: boolean;
-  userData: UserData | null; // Typing the userData based on the expected backend response
+  userId: string | null; 
+  userData: UserData | null; 
   error: string | null;
 }
 
 const initialState: UserState = {
   isLoggedIn: false,
+  userId: null, 
   userData: null,
   error: null,
 };
@@ -37,9 +38,9 @@ export const selectUserData = createSelector(
 
 export const loginUser = createAsyncThunk(
   "user/login",
-  async ({ email, password }: { email: string; password: string }) => {
+  async ({ email, password }: {  email: string; password: string }) => {
     try {
-      const response = await fetch("http://localhost:3001/auth/login", {
+      const response = await fetch("/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,6 +65,9 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setUser: (state, action) => {
+      state.userData = action.payload;
+    },
     setUserLoggedInState: (state, action) => {
       state.isLoggedIn = action.payload;
     },
@@ -80,6 +84,6 @@ const userSlice = createSlice({
 });
 
 export const selectIsLoggedIn = (state: RootState) => state.user.isLoggedIn;
-export const { setUserLoggedInState } = userSlice.actions;
+export const { setUserLoggedInState, setUser } = userSlice.actions;
 
 export default userSlice.reducer;

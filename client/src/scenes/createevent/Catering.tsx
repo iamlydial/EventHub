@@ -1,9 +1,24 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import axios from "axios";
 
 const Catering = () => {
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState<string[]>([]);
+  const [cateringOptions, setCateringOptions] = useState<string[]>([]);
+  const [nextClicked, setNextClicked] = useState(false);
+
+  useEffect(() => {
+    // Fetch catering options for our frontend
+    axios.get("/catering-options")
+      .then(response => {
+        setCateringOptions(response.data.cateringOptions);
+      })
+      .catch(error => {
+        console.error("Error fetching catering options:", error);
+      });
+  }, []);
 
   const handleBackClick = () => {
     navigate(-1);
@@ -11,19 +26,30 @@ const Catering = () => {
 
   const handleNextClick = () => {
     if (selectedOption.length !== 3) {
-      alert("Please select three catering types.");
+      alert("You need to select 3 catering types.");
       return;
     }
-
-    console.log("Selected Catering:", selectedOption);
-    navigate("/theme");
+  
+    setNextClicked(true);
+  
+    
+    axios.post("/choose-catering", { catering_types: selectedOption })
+      .then(response => {
+        console.log(response.data.message);
+        
+        navigate("/theme");
+      })
+      .catch(error => {
+        console.error("Error choosing catering types:", error);
+        console.log("Error response:", error.response); 
+        
+      });
   };
 
   const handleOptionClick = (option: string) => {
+    // up to three selections
     if (selectedOption.includes(option)) {
-      setSelectedOption((prevSelected) =>
-        prevSelected.filter((selected) => selected !== option)
-      );
+      setSelectedOption((prevSelected) => prevSelected.filter((selected) => selected !== option));
     } else {
       if (selectedOption.length < 3) {
         setSelectedOption((prevSelected) => [...prevSelected, option]);
@@ -32,6 +58,14 @@ const Catering = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (nextClicked) {
+      navigate("/theme");
+    }
+  }, [nextClicked, navigate]);
+
+  
 
   return (
     <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-gray-300">

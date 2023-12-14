@@ -1,79 +1,106 @@
 // This is the file for Route handler for the Event booking and use the EVENTS table in db:
 
-const db = require('../db'); 
+const db = require('../db');
+const cors = require("cors");
 const express = require('express');
 const session = require('express-session');
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 
-// function to start events table creation in the database
-async function createEventInDatabase(eventData) {
+// Function to start events table creation in the database
+async function createEventInDatabase(userId, eventData) {
   try {
-    const [result] = await db.execute('INSERT INTO events (ID, event_name, event_type, event_decor, date, location, catering_type, status, event_confirmed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [eventData.ID, eventData.event_name, eventData.event_type, eventData.event_decor, eventData.date, eventData.location, eventData.catering_type, eventData.status, eventData.event_confirmed]);
+    // Insert event data into the database, including the user_id
+    const connection = await db.getConnection();
+    const [result] = await connection.query(
+      'INSERT INTO Events (user_id, event_name, event_theme, event_date, event_time, event_duration, location, catering_type, event_confirmed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [userId, eventData.event_name, eventData.event_theme, eventData.event_date, eventData.event_time, eventData.event_duration, eventData.location, eventData.catering_type, 'NOT CONFIRMED']
+    );
+
+    // Fetch the created event from the database
+    const [createdEvent] = await connection.query('SELECT * FROM Events WHERE ID = ?', [result.insertId]);
+
     return {
-      id: result.insertId,
-      event_name: eventData.event_name,
-      event_type: eventData.event_type,
-      event_decor: eventData.event_decor,
-      date: eventData.date,
-      location: eventData.location,
-      catering_type: eventData.catering_type,
-      status: eventData.status,
-      event_confirmed: eventData.event_confirmed,
+      id: createdEvent[0].ID,
+      user_id: createdEvent[0].user_id,
+      event_name: createdEvent[0].event_name,
+      event_theme: createdEvent[0].event_theme,
+      event_date: createdEvent[0].event_date,
+      event_time: createdEvent[0].event_time,
+      event_duration: createdEvent[0].event_duration,
+      location: createdEvent[0].location,
+      catering_type: createdEvent[0].catering_type,
+      event_confirmed: createdEvent[0].event_confirmed,
     };
   } catch (error) {
     throw error;
   }
 }
 
+// Middleware to check if the user is authenticated
+function isAuthenticated(req, res, next) {
+  if (req.session && req.session.user) {
+    return next();
+  } else {
+    res.status(401).json({ message: 'Unauthorized' });
+  }
+}
 
-// Select the type of event
-router.get('/choose-event', (req, res) => {
+
+// createevent.tsx routers
+router.get('/event-types',  (req, res) => {
   const eventTypes = ['Bridal Shower', 'Birthday', 'Kids Birthday', 'Baby Shower'];
-
   res.json({ eventTypes });
 });
 
 
-//Choose Bridal Shower subtype (Bridal Day Party or Bridal Night Party)
-router.get('/choose-event/bridal-shower', (req, res) => {
-  const bridalShowerSubtypes = ['Bridal Day Party', 'Bridal Night Party'];
+router.post('/create-event',  async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+    const eventData = req.body;
 
-  res.json({ bridalShowerSubtypes });
+    const createdEvent = await createEventInDatabase(userId, eventData);
+
+    res.status(201).json({ message: 'Event created successfully', eventTypes: eventData });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
-// Choose Birthday subtype (Guys Night or Ladies Night)
-router.get('/choose-event/birthday', (req, res) => {
-  const birthdaySubtypes = ['Guys Night', 'Ladies Night'];
 
-  res.json({ birthdaySubtypes });
-});
-
-// Choose Kids Birthday subtype (Girls Birthday Party, Boys Birthday Party, or No Gender Birthday Party)
-router.get('/choose-event/kids-birthday', (req, res) => {
-  const kidsBirthdaySubtypes = ['Girls Birthday Party', 'Boys Birthday Party', 'No Gender Birthday Party'];
-
-  res.json({ kidsBirthdaySubtypes });
-});
-
-// Choose Baby Shower subtype (Boys Baby Shower, Girls Baby Shower, or No Gender Baby Shower)
-router.get('/choose-event/baby-shower', (req, res) => {
-  const babyShowerSubtypes = ['Boys Baby Shower', 'Girls Baby Shower', 'No Gender Baby Shower'];
-
-  res.json({ babyShowerSubtypes });
-});
-
-// Choose the location type (Grand Venue, Bar, Garden, Intimate Venue)
-router.get('/choose-location', (req, res) => {
+// Location.tsx routers:
+router.get('/location-options', (req, res) => {
   const locationTypes = ['Grand Venue', 'Bar', 'Garden', 'Intimate Venue'];
 
   res.json({ locationTypes });
 });
 
-// Choose the date and time for the event
-router.get('/choose-date-time', (req, res) => {
+
+router.post('/choose-location',   async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+    const selectedLocation = req.body.location_type;
+
+    
+    const updateQuery = 'UPDATE Events SET location = ? WHERE user_id = ?';
+    const connection = await db.getConnection();
+    await connection.query(updateQuery, [selectedLocation, userId]);
+
+    res.status(200).json({ message: 'Location selected successfully' });
+  } catch (error) {
+    console.error('Error choosing location:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+
+
+// date.tsx router:
+router.get('/choose-date-time', isAuthenticated,  (req, res) => {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
+
 
   // Generate date options for the entire year
   const dateOptions = [];
@@ -91,29 +118,97 @@ router.get('/choose-date-time', (req, res) => {
 });
 
 
-// Choose the type of catering (Cold Food, Hot Food, Soft Drinks, Cakes, Alcohol and Mocktails, Sweets/Pastries)
-router.get('/choose-catering', (req, res) => {
+router.post('/choose-date', isAuthenticated,  async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+    const { date, time, duration } = req.body;
+
+    const connection = await db.getConnection();
+    const updateQuery = 'UPDATE Events SET event_date = ?, event_time = ?, event_duration = ? WHERE user_id = ?';
+    await connection.query(updateQuery, [date, time, duration, userId]);
+
+    res.status(200).json({ message: 'Date and time selected successfully' });
+  } catch (error) {
+    console.error('Error choosing date and time:', error);
+    res.status(500).json({ message: `Internal Server Error: ${error.message || "Unknown error"}` });
+  }
+});
+
+
+
+// Catering.tsx routers:
+router.get('/catering-options', isAuthenticated,  (req, res) => {
   const cateringTypes = ['Cold Food', 'Hot Food', 'Soft Drinks', 'Cakes', 'Alcohol and Mocktails', 'Sweets/Pastries'];
 
   res.json({ cateringTypes });
 });
 
 
-// Process the confirmed booking and display a thank you message
-router.post('/confirm-booking', async (req, res) => {
+
+router.post('/choose-catering', isAuthenticated,  async (req, res) => {
   try {
-    const eventData = req.body;
+    const userId = req.session.user.user_id;
+    const selectedCateringTypes = req.body.catering_types;
 
-    // Call the createEventInDatabase method
-    const createdEvent = await createEventInDatabase(eventData);
+    if (!Array.isArray(selectedCateringTypes) || selectedCateringTypes.length !== 3) {
+      return res.status(400).json({ message: 'Please provide an array of 3 catering types.' });
+    }
 
-    res.status(201).json({ message: 'YAY! Thank you for booking! Your event has been confirmed.', event: createdEvent });
+    const connection = await db.getConnection();
+    const updateQuery = 'UPDATE Events SET catering_type = ? WHERE user_id = ?';
+    await connection.query(updateQuery, [selectedCateringTypes.join(", "), userId]);
+
+    res.status(200).json({ message: 'Catering types selected successfully' });
   } catch (error) {
-    console.error(error);
+    console.error('Error choosing catering types:', error);
+    res.status(500).json({ message: `Internal Server Error: ${error.message || "Unknown error"}` });
+  }
+});
+
+
+// theme.tsx routers:
+router.get('/theme-options',isAuthenticated,  async (req, res) => {
+  try {
+    
+    const themeOptions = ['Elegant', 'Playful', 'Boho Chic', 'Casual'];
+
+    res.status(200).json({ themeOptions });
+  } catch (error) {
+    console.error('Error getting theme options:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
 
+router.post('/choose-theme', isAuthenticated,  async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+    const selectedTheme = req.body.theme;
+
+    const connection = await db.getConnection();
+    const updateQuery = 'UPDATE Events SET event_theme = ? WHERE user_id = ?';
+    await connection.query(updateQuery, [selectedTheme, userId]);
+
+    res.status(200).json({ message: 'Theme selected successfully' });
+  } catch (error) {
+    console.error('Error choosing theme:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+router.post('/confirm-booking',isAuthenticated,   async (req, res) => {
+  try {
+    const userId = req.session.user.user_id;
+
+    const connection = await db.getConnection();
+    const updateQuery = 'UPDATE Events SET event_confirmed = ? WHERE user_id = ?';
+    await connection.query(updateQuery, ["CONFIRMED", userId]);
+
+    res.status(201).json({ message: 'YAY! Thank you for booking! Your event has been confirmed.'});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 module.exports = router;

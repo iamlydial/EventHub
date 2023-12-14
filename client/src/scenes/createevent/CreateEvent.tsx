@@ -1,18 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-<<<<<<< HEAD
 import GreySquiggle from "../../assets/images/GreySquiggle.jpg";
+import axios from 'axios'
 import createEventBg from "../../GalleryComponent/createEventBg.jpg"
-=======
->>>>>>> 6fa1a98c0621c972210deba5ac099b1a82ef9126
+
 
 const CreateEvent = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  console.log("Current route:", location.pathname);
-
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [eventTypes, setEventTypes] = useState<string[]>([]);
+  const [nextClicked, setNextClicked] = useState(false);
+
+  useEffect(() => {
+    // Fetch event types for our frontend
+    axios.get("/event-types")
+      .then(response => {
+        setEventTypes(response.data.eventTypes);
+      })
+      .catch(error => {
+        console.error("Error fetching event types:", error);
+      });
+  }, []);
+
+  console.log("Current route:", location.pathname);
 
   const handleOptionClick = (option: string) => {
     console.log("Selected Option:", option);
@@ -25,16 +37,30 @@ const CreateEvent = () => {
       return;
     }
 
-    console.log("Selected Option:", selectedOption);
+    setNextClicked(true);
 
-    navigate("/location");
+    axios.post("/create-event", { event_name: selectedOption })
+      .then(response => {
+        console.log(response.data.message);
+        
+        navigate("/location");
+      })
+      .catch(error => {
+        console.error("Error creating event:", error);
+        
+      });
   };
+
+  useEffect(() => {
+    if (nextClicked) {
+      navigate("/location");
+    }
+  }, [nextClicked, navigate]);
+   
+   
   return (
-<<<<<<< HEAD
-    <div className="relative pt-20 flex flex-col items-center justify-center h-screen flex flex-col justify-between min-h-screen bg-cover object-fit-none bg center bg-no-repeat" style={{ backgroundImage: `url(${createEventBg})` }}>
-=======
+
     <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-gray-300">
->>>>>>> 6fa1a98c0621c972210deba5ac099b1a82ef9126
       <h3
         className="absolute top-24 left-4 font-bold text-center mt-12"
         style={{ color: "#D4A69E" }}
@@ -108,4 +134,5 @@ const CreateEvent = () => {
     </div>
   );
 };
+
 export default CreateEvent;

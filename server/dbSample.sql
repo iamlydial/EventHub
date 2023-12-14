@@ -5,21 +5,19 @@ USE eventhub;
 
 CREATE TABLE IF NOT EXISTS Events (
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT, -- Foreign key referencing Users table
+    user_id INT, -- Foreign key referencing Users table,
     event_name VARCHAR(255) NOT NULL,
-    event_theme ENUM('Birthday for Her', 'Birthday for Him', 'Birthday for Little Her', 'Birthday for Little Him', 'Baby Shower', 'Bridal Party'),
-    event_date DATE,
-    event_time TIME,
+    event_theme VARCHAR(255),
+    event_date VARCHAR(255),
+    event_time VARCHAR(255),
+    event_duration INT,
     location VARCHAR(255),
-    catering_type ENUM('Cold Food', 'Hot Food', 'Soft Drinks', 'Alcohol & Mocktails', 'Cakes', 'Sweet/Pastries'),
-    decoration_style ENUM('Elegant', 'Playful',' Boho Chic', 'Casual'),
-    event_status ENUM('PLANNING IN PROGRESS', 'PLANNING COMPLETED'),
-    event_confirmed ENUM('CONFIRMED', 'NOT CONFIRMED')
+    catering_type VARCHAR(255),
+    event_confirmed VARCHAR(255)
     -- Other necessary columns for Events table
 ); 
 
-ALTER TABLE Events
-ADD COLUMN location_new ENUM('Grand Venue', 'Bar', 'Garden', 'Intimate Venue');
+
 
 
 DELIMITER //
@@ -39,7 +37,7 @@ END//
 
 DELIMITER ;
 
-ALTER TABLE Events MODIFY COLUMN decoration_style ENUM('Elegant', 'Playful', 'Boho Chic', 'Casual');
+
 
 
 SELECT * from EVENTS;
@@ -70,6 +68,9 @@ VALUES
     ('William Garcia', 'william@example.com', '6664567890', NULL);
 
 ALTER TABLE users ADD COLUMN password VARCHAR(255);
+
+
+
 
 
 SELECT * from Users;

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Date = () => {
@@ -6,8 +8,19 @@ const Date = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [duration, setDuration] = useState("");
+  const [dateOptions, setDateOptions] = useState([]);
+  const [nextClicked, setNextClicked] = useState(false);
 
-  const numericPattern = /^[0-9]*$/;
+  useEffect(() => {
+    // Fetch date options for our frontend
+    axios.get("/choose-date-time")
+      .then(response => {
+        setDateOptions(response.data.dateOptions);
+      })
+      .catch(error => {
+        console.error("Error fetching date options:", error);
+      });
+  }, []);
 
   const handleBackClick = () => {
     navigate(-1);
@@ -19,8 +32,29 @@ const Date = () => {
       return;
     }
 
-    navigate("/occasion-confirmed");
+    setNextClicked(true);
+
+    axios.post("/choose-date", {
+      date: date,
+      time: time,
+      duration: duration,
+    })
+      .then(response => {
+        console.log(response.data.message);
+        
+        navigate("/occasion-confirmed");
+      })
+      .catch(error => {
+        console.error("Error choosing date and time:", error);
+        
+      });
   };
+
+  useEffect(() => {
+    if (nextClicked) {
+      navigate("/occasion-confirmed");
+    }
+  }, [nextClicked, navigate]);
 
   return (
     <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-gray-300">
@@ -64,6 +98,7 @@ const Date = () => {
           onChange={(e) => setDuration(e.target.value)}
         />
       </div>
+
       <div className="absolute bottom-10 right-10 lg:right-10 flex flex-col items-center">
         <p className="font-bold text-center mb-1" style={{ color: "#D4A69E" }}>
           Confirmation
@@ -75,6 +110,7 @@ const Date = () => {
           Finish
         </button>
       </div>
+
       <div className="absolute bottom-10 left-10 lg:left-10 flex flex-col items-center">
         <p className="font-bold text-center mb-1" style={{ color: "#D4A69E" }}>
           Theme
