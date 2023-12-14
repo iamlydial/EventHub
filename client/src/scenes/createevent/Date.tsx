@@ -23,9 +23,9 @@ const Date = () => {
   };
 
   return (
-    <div className="relative pt-20 flex flex-col items-center justify-center h-screen">
+    <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-gray-300">
       <h3
-        className="absolute top-20 left-4 font-mukta font-bold text-center mt-4"
+        className="absolute top-24 left-4 font-bold text-center mt-12"
         style={{ color: "#D4A69E" }}
       >
         Date and Time
@@ -33,7 +33,7 @@ const Date = () => {
 
       <ul className="text-center mb-8 mt-4">
         <li>
-          <h3 className="font-mukta mb-4">
+          <h3 className="font-bold mb-4">
             Click on a tab to enter your date and time
           </h3>
         </li>
@@ -65,28 +65,22 @@ const Date = () => {
         />
       </div>
       <div className="absolute bottom-10 right-10 lg:right-10 flex flex-col items-center">
-        <p
-          className="font-mukta font-bold text-center mb-1"
-          style={{ color: "#D4A69E" }}
-        >
+        <p className="font-bold text-center mb-1" style={{ color: "#D4A69E" }}>
           Confirmation
         </p>
         <button
-          className="w-36 rounded-md p-2 font-roboto bg-dutch-white hover:bg-sage font-black"
+          className="w-36 rounded-md p-2 font-roboto bg-dutchWhite hover:bg-sage font-black"
           onClick={handleNextClick}
         >
           Finish
         </button>
       </div>
       <div className="absolute bottom-10 left-10 lg:left-10 flex flex-col items-center">
-        <p
-          className="font-mukta font-bold text-center mb-1"
-          style={{ color: "#D4A69E" }}
-        >
+        <p className="font-bold text-center mb-1" style={{ color: "#D4A69E" }}>
           Theme
         </p>
         <button
-          className="w-36 rounded-md p-2 font-roboto bg-dutch-white hover:bg-sage font-black"
+          className="w-36 rounded-md p-2 font-roboto bg-dutchWhite hover:bg-sage font-black"
           onClick={handleBackClick}
         >
           Back
