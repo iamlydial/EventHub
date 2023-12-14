@@ -16,12 +16,12 @@ function AccountDashboard() {
   return (
     <div className="bg-cover bg center bg-no-repeat mt-10 " style={{ backgroundImage: `url(${mainBgCover})` }}>
       <Heading />
-      {/* <AccountDashboardSideNav /> */}
+      {/* <AccountDashboard />  */}
       <AccountDashboardTabs />
     </div>
   );
-}
+};
+
 
 export default AccountDashboard;
 
-// bg-gray-100 min-h-screen" style={BackgroundStyle}

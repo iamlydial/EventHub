@@ -7,6 +7,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import { setUserLoggedInState } from "../../redux/userSlice";
 import { loginUser } from "../../redux/userSlice";
 
+
 interface FormValues {
   email: string;
   password: string;
@@ -122,6 +123,7 @@ const Login: React.FC = () => {
   );
 };
 
+
 export default Login;
 
 
@@ -129,7 +131,7 @@ export default Login;
 
 // isLoggedIn variable that represents the user's login status
 
-// Create a function to generate the navigation links based on login status
+// Created a function to generate the navigation links based on login status
 // export const generateNavLinks = (isLoggedIn: boolean): NavLink[] => {
 //   if (isLoggedIn) {
 //     return [
