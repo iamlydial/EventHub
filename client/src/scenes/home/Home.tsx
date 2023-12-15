@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { selectIsLoggedIn, selectUserData } from "../../redux/userSlice";
-
-import { Carousel } from "flowbite-react";
 import { Link } from "react-router-dom";
+import { Carousel } from "flowbite-react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-
+import { selectIsLoggedIn, selectUserData } from "../../redux/userSlice";
 type Props = {};
 
 
@@ -14,6 +12,10 @@ const Home: React.FC<Props> = () => {
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userData = useSelector(selectUserData);
+  console.log(selectIsLoggedIn);
+  console.log(isLoggedIn, "isLoggedIn");
+  console.log(userData?.name, "userData");
+
 
   // useEffect(() => {
   //   fetch("/api") // Assumes your React app and server are running on the same origin
@@ -30,11 +32,7 @@ const Home: React.FC<Props> = () => {
     <div className="mt-20">
       <div className="bg-[url('https://images.unsplash.com/photo-1534768368122-aa9bbb3a8d62?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fHBhc3RlbCUyMHBhcnR5fGVufDB8fDB8fHwy')] bg-fixed bg-cover p-40 h-auto">
         <h1 className="text-8xl text-white text-center font-mukta font-bold p-5 ">
-<<<<<<< Updated upstream
-          {userData?.user?.name} Curate your perfect Event with EventHub
-=======
-          {userData?.name}, Curate your perfect Event with EventHub
->>>>>>> Stashed changes
+          {userData?.name} Curate your perfect Event with EventHub
         </h1>
         <p className="font-roboto text-white text-4xl text-center p-3">
           EventHub facilitates the planning and organization of various events
@@ -69,7 +67,7 @@ const Home: React.FC<Props> = () => {
       </h1>
 
       <div className="flex items-center justify-center mb-10">
-        
+
         <div className="flex relative overflow-hidden h-52 w-96 rounded-lg sm:h-64 xl:h-80 2xl:h-96" >
           <Carousel slideInterval={4000} pauseOnHover>
             <img

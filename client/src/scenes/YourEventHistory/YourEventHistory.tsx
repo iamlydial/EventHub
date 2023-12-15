@@ -3,9 +3,7 @@ import "./YourEventHistory.css";
 import React, { useEffect, useState } from "react";
 
 import Button from "../AccountInformation/Buttons/button";
-<<<<<<< Updated upstream
 import mainBgCover from "../../GalleryComponent/mainBgCover.jpg";
-=======
 import { Link } from 'react-router-dom';
 import { RootState } from "../../redux/store";
 import axios from "axios";
@@ -25,7 +23,6 @@ interface EventDetails {
   event_confirmed: string;
   location_new: string;
 }
->>>>>>> Stashed changes
 
 const YourEventHistory: React.FC = () => {
   const userId = useSelector((state: RootState) => state.user.userData?.user_id);
@@ -45,7 +42,6 @@ const YourEventHistory: React.FC = () => {
   return (
     <div className="mt-10 p-5 bg-cover bg center bg-no-repeat opacity-95" style={{ backgroundImage: `url(${mainBgCover})` }}>
       <div className="text-center py-5">
-<<<<<<< Updated upstream
         <h1 className="text-5xl font-bold mt-12 pt-20 mb-10">Event History</h1>
         <p className="text-xl mb-10">All your current and past events in one place</p>
       </div>
@@ -77,29 +73,7 @@ const YourEventHistory: React.FC = () => {
             <Button text="Get in touch" className="w-full" />
           </Link>
         </div>
-=======
-        <h1 className="text-5xl font-bold mt-10 mb-10">Event History</h1>
-        <p className="text-xl mb-10">All your Events in one place</p>
-      </div>
 
-      <div className="bg-gray-200 p-8 rounded-md">
-        <h1 className="text-3xl font-bold">Your Current Event</h1>
-        {currentEvent?.length ? (
-          currentEvent.map((currentEvent, index) => <div key={index}>
-          <p>Event Name: {currentEvent.event_name}</p>
-          <p>Date: {currentEvent.event_date}</p>
-        </div>)
-        ) : (
-          <p>No current event found.</p>
-        )}
-      </div>
-
-      {/* Centered Button */}
-      <div className="centeredButton">
-        <Link to="/account-dashboard">
-          <Button text="Return to Dashboard" />
-        </Link>
->>>>>>> Stashed changes
       </div>
     </div>
   );
