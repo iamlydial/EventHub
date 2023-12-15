@@ -30,11 +30,7 @@ const Home: React.FC<Props> = () => {
     <div className="mt-20">
       <div className="bg-[url('https://images.unsplash.com/photo-1534768368122-aa9bbb3a8d62?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fHBhc3RlbCUyMHBhcnR5fGVufDB8fDB8fHwy')] bg-fixed bg-cover p-40 h-auto">
         <h1 className="text-8xl text-white text-center font-mukta font-bold p-5 ">
-<<<<<<< Updated upstream
-          {userData?.user?.name} Curate your perfect Event with EventHub
-=======
           {userData?.name}, Curate your perfect Event with EventHub
->>>>>>> Stashed changes
         </h1>
         <p className="font-roboto text-white text-4xl text-center p-3">
           EventHub facilitates the planning and organization of various events

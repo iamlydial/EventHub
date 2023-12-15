@@ -12,6 +12,8 @@ async function createEventInDatabase(userId, eventData) {
   try {
     // Insert event data into the database, including the user_id
     const connection = await db.getConnection();
+
+    
     const [result] = await connection.query(
       'INSERT INTO Events (user_id, event_name, event_theme, event_date, event_time, event_duration, location, catering_type, event_confirmed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
       [userId, eventData.event_name, eventData.event_theme, eventData.event_date, eventData.event_time, eventData.event_duration, eventData.location, eventData.catering_type, 'NOT CONFIRMED']
