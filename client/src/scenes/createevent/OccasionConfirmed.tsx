@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-<!-- import React, { useEffect } from "react"; -->
 
 import { useNavigate } from "react-router-dom";
 import oc from "../../assets/images/oc.jpg";
@@ -10,12 +9,12 @@ const OccasionConfirmed = () => {
   const [eventDetails, setEventDetails] = useState(null);
 
   useEffect(() => {
-   
-    axios.post("/confirm-booking")
-      .then(response => {
+    axios
+      .post("/confirm-booking")
+      .then((response) => {
         setEventDetails(response.data.eventDetails);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching event details:", error);
       });
   }, []);
