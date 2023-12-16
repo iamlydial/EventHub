@@ -42,7 +42,7 @@ const Home: React.FC<Props> = () => {
           like bridal showers, birthdays, and baby showers.
         </p>
         <div className="flex items-center justify-center m-5">
-          <Link to="/login">
+          <Link to="/signup">
             <button
               type="button"
               className="focus:outline-none text-white hover:text-onyx bg-dutchWhite font-large rounded-lg text-2xl px-5 py-2.5 me-2 mb-5 items-center justify-center"
