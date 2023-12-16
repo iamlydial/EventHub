@@ -16,20 +16,9 @@ const Home: React.FC<Props> = () => {
   console.log(isLoggedIn, "isLoggedIn");
   console.log(userData?.name, "userData");
 
-
-  // useEffect(() => {
-  //   fetch("/api") // Assumes your React app and server are running on the same origin
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setBackendData(state.user);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching data:", error);
-  //     });
-  // }, []);
-
   return (
     <div className="mt-18">
+      
       <div className="bg-[url('https://images.unsplash.com/photo-1534768368122-aa9bbb3a8d62?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fHBhc3RlbCUyMHBhcnR5fGVufDB8fDB8fHwy')] bg-fixed bg-cover p-40 h-auto">
         <h1 className="text-8xl text-white text-center font-mukta font-bold p-5 ">
           {userData?.name} Curate your perfect Event with EventHub
