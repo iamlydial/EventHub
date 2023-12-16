@@ -10,4 +10,9 @@ export interface LogLinks {
   icon: string;
 }
 
-// Footer Links
+export interface CarouselItem {
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+}

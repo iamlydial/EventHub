@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import { Carousel } from "flowbite-react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { selectIsLoggedIn, selectUserData } from "../../redux/userSlice";
+import HomeHeroCarousel from "../../components/HomeHeroCarousel/HomeHeroCarousel";
 type Props = {};
-
-
 
 const Home: React.FC<Props> = () => {
   const [backendData, setBackendData] = useState<{ users?: string[] }>({});
@@ -18,11 +17,12 @@ const Home: React.FC<Props> = () => {
 
   return (
     <div className="mt-18">
-      
+      <HomeHeroCarousel />
       <div className="bg-[url('https://images.unsplash.com/photo-1534768368122-aa9bbb3a8d62?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fHBhc3RlbCUyMHBhcnR5fGVufDB8fDB8fHwy')] bg-fixed bg-cover p-40 h-auto">
         <h1 className="text-8xl text-white text-center font-mukta font-bold p-5 ">
           {userData?.name} Curate your perfect Event with EventHub
         </h1>
+        
         <p className="font-roboto text-white text-4xl text-center p-3">
           EventHub facilitates the planning and organization of various events
           for your peace of mind.
@@ -56,11 +56,9 @@ const Home: React.FC<Props> = () => {
       </h1>
 
       <div className="flex items-center justify-center mb-10">
-
-        <div className="flex relative overflow-hidden h-52 w-96 rounded-lg sm:h-64 xl:h-80 2xl:h-96" >
+        <div className="flex relative overflow-hidden h-52 w-96 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
           <Carousel slideInterval={4000} pauseOnHover>
             <img
-
               src={require("../../assets/images/al-elmes-ULHxWq8reao-unsplash.jpg")}
               alt="Wedding"
             />
@@ -78,7 +76,6 @@ const Home: React.FC<Props> = () => {
             />
           </Carousel>
         </div>
-
       </div>
       <div className="flex-grow border-t-2 border-onyx mb-5 border-opacity-10"></div>
       {/*   
