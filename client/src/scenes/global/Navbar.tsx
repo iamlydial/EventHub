@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { logLinks, navLinks } from "../../types/constants";
 import { hamburger, close } from "../../assets/icons";
-import logoNavbar from "../../assets/images/EventHub-Logo1.jpg";
+// import logoNavbar from "../../assets/images/EventHub-Logo1.jpg";
 import { useMediaQuery } from "@react-hook/media-query";
 
 interface NavProps {}
@@ -11,11 +11,11 @@ const Navbar: React.FC<NavProps> = () => {
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
 
   return (
-    <header className="fle flex-col sm:px-16 px-2 py-2 absolute z-10 w-full border shadow-sm bg-onyx">
+    <header className="fle flex-col sm:px-16 px-2 py-2 absolute z-10 w-full shadow-sm bg-onyx">
       {isAboveMediumScreens ? (
         <nav className="flex justify-between font-mukta items-center max-container bg-onyx text-white p-1 w-full">
-          <a href="/">
-            <img src={logoNavbar} alt="Logo" width={100} height="auto" />
+          <a className="text-2xl" href="/">EventHub
+            {/* <img src={logoNavbar} alt="Logo" width={100} height="auto" /> */}
           </a>
           <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden p-2 ml-3">
             {navLinks.map((link, index) => (
@@ -34,9 +34,9 @@ const Navbar: React.FC<NavProps> = () => {
           </ul>
         </nav>
       ) : (
-        <nav className="flex justify-between font-mukta items-center max-container">
-          <a href="/">
-            <img src={logoNavbar} alt="Logo" width={100} height="auto" />
+        <nav className="flex justify-between font-mukta items-center max-container text-white">
+          <a className="text-2xl" href="/">EventHub
+            {/* <img src={logoNavbar} alt="Logo" width={100} height="auto" /> */}
           </a>
           <div className="lg:hidden">
             <img

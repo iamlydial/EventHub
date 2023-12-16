@@ -14,14 +14,14 @@ import mainBgCover from "../../GalleryComponent/mainBgCover.jpg"
 
 const GalleryComponent: React.FC = () => {
   const imagesList = [
-    { id: 1, src: image1, alt: "Image 1" },
-    { id: 2, src: image2, alt: "Image 2" },
-    { id: 3, src: image3, alt: "Image 3" },
-    { id: 4, src: image4, alt: "Image 4" },
-    { id: 5, src: image5, alt: "Image 5" },
-    { id: 6, src: image6, alt: "Image 6" },
-    { id: 7, src: image7, alt: "Image 7" },
-    { id: 8, src: image8, alt: "Image 8" },
+    { id: 1, src: image1, alt: "Bridal Night Party" },
+    { id: 2, src: image2, alt: "Bridal Day Party" },
+    { id: 3, src: image3, alt: "Boy Baby Shower" },
+    { id: 4, src: image4, alt: "Girl Baby Shower" },
+    { id: 5, src: image5, alt: "Boys Birthday" },
+    { id: 6, src: image6, alt: "Guys Night" },
+    { id: 7, src: image7, alt: "Girls Birthday" },
+    { id: 8, src: image8, alt: "Ladies Night" },
   ];
 
 

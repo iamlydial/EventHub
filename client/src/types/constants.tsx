@@ -12,9 +12,9 @@ export const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/gallery", label: "Gallery" },
   { href: "/services", label: "Services" },
-  { href: "/contact-us", label: "Contact Us" },
+  // { href: "/contact-us", label: "Contact Us" },
   { href: "/account-dashboard", label: "Account Dashboard" },
-  { href: "/your-event-history", label: "Your Event History" },
+  { href: "/your-event-history", label: "My Event" },
 ];
 
 export const logLinks: LogLinks[] = [

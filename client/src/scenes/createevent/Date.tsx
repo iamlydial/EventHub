@@ -57,7 +57,7 @@ const Date = () => {
   }, [nextClicked, navigate]);
 
   return (
-    <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-gray-300">
+    <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300">
       <h3
         className="absolute top-24 left-4 font-bold text-center mt-12"
         style={{ color: "#D4A69E" }}
