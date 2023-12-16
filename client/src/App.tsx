@@ -17,8 +17,8 @@ import Theme from "./scenes/createevent/Theme";
 import Date from "./scenes/createevent/Date";
 import OccasionConfirmed from "./scenes/createevent/OccasionConfirmed";
 import { selectIsLoggedIn, setUserLoggedInState } from "./redux/userSlice";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import Logout from "./scenes/logout/Logout";
 
 const App: React.FC = () => {
   const ScrollToTop = () => {
@@ -29,6 +29,7 @@ const App: React.FC = () => {
     return null;
   };
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -39,7 +40,7 @@ const App: React.FC = () => {
 
   return (
     <div className="app">
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} />
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
@@ -58,7 +59,7 @@ const App: React.FC = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/account-dashboard" element={<AccountDashboard />} />
           <Route path="/your-event-history" element={<YourEventHistory />} />
-
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </BrowserRouter>
       <Footer />
@@ -67,5 +68,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
-
