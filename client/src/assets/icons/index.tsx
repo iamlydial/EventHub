@@ -1,6 +1,6 @@
 import hamburger from "./hamburger.svg";
-import login from "./login.svg";
-import signup from "./signup.svg";
+import login from "./signup.svg";
+import signup from "./login-3-svgrepo-com.svg";
 import close from "./close-svgrepo-com.svg";
 import copyright from "./copyright-sign.svg";
 // social media

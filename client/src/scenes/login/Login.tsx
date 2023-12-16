@@ -5,9 +5,8 @@ import loginImage2 from "../../assets/images/tuva-mathilde-loland-7hhn4SmbnT8-un
 import { loginUser } from "../../redux/userSlice";
 import { setUser } from "../../redux/userSlice";
 import { useAppDispatch } from "../../redux/hooks";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import validation from "./LoginValidation";
-
 
 interface FormValues {
   email: string;
@@ -37,44 +36,46 @@ const Login: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSignupNavigation = () => {
+    navigate("/signup"); // Replace "/signup" with your signup page route
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const validationErrors = validation(values);
-    setErrors(validationErrors);
 
-    // Wait for state to update, then check for errors
-    setTimeout(() => {
-      if (
-        !Object.values(validationErrors).some(
-          (error) => error !== undefined && error !== ""
-        )
-      ) {
-        axios
-          .post("/auth/login", values)
-          .then((res) => {
-            console.log(res);
-            // Check for successful login response and redirect
-            if (res.data) {
-              // Redirect user to the home page
-              dispatch(
-                setUser(res.data)
-              );
-              localStorage.setItem("isLoggedIn", "true");
-              navigate("/"); // Replace "/home" with your home page route
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-            if (err.response && err.response.status === 401) {
-              // Handle 401 error (Unauthorized)
-              console.log("Unauthorized access");
-            } else {
-              // Handle other error scenarios
-              // setLoginError("An error occurred during login");
-            }
-          });
+    if (
+      Object.values(validationErrors).some(
+        (error) => error !== undefined && error !== ""
+      )
+    ) {
+      // Handle validation errors here
+      console.log("Validation errors occurred:", validationErrors);
+      return;
+    }
+
+    try {
+      console.log("Sending login request...");
+      const response = await axios.post("/auth/login", values);
+      const userData = response.data; // Extract the user data from the response
+
+      if (userData) {
+        console.log("Login successful. Response data:", userData);
+
+        // Dispatch setUser action with the user data from the response
+        dispatch(setUser(userData));
+
+        // Set isLoggedIn in localStorage to true
+        localStorage.setItem("isLoggedIn", "true");
+
+        console.log("User data dispatched and isLoggedIn set in localStorage.");
+
+        // Redirect user to the home page
+        window.location.href = "/account-dashboard"; // Replace with your home page route
       }
-    }, 0);
+    } catch (error) {
+      console.error("Login error:", error);
+    }
   };
 
   return (
@@ -114,6 +115,7 @@ const Login: React.FC = () => {
           >
             LOGIN
           </button>
+          <Link to="/signup">Don't have an account? Sign Up</Link>
         </form>
       </div>
       {/* Hide the image on small screens (sm and smaller) */}
@@ -124,38 +126,4 @@ const Login: React.FC = () => {
   );
 };
 
-
 export default Login;
-
-
-
-
-// isLoggedIn variable that represents the user's login status
-
-// Created a function to generate the navigation links based on login status
-// export const generateNavLinks = (isLoggedIn: boolean): NavLink[] => {
-//   if (isLoggedIn) {
-//     return [
-//       { href: "/", label: "Home" },
-//       { href: "/gallery", label: "Gallery" },
-//       { href: "/services", label: "Services" },
-//       { href: "/create-event", label: "Create Event" },
-//       { href: "/account-dashboard", label: "Account Dashboard" },
-//       { href: "/your-event-history", label: "Your Event History" },
-//       { href: "/contact-us", label: "Contact Us" },
-//     ];
-//   } else {
-//     return [
-//       { href: "/", label: "Home" },
-//       { href: "/gallery", label: "Gallery" },
-//       { href: "/services", label: "Services" },
-//       { href: "/contact-us", label: "Contact Us" },
-//       { href: "/login", label: "Log In", icon: login },
-//       { href: "/signup", label: "Sign Up", icon: signup },
-//     ];
-//   }
-// };
-
-// // Example usage:
-// const isLoggedIn = true; // Replace this with your actual logic to determine user login status
-// const navLinks: NavLink[] = generateNavLinks(isLoggedIn);

@@ -9,13 +9,16 @@ const Footer: FC = () => {
       <div className="flex items-start  w-full gap-10 lg:gap-20 flex-wrap max-md:flex-row">
         <div className="flex flex-col items-start">
           <a href="/">
-            <img
+            {/* <img
               src={logo}
               alt="logo"
               width={130}
               height={46}
               className="m-0"
-            />
+            /> */}
+            <h1 className="text-white font-mukta font-bold text-2xl">
+              EventHub
+            </h1>
           </a>
           <p className="mt-6 text-base leading-7 font-roboto text-white sm:max-w-sm">
             All your event needs under one roof.

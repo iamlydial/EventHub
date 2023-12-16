@@ -18,8 +18,6 @@ CREATE TABLE IF NOT EXISTS Events (
 ); 
 
 
-
-
 DELIMITER //
 
 CREATE TRIGGER before_insert_event
@@ -36,8 +34,6 @@ BEGIN
 END//
 
 DELIMITER ;
-
-
 
 
 SELECT * from EVENTS;
