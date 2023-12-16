@@ -48,10 +48,6 @@ const YourEventHistory: React.FC = () => {
         <h1 className="text-5xl font-bold mt-12 pt-20 mb-10">Event History</h1>
         <p className="text-xl mb-10">All your past and current events in one place</p>
       </div>
-<<<<<<< Updated upstream
-      <div className="grid grid-cols-3 gap-4">
-        
-=======
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-onyx p-8 rounded-md">
           <h1 className="text-3xl font-bold">Your Current Event</h1>
@@ -67,7 +63,6 @@ const YourEventHistory: React.FC = () => {
             <p>Event Time: {ongoingEvent.event_time}</p>
           </div>}
         </div>
->>>>>>> Stashed changes
         <div className="bg-onyx p-8 rounded-md">
           <h1 className="text-3xl font-bold">Your Previous Event</h1>
           <p className="text-lg my-4">
@@ -82,28 +77,6 @@ const YourEventHistory: React.FC = () => {
             <p>Event Time: {event.event_time}</p>
           </div>)}
         </div>
-<<<<<<< Updated upstream
-        <div className="bg-onyx p-8 rounded-md">
-          <h1 className="text-3xl font-bold">Your Current Event</h1>
-          <p className="text-lg mt-4">
-            Check in to see all the current details and status updates of your event.
-          </p>
-          <Link to="/account-dashboard">
-            <Button text="Start Here" className="w-full" />
-          </Link>
-        </div>
-        <div className="bg-onyx p-8 rounded-md block w-full">
-          <h1 className="text-3xl font-bold">Event History Log</h1>
-          <p className="text-lg mt-4">
-            Click to see a log containing of all your past events.
-          </p>
-          <Link to="/account-dashboard">
-            <Button text="See Here" className="w-full" />
-          </Link>
-        </div>
-
-=======
->>>>>>> Stashed changes
       </div>
     </div>
   );
