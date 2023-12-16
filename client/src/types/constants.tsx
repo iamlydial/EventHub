@@ -9,7 +9,7 @@ import {
 } from "../assets/icons";
 
 export const navLinks: NavLink[] = [
-  { href: "/", label: "Home" },
+  // { href: "/", label: "Home" },
   { href: "/gallery", label: "Gallery" },
   { href: "/services", label: "Services" },
   // { href: "/contact-us", label: "Contact Us" },

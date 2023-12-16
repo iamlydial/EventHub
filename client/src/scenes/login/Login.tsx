@@ -78,8 +78,8 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="pt-20 flex flex-col lg:flex-row lg:h-screen">
-      <div className="flex flex-col w-full lg:w-6/12 p-20 gap-y-10">
+    <div className="pt-18 flex flex-col lg:flex-row lg:h-screen">
+      <div className="flex flex-col w-full lg:w-6/12 p-28  gap-y-10 pt-40">
         <h1 className="font-mukta items-center text-onyx text-4xl font-bold">
           Login
         </h1>
@@ -117,7 +117,7 @@ const Login: React.FC = () => {
         </form>
       </div>
       {/* Hide the image on small screens (sm and smaller) */}
-      <div className="flex-col w-full lg:w-6/12">
+      <div className="flex-col w-full lg:w-6/12 pt-10">
         <img className="max-lg:hidden" src={loginImage2} alt="Login" />
       </div>
     </div>
