@@ -11,10 +11,10 @@ import {
 import { slide1, slide2, slide3 } from "../assets/images";
 
 export const navLinks: NavLink[] = [
-  { href: "/gallery", label: "Gallery" },
-  { href: "/services", label: "Services" },
   { href: "/account-dashboard", label: "Account Dashboard" },
-  { href: "/your-event-history", label: "My Event" },
+  { href: "/your-event-history", label: "My Events" },
+  { href: "/services", label: "Services" },
+  { href: "/gallery", label: "Gallery" },
 ];
 
 export const logLinks: LogLinks[] = [
@@ -29,21 +29,22 @@ export const homeHeroLinks: CarouselItem[] = [
     image: slide1,
     title: "Bachelorette Party",
     description:
-      "We curate sensational moments, blending sophistication with excitement.",
+      "Witness the magic of our expertise in curating exceptional events that leave a lasting impression on every guest.",
+
   },
   {
     id: 2,
     image: slide2,
-    title: "18th birthday party",
+    title: "18th Birthday",
     description:
-      "Witness the magic of their expertise in curating exceptional and tailored events that left a lasting impression on every guest.",
+      "We curate sensational moments, blending sophistication with excitement.",
   },
   {
     id: 3,
     image: slide3,
     title: "Baby Shower Celebrations",
     description:
-      "Memorable celebrations with creativity, elegance, and personalized touches, ensuring unforgettable moments for expecting parents.",
+      "Memorable celebrations with creativity, elegance, and personalised touches, ensuring unforgettable moments for expecting parents.",
   },
 ];
 
@@ -77,7 +78,7 @@ export const footerLinks = [
 ];
 
 export const socialMedia = [
-  { src: facebook, alt: "facebook logo" },
-  { src: twitter, alt: "twitter logo" },
-  { src: instagram, alt: "instagram logo" },
+  { src: facebook, alt: "facebook logo", link: "www.facebook.com" },
+  { src: twitter, alt: "twitter logo", link: "www.twitter.com" },
+  { src: instagram, alt: "instagram logo", link: "www.instagram.com" },
 ];

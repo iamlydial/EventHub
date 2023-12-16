@@ -5,7 +5,7 @@ type Props = {};
 
 const ContactUs = (props: Props) => {
   return (
-    <div className="pt-20  flex flex-col lg:flex-row h- lg:h-screen">
+    <div className="pt-18  flex flex-col lg:flex-row h- lg:h-screen">
       <div
         className="p-10 w-full gridContainer bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${glitterGlass})` }}
       
@@ -41,7 +41,7 @@ const ContactUs = (props: Props) => {
                   placeholder="Message"
                 />
                 <div className="pt-10 flex flex-row justify-center">
-                  <button className="w-full lg:w-4/12 rounded-md p-2 font-roboto bg-dutch-white hover:bg-sage font-black">
+                  <button className="w-full lg:w-4/12 rounded-md p-2 font-roboto bg-dutchWhite hover:bg-sage font-black">
                     SEND
                   </button>
                 </div>
