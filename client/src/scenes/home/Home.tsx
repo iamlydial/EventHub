@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Carousel } from "flowbite-react";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector, useDispatch } from "react-redux";
 import { selectIsLoggedIn, selectUserData } from "../../redux/userSlice";
 import HomeHeroCarousel from "../../components/HomeHeroCarousel/HomeHeroCarousel";
 type Props = {};
 
 const Home: React.FC<Props> = () => {
   const [backendData, setBackendData] = useState<{ users?: string[] }>({});
-
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userData = useSelector(selectUserData);
   console.log(selectIsLoggedIn);
   console.log(isLoggedIn, "isLoggedIn");
   console.log(userData?.name, "userData");
+
+  useEffect(() => {
+    // Fetch user data after login if needed
+    if (isLoggedIn && !userData) {
+      // Dispatch action to fetch user data from the Redux store
+      // Example: dispatch(fetchUserData());
+      // Ensure the fetchUserData action populates the userData in the Redux store
+    }
+  }, [isLoggedIn, userData, dispatch]);
 
   return (
     <div className="mt-18">
@@ -22,7 +31,7 @@ const Home: React.FC<Props> = () => {
         <h1 className="text-8xl text-white text-center font-mukta font-bold p-5 ">
           {userData?.name} Curate your perfect Event with EventHub
         </h1>
-        
+
         <p className="font-roboto text-white text-4xl text-center p-3">
           EventHub facilitates the planning and organization of various events
           for your peace of mind.
