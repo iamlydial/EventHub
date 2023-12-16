@@ -19,11 +19,11 @@ const Home: React.FC<Props> = () => {
     <div className="mt-18">
       <HomeHeroCarousel />
       <div className="bg-[url('https://images.unsplash.com/photo-1534768368122-aa9bbb3a8d62?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fHBhc3RlbCUyMHBhcnR5fGVufDB8fDB8fHwy')] bg-fixed bg-cover p-40 h-auto">
-        <h1 className="text-8xl text-white text-center font-mukta font-bold p-5 ">
+        <h1 className="text-5xl text-white text-center font-mukta font-bold p-5 ">
           {userData?.name} Curate your perfect Event with EventHub
         </h1>
         
-        <p className="font-roboto text-white text-4xl text-center p-3">
+        <p className="font-roboto text-white text-3xl text-center p-3">
           EventHub facilitates the planning and organization of various events
           for your peace of mind.
           <br />
@@ -77,13 +77,17 @@ const Home: React.FC<Props> = () => {
           </Carousel>
         </div>
       </div>
-      <div className="flex-grow border-t-2 border-onyx mb-5 border-opacity-10"></div>
-      {/*   
-      {typeof backendData.users === "undefined" ? (
-        <p></p>
-      ) : (
-        backendData.users.map((user, i) => <p key={i}>{user}</p>)
-      )} */}
+      <div className="flex items-center justify-center m-5">
+      <Link to="/gallery">
+            <button
+              type="button"
+              className="focus:outline-none text-white hover:text-onyx bg-dutchWhite font-large rounded-lg text-2xl px-5 py-2.5 me-2 mb-5 mx-5 items-center justify-center"
+            >
+              See More
+            </button>
+          </Link>
+      </div>
+      
     </div>
   );
 };
