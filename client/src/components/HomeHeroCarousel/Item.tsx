@@ -3,7 +3,6 @@ import { CarouselItem } from "../../types/interfaces";
 import { Paper, Button } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { selectIsLoggedIn, selectUserData } from "../../redux/userSlice";
-import { useSelector } from "react-redux/es/hooks/useSelector";
 import { Link } from "react-router-dom"
 
 
