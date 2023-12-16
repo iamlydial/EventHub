@@ -12,11 +12,12 @@ const Location = () => {
 
   useEffect(() => {
     // Fetch location types for our frontend
-    axios.get("/location-options")
-      .then(response => {
+    axios
+      .get("/location-options")
+      .then((response) => {
         setLocationTypes(response.data.locationTypes);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching location types:", error);
       });
   }, []);
@@ -37,12 +38,12 @@ const Location = () => {
 
     setNextClicked(true);
 
-    
-    axios.post("/choose-location", { location_type: selectedOption })
-      .then(response => {
+    axios
+      .post("/choose-location", { location_type: selectedOption })
+      .then((response) => {
         console.log(response.data.message);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error choosing location:", error);
       });
   };
@@ -53,11 +54,10 @@ const Location = () => {
     }
   }, [nextClicked, navigate]);
 
-
   return (
     <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300">
       <h3
-        className="absolute top-24 left-4 font-bold text-center mt-12"
+        className="absolute top-24 left-4 font-bold text-center mt-2"
         style={{ color: "#D4A69E" }}
       >
         Location

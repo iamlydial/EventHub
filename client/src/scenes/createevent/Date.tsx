@@ -13,11 +13,12 @@ const Date = () => {
 
   useEffect(() => {
     // Fetch date options for our frontend
-    axios.get("/choose-date-time")
-      .then(response => {
+    axios
+      .get("/choose-date-time")
+      .then((response) => {
         setDateOptions(response.data.dateOptions);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching date options:", error);
       });
   }, []);
@@ -34,19 +35,19 @@ const Date = () => {
 
     setNextClicked(true);
 
-    axios.post("/choose-date", {
-      date: date,
-      time: time,
-      duration: duration,
-    })
-      .then(response => {
+    axios
+      .post("/choose-date", {
+        date: date,
+        time: time,
+        duration: duration,
+      })
+      .then((response) => {
         console.log(response.data.message);
-        
+
         navigate("/occasion-confirmed");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error choosing date and time:", error);
-        
       });
   };
 
@@ -59,7 +60,7 @@ const Date = () => {
   return (
     <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300">
       <h3
-        className="absolute top-24 left-4 font-bold text-center mt-12"
+        className="absolute top-24 left-4 font-bold text-center mt-2"
         style={{ color: "#D4A69E" }}
       >
         Date and Time

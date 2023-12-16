@@ -22,11 +22,11 @@ const OccasionConfirmed = () => {
   return (
     <div
       className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300"
-      // style={{
-      //   backgroundImage: `url(${oc})`,
-      //   backgroundSize: "cover",
-      //   backgroundPosition: "center",
-      // }}
+      style={{
+        backgroundImage: `url(${oc})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
       <h1 className="text-3xl font-bold mb-4" style={{ color: "#000000" }}>
         Occasion Confirmed!

@@ -12,11 +12,12 @@ const Theme = () => {
 
   useEffect(() => {
     // Fetch theme options for our frontend
-    axios.get("/theme-options")
-      .then(response => {
+    axios
+      .get("/theme-options")
+      .then((response) => {
         setThemeOptions(response.data.themeOptions);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching theme options:", error);
       });
   }, []);
@@ -34,19 +35,18 @@ const Theme = () => {
       alert("Please select a theme before proceeding.");
       return;
     }
-  
+
     setNextClicked(true);
-  
-   
-    axios.post("/choose-theme", { theme: selectedOption })
-      .then(response => {
+
+    axios
+      .post("/choose-theme", { theme: selectedOption })
+      .then((response) => {
         console.log(response.data.message);
-        
+
         navigate("/date");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error choosing theme:", error);
-      
       });
   };
 
@@ -59,7 +59,7 @@ const Theme = () => {
   return (
     <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300">
       <h3
-        className="absolute top-24 left-4 font-bold text-center mt-12"
+        className="absolute top-24 left-4 font-bold text-center mt-2"
         style={{ color: "#D4A69E" }}
       >
         Theme
