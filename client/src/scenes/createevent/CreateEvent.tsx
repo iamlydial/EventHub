@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
 import GreySquiggle from "../../assets/images/GreySquiggle.jpg";
 import axios from 'axios'
 import createEventBg from "../../GalleryComponent/createEventBg.jpg"
-
 
 const CreateEvent = () => {
   const location = useLocation();
@@ -41,8 +41,6 @@ const CreateEvent = () => {
 
     axios.post("/create-event", { event_name: selectedOption })
       .then(response => {
-        console.log(response.data.message);
-        
         navigate("/location");
       })
       .catch(error => {

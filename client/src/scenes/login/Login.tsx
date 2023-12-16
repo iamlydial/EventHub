@@ -57,6 +57,7 @@ const Login: React.FC = () => {
       const res = await axios.post("/auth/login", values);
       if (res.data) {
         // Dispatch setUser action with the user data from the response
+        console.log(res.data);
         dispatch(setUser(res.data));
 
         // Set isLoggedIn in localStorage to true

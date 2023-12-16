@@ -39,22 +39,14 @@ const Date = () => {
       time: time,
       duration: duration,
     })
-      .then(response => {
-        console.log(response.data.message);
-        
-        navigate("/occasion-confirmed");
-      })
+      .then(response => {})
       .catch(error => {
         console.error("Error choosing date and time:", error);
         
       });
-  };
 
-  useEffect(() => {
-    if (nextClicked) {
-      navigate("/occasion-confirmed");
-    }
-  }, [nextClicked, navigate]);
+    navigate("/occasion-confirmed");
+  };
 
   return (
     <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300">

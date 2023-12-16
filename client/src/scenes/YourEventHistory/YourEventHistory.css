@@ -34,6 +34,7 @@
   
   .text-3xl {
     font-size: 1.875rem;
+    color: white;
   }
   
   .font-bold {
@@ -46,6 +47,10 @@
   
   .mt-4 {
     margin-top: 1rem;
+  }
+
+  .my-4{
+    color: white;
   }
   
   .block {
@@ -64,4 +69,10 @@
     margin-top: 2rem; 
   }
 
+  .event-history {
+    margin-bottom: 1rem;
+    background-color: #edf2f7;
+    border-radius: 10px;
+    padding: 1rem;
+  }
   

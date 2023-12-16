@@ -62,8 +62,9 @@ router.post('/create-event',  async (req, res) => {
     const eventData = req.body;
 
     const createdEvent = await createEventInDatabase(userId, eventData);
+    req.session.event_id = createdEvent.id;
 
-    res.status(201).json({ message: 'Event created successfully', eventTypes: eventData });
+    res.status(201).json({ message: 'Event created successfully', event_id: createdEvent.id });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -80,13 +81,13 @@ router.get('/location-options', (req, res) => {
 
 router.post('/choose-location',   async (req, res) => {
   try {
-    const userId = req.session.user.user_id;
+    const eventID = req.session.event_id;
+    console.log(eventID);
     const selectedLocation = req.body.location_type;
-
     
-    const updateQuery = 'UPDATE Events SET location = ? WHERE user_id = ?';
+    const updateQuery = 'UPDATE Events SET location = ? WHERE ID = ?';
     const connection = await db.getConnection();
-    await connection.query(updateQuery, [selectedLocation, userId]);
+    await connection.query(updateQuery, [selectedLocation, eventID]);
 
     res.status(200).json({ message: 'Location selected successfully' });
   } catch (error) {
@@ -122,12 +123,13 @@ router.get('/choose-date-time', isAuthenticated,  (req, res) => {
 
 router.post('/choose-date', isAuthenticated,  async (req, res) => {
   try {
-    const userId = req.session.user.user_id;
+    const eventID = req.session.event_id;
+    console.log(eventID);
     const { date, time, duration } = req.body;
 
     const connection = await db.getConnection();
-    const updateQuery = 'UPDATE Events SET event_date = ?, event_time = ?, event_duration = ? WHERE user_id = ?';
-    await connection.query(updateQuery, [date, time, duration, userId]);
+    const updateQuery = 'UPDATE Events SET event_date = ?, event_time = ?, event_duration = ?, event_confirmed = ? WHERE ID = ?';
+    await connection.query(updateQuery, [date, time, duration, "CONFIRMED", eventID]);
 
     res.status(200).json({ message: 'Date and time selected successfully' });
   } catch (error) {
@@ -149,7 +151,8 @@ router.get('/catering-options', isAuthenticated,  (req, res) => {
 
 router.post('/choose-catering', isAuthenticated,  async (req, res) => {
   try {
-    const userId = req.session.user.user_id;
+    const eventID = req.session.event_id;
+    console.log(eventID);
     const selectedCateringTypes = req.body.catering_types;
 
     if (!Array.isArray(selectedCateringTypes) || selectedCateringTypes.length !== 3) {
@@ -157,8 +160,8 @@ router.post('/choose-catering', isAuthenticated,  async (req, res) => {
     }
 
     const connection = await db.getConnection();
-    const updateQuery = 'UPDATE Events SET catering_type = ? WHERE user_id = ?';
-    await connection.query(updateQuery, [selectedCateringTypes.join(", "), userId]);
+    const updateQuery = 'UPDATE Events SET catering_type = ? WHERE ID = ?';
+    await connection.query(updateQuery, [selectedCateringTypes.join(", "), eventID]);
 
     res.status(200).json({ message: 'Catering types selected successfully' });
   } catch (error) {
@@ -184,31 +187,17 @@ router.get('/theme-options',isAuthenticated,  async (req, res) => {
 
 router.post('/choose-theme', isAuthenticated,  async (req, res) => {
   try {
-    const userId = req.session.user.user_id;
+    const eventID = req.session.event_id;
+    console.log(eventID);
     const selectedTheme = req.body.theme;
 
     const connection = await db.getConnection();
-    const updateQuery = 'UPDATE Events SET event_theme = ? WHERE user_id = ?';
-    await connection.query(updateQuery, [selectedTheme, userId]);
+    const updateQuery = 'UPDATE Events SET event_theme = ? WHERE ID = ?';
+    await connection.query(updateQuery, [selectedTheme, eventID]);
 
     res.status(200).json({ message: 'Theme selected successfully' });
   } catch (error) {
     console.error('Error choosing theme:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
-
-router.post('/confirm-booking',isAuthenticated,   async (req, res) => {
-  try {
-    const userId = req.session.user.user_id;
-
-    const connection = await db.getConnection();
-    const updateQuery = 'UPDATE Events SET event_confirmed = ? WHERE user_id = ?';
-    await connection.query(updateQuery, ["CONFIRMED", userId]);
-
-    res.status(201).json({ message: 'YAY! Thank you for booking! Your event has been confirmed.'});
-  } catch (error) {
-    console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
