@@ -1,11 +1,11 @@
 CREATE DATABASE IF NOT EXISTS eventhub;
 USE eventhub;
 
--- create events table
+
 
 CREATE TABLE IF NOT EXISTS Events (
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT, -- Foreign key referencing Users table,
+    user_id INT, 
     event_name VARCHAR(255) NOT NULL,
     event_theme VARCHAR(255),
     event_date VARCHAR(255),
@@ -14,10 +14,8 @@ CREATE TABLE IF NOT EXISTS Events (
     location VARCHAR(255),
     catering_type VARCHAR(255),
     event_confirmed VARCHAR(255)
-    -- Other necessary columns for Events table
+   
 ); 
-
-
 
 
 DELIMITER //
@@ -38,8 +36,6 @@ END//
 DELIMITER ;
 
 
-
-
 SELECT * from EVENTS;
 
 
@@ -50,7 +46,7 @@ CREATE TABLE IF NOT EXISTS Users (
     email VARCHAR(100) NOT NULL,
     telephone_number VARCHAR(20),
     events INT,
-    FOREIGN KEY (events) REFERENCES Events(ID) ON DELETE SET NULL -- Change this to match the Events table primary key and define appropriate ON DELETE behavior
+    FOREIGN KEY (events) REFERENCES Events(ID) ON DELETE SET NULL 
 );
 
 

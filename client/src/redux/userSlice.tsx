@@ -1,44 +1,39 @@
-import {
-  createAsyncThunk,
-  createSelector,
-  createSlice,
-} from "@reduxjs/toolkit";
-
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
+import { configureStore } from "@reduxjs/toolkit"; // Import configureStore
+import store, { AppDispatch as StoreAppDispatch } from "./store";
 
+// Define your types/interfaces here
 interface UserData {
   user_id: number;
   name: string;
-  email: any; 
+  email: any;
   telephone_number: string;
   events: string;
-  password: number; 
+  password: number;
 }
 
 export interface UserState {
   isLoggedIn: boolean;
-  userId: string | null; 
-  userData: UserData | null; 
+  userId: string | null;
+  userData: UserData | null;
   error: string | null;
 }
 
 const initialState: UserState = {
   isLoggedIn: false,
-  userId: null, 
+  userId: null,
   userData: null,
   error: null,
 };
 
 export const selectUserState = (state: RootState) => state.user;
 
-export const selectUserData = createSelector(
-  selectUserState,
-  (user) => user.userData
-);
+export const selectUserData = (state: RootState) => state.user.userData;
 
 export const loginUser = createAsyncThunk(
   "user/login",
-  async ({ email, password }: {  email: string; password: string }) => {
+  async ({ email, password }: { email: string; password: string }) => {
     try {
       const response = await fetch("/auth/login", {
         method: "POST",
@@ -61,15 +56,45 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const logoutUser = createAsyncThunk(
+  "user/logout",
+  async (_, { dispatch }: { dispatch: AppDispatch }) => {
+    try {
+      const response = await fetch("/auth/logout", {
+        method: "POST",
+        // Other necessary configurations
+      });
+
+      if (response.ok) {
+        // Dispatch action to update state after successful logout
+        dispatch(setUserLoggedInState(false)); // Update isLoggedIn state to false
+      } else {
+        throw new Error("Logout failed");
+      }
+    } catch (error) {
+      throw new Error("Logout failed");
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action) => {
+    setUser: (state, action: PayloadAction<UserData>) => {
       state.userData = action.payload;
     },
-    setUserLoggedInState: (state, action) => {
+    setUserLoggedInState: (state, action: PayloadAction<boolean>) => {
       state.isLoggedIn = action.payload;
+    },
+    login: (state) => {
+      state.isLoggedIn = true; // Set the isLoggedIn state to true upon login
+      // You can add other login logic here if needed
+    },
+    logout: (state) => {
+      state.isLoggedIn = false; // Set the isLoggedIn state to false upon logout
+      // Clear other user data upon logout if needed
+      state.userData = null; // Example: resetting user data to null
     },
   },
   extraReducers: (builder) => {
@@ -85,5 +110,8 @@ const userSlice = createSlice({
 
 export const selectIsLoggedIn = (state: RootState) => state.user.isLoggedIn;
 export const { setUserLoggedInState, setUser } = userSlice.actions;
+
+// Define AppDispatch here
+export type AppDispatch = StoreAppDispatch;
 
 export default userSlice.reducer;
