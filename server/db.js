@@ -6,7 +6,7 @@ const router = express.Router();
 const pool = mysql.createPool({
   host: "127.0.0.1",
   user: "root",
-  password: "smiley1987",
+  password: "123456",
   database: "eventhub",
   waitForConnections: true,
   connectionLimit: 10,
