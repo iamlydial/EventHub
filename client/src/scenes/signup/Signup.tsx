@@ -3,7 +3,6 @@ import axios from "axios";
 import loginImage from "../../assets/images/marc-babin-aQWmCH_b3MU-unsplash 1.png";
 import { useNavigate } from "react-router-dom";
 import validation from "./SignupValidation";
-
 interface FormValues {
   name: string;
   email: string;
@@ -64,7 +63,7 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div className="pt-20 flex flex-col lg:flex-row lg:h-screen">
+    <div className="pt-18 flex flex-col lg:flex-row lg:h-screen">
       <div className="flex flex-col w-full lg:w-6/12 p-20 gap-y-1">
         <h1 className="font-mukta items-center text-onyx text-4xl font-bold">
           Create<br></br> an account
@@ -138,8 +137,9 @@ const Signup: React.FC = () => {
             SIGN UP
           </button>
         </form>
+        <a href="/login">Already have an account? Log In</a>
       </div>
-      <div className="flex-col w-full lg:w-6/12">
+      <div className="flex-col w-full lg:w-6/12 pt-10">
         <img className="max-lg:hidden" src={loginImage} alt="Login" />
       </div>
     </div>

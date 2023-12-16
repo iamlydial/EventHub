@@ -12,7 +12,7 @@ const Footer: FC = () => {
             <img
               src={logo}
               alt="logo"
-              width={150}
+              width={130}
               height={46}
               className="m-0"
             />
