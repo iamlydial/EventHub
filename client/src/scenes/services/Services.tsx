@@ -8,19 +8,20 @@ const Services: React.FC = () => {
   return (
     <div className="gridContainer bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${bGServiceImage})` }}>
       <img src="client/src/GalleryComponent/bgServiceImage.jpg" alt="" />
-      <div className="sHeading bg-cover bg-center h-3/4 bg-onyx rounded-lg m-10 mt-20 opacity-70">
+      <div className="sHeading bg-cover bg-center h-3/4 bg-onyx rounded-lg m-10 mt-20 opacity-80">
         <h1 className="title text-5xl text-white pt-20 text-center font-bold p-5 mt-5">EventHub Services</h1>
         <p className="strapLine text-2xl text-white text-center p-5">
           Planning - Location  - Catering - Theme - Design
         </p>
-        <p className="strapLine2 text-lg text-white text-navigation p-20">
-          Here at EventHub, we have created tailored party packages for All age Birthday party’s,
-          Baby showers and Bridal Showers. See Below our list of services and the event planning journey.
-          Follow our seamless plan to creating your perfect event.
+        <p className="strapLine2 text-lg text-white text-navigation p-20 text-start">
+          Here at EventHub, we have created tailored party packages for all ages.
+          From Birthday Parties and Baby Showers to Ladies' and Guy's Nights.
+          See below for our list of services and the event planning journey.
+          Follow our seamless plan to create your perfect event.
         </p>
       </div>
 
-      <div className="userJourney p-10 m-20 flex flex-col items-center bg-white rounded-lg opacity-80">
+      <div className="userJourney p-10 m-20 flex flex-col items-center bg-white rounded-lg opacity-90">
         <h2 className="text-4xl font-bold text-center mb-10">Your Journey Starts Here</h2>
         <div className="grid grid-cols-1 md:grid-cols-1 gap-4 p-5 flex flex-col items-center">
 

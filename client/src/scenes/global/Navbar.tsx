@@ -4,7 +4,6 @@ import { hamburger, close } from "../../assets/icons";
 import { useMediaQuery } from "@react-hook/media-query";
 import { useDispatch } from "react-redux";
 import { AppDispatch, logoutUser } from "../../../src/redux/userSlice";
-import { unwrapResult } from "@reduxjs/toolkit";
 
 interface NavProps {
   isLoggedIn: boolean;
