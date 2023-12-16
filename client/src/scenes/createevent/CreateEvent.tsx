@@ -81,7 +81,7 @@ const CreateEvent = () => {
         </li>
         <li>
           <h3 className="font-bold mb-4" style={{ color: "#D4A69E" }}>
-            Lets get started
+            Let's get started
           </h3>
         </li>
       </ul>
@@ -101,7 +101,7 @@ const CreateEvent = () => {
           }`}
           onClick={() => handleOptionClick("Kids Birthday")}
         >
-          Kids Birthday
+          Kid's Birthday
         </button>
         <button
           className={`flex items-center justify-center h-28 px-8 bg-sage rounded-md text-gray-800 ${

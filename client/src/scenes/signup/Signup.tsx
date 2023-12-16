@@ -117,19 +117,6 @@ const Signup: React.FC = () => {
           {errors.confirmPassword && (
             <span className="text-red-500">{errors.confirmPassword}</span>
           )}
-          {/* <div className="flex text-onyx flex-row gap-5 items-center">
-            <input type="checkbox" className="h-7 w-7" />
-            <p className="font-roboto">
-              I accept{" "}
-              <span className="font-roboto underline font-extrabold">
-                Privacy
-              </span>{" "}
-              and{" "}
-              <span className="font-roboto undeline underline font-extrabold">
-                Terms & Conditions
-              </span>
-            </p>
-          </div> */}
           <button
             type="submit"
             className=" bg-dutchWhite hover:bg-rosyBrown hover:text-black p-3 rounded-md text-white font-roboto"

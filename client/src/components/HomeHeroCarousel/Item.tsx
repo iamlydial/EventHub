@@ -3,6 +3,9 @@ import { CarouselItem } from "../../types/interfaces";
 import { Paper, Button } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { selectIsLoggedIn, selectUserData } from "../../redux/userSlice";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { Link } from "react-router-dom"
+
 
 interface ItemProps {
   item: CarouselItem;
@@ -14,6 +17,8 @@ const Item: React.FC<ItemProps> = ({ item }) => {
   console.log(selectIsLoggedIn);
   console.log(isLoggedIn, "isLoggedIn from Carousel");
   console.log(userData?.name, "userData from Carousel");
+
+
   return (
     <Paper className="mt-10">
       <div className="relative">
@@ -24,6 +29,7 @@ const Item: React.FC<ItemProps> = ({ item }) => {
               <h1 className="flex text-4xl  text-onyx flex-row font-bold font-mukta">
                 Welcome {userData?.name},<br />
                 we curate:
+
               </h1>
 
               <h2 className="text-4xl font-bold  text-rosyBrown flex-row">
@@ -31,9 +37,9 @@ const Item: React.FC<ItemProps> = ({ item }) => {
               </h2>
               <h3 className="flex font-md  text-onyx ">{item.description}</h3>
               <div className="flex flex-row text-center mt-4">
-                <button className="bg-rosyBrown rounded-md p-3">
-                  Create Your Event!
-                </button>
+                <Link to="/signup">
+                  <button className="bg-rosyBrown rounded-md p-3">Create Your Event!</button>
+                </Link>
               </div>
             </div>
           </div>
