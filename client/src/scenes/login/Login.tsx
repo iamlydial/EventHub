@@ -50,23 +50,30 @@ const Login: React.FC = () => {
       )
     ) {
       // Handle validation errors here
+      console.log("Validation errors occurred:", validationErrors);
       return;
     }
 
     try {
-      const res = await axios.post("/auth/login", values);
-      if (res.data) {
+      console.log("Sending login request...");
+      const response = await axios.post("/auth/login", values);
+      const userData = response.data; // Extract the user data from the response
+
+      if (userData) {
+        console.log("Login successful. Response data:", userData);
+
         // Dispatch setUser action with the user data from the response
-        dispatch(setUser(res.data));
+        dispatch(setUser(userData));
 
         // Set isLoggedIn in localStorage to true
         localStorage.setItem("isLoggedIn", "true");
+
+        console.log("User data dispatched and isLoggedIn set in localStorage.");
 
         // Redirect user to the home page
         window.location.href = "/account-dashboard"; // Replace with your home page route
       }
     } catch (error) {
-      // Handle login failure or other errors
       console.error("Login error:", error);
     }
   };

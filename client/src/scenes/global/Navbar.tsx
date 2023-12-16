@@ -9,26 +9,22 @@ interface NavProps {
   isLoggedIn: boolean;
 }
 
-const Navbar: React.FC<NavProps> = () => {
-  const dispatch = useDispatch<AppDispatch>();
+const Navbar: React.FC<NavProps> = ({ isLoggedIn }) => {
+  const dispatch = useDispatch();
   const isAboveMediumScreens: boolean = useMediaQuery("(min-width: 1060px)");
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(
+  const [loggedInState, setLoggedInState] = useState(
     localStorage.getItem("isLoggedIn") === "true"
   );
 
   const handleLogout = async () => {
     try {
-      const action = await dispatch(logoutUser() as any); // Use 'as any' to temporarily bypass type check
-      // Assuming the logout action succeeds without error
+      const action: any = await dispatch(logoutUser() as any);
       localStorage.setItem("isLoggedIn", "false");
-      setIsLoggedIn(false);
-      console.log("Logout successful:", action);
-      console.log(isLoggedIn, "isLoggedIn in logout function");
-      // Additional actions after successful logout
+      setLoggedInState(false); // Update the local state for isLoggedIn
     } catch (error) {
-      console.error("Logout error:", error);
-      // Handle any logout errors
+      console.error("Logout failed:", error);
+      // Handle logout failure
     }
   };
 
@@ -50,7 +46,11 @@ const Navbar: React.FC<NavProps> = () => {
           <ul className="flex flex-row font-mukta justify-end items-center gap-8 max-lg:hidden">
             {logLinks.map((link, index) => (
               <li className="flex gap-4" key={index}>
-                <a href={link.href}>{link.label}</a>
+                {link.href === "/logout" ? (
+                  <button onClick={handleLogout}>{link.label}</button>
+                ) : (
+                  <a href={link.href}>{link.label}</a>
+                )}
                 <img src={link.icon} height={25} width={25} alt={link.label} />
               </li>
             ))}
@@ -60,7 +60,6 @@ const Navbar: React.FC<NavProps> = () => {
         <nav className="flex justify-between font-mukta items-center max-container text-white">
           <a className="font-mukta text-2xl" href="/">
             EventHub
-            {/* <img src={logoNavbar} alt="Logo" width={100} height="auto" /> */}
           </a>
           <div className="lg:hidden">
             <img
