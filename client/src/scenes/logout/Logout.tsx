@@ -10,14 +10,14 @@ const Logout = (props: Props) => {
         <h1 className="font-mukta items-center text-onyx text-4xl font-bold leading-loose">
           You have been <br /> successfully logged out.
         </h1>
-        <h2 className="font-mukta ">Thank you for visiting us!</h2>
+        <h2 className="font-mukta ">Thank you for visiting EventHub!</h2>
       </div>
       {/* Hide the image on small screens (sm and smaller) */}
       <div className="flex-col w-full lg:w-6/12 pt-10">
         <img
           className="max-lg:hidden bg-cover h-screen"
           src={ThankYouImage}
-          alt="Login"
+          alt="Logout"
         />
       </div>
     </div>

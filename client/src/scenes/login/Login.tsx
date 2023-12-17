@@ -5,7 +5,7 @@ import loginImage2 from "../../assets/images/tuva-mathilde-loland-7hhn4SmbnT8-un
 import { loginUser } from "../../redux/userSlice";
 import { setUser } from "../../redux/userSlice";
 import { useAppDispatch } from "../../redux/hooks";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import validation from "./LoginValidation";
 
 interface FormValues {
@@ -50,23 +50,30 @@ const Login: React.FC = () => {
       )
     ) {
       // Handle validation errors here
+      console.log("Validation errors occurred:", validationErrors);
       return;
     }
 
     try {
-      const res = await axios.post("/auth/login", values);
-      if (res.data) {
+      console.log("Sending login request...");
+      const response = await axios.post("/auth/login", values);
+      const userData = response.data; // Extract the user data from the response
+
+      if (userData) {
+        console.log("Login successful. Response data:", userData);
+
         // Dispatch setUser action with the user data from the response
-        dispatch(setUser(res.data));
+        dispatch(setUser(userData));
 
         // Set isLoggedIn in localStorage to true
         localStorage.setItem("isLoggedIn", "true");
 
+        console.log("User data dispatched and isLoggedIn set in localStorage.");
+
         // Redirect user to the home page
-        window.location.href = "/"; // Replace with your home page route
+        window.location.href = "/account-dashboard"; // Replace with your home page route
       }
     } catch (error) {
-      // Handle login failure or other errors
       console.error("Login error:", error);
     }
   };
@@ -108,12 +115,7 @@ const Login: React.FC = () => {
           >
             LOGIN
           </button>
-          <p className="flex flex-row text-sm">
-            If you dont'have an account, {""}
-            <a href="/signup">
-              <span className="underline"> sign up!</span>
-            </a>
-          </p>
+          <Link to="/signup">Don't have an account? Sign Up</Link>
         </form>
       </div>
       {/* Hide the image on small screens (sm and smaller) */}
