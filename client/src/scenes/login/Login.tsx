@@ -64,8 +64,8 @@ const Login: React.FC = () => {
 
         // Dispatch setUser action with the user data from the response
 
-        console.log(res.data);
-        dispatch(setUser(res.data));
+        dispatch(setUser(userData));
+
 
         
 
