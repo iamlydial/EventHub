@@ -61,7 +61,7 @@ const Login: React.FC = () => {
         localStorage.setItem("isLoggedIn", "true");
         console.log("User data dispatched and isLoggedIn set in localStorage.");
         // Redirect user to the home page
-        window.location.href = "/"; // Replace with your home page route
+        window.location.href = "/account-dashboard"; // Redirects to dashboard after login
       }
     } catch (error) {
       console.error("Login error:", error);

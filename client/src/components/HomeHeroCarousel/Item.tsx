@@ -26,8 +26,8 @@ const Item: React.FC<ItemProps> = ({ item }) => {
           <div className="flex flex-col items-center p-10 ">
             <div className="flex h-full flex-col gap-y-12 items-center">
               <h1 className="flex text-4xl  text-onyx flex-row font-bold font-mukta">
-                Welcome {userData?.name},<br />
-                we curate:
+                {userData?.name}<br />
+                Curate your
 
               </h1>
 
