@@ -25,7 +25,8 @@ interface EventDetails {
 }
 
 const YourEventHistory: React.FC = () => {
-  const user = useSelector((state: RootState) => state.persisted.user.userData);
+  const user = useSelector((state: RootState) => state.user.userData);
+
   const [currentEvent, setCurrentEvent] = useState<EventDetails[] | null>(null);
   const ongoingEvent = currentEvent?.[currentEvent?.length - 1];
 
