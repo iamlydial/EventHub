@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import whiteballoons from "../../assets/images/whiteballoons.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -13,11 +13,12 @@ const Date = () => {
 
   useEffect(() => {
     // Fetch date options for our frontend
-    axios.get("/choose-date-time")
-      .then(response => {
+    axios
+      .get("/choose-date-time")
+      .then((response) => {
         setDateOptions(response.data.dateOptions);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching date options:", error);
       });
   }, []);
@@ -34,6 +35,7 @@ const Date = () => {
 
     setNextClicked(true);
 
+
     axios.post("/choose-date", {
       date: date,
       time: time,
@@ -41,17 +43,24 @@ const Date = () => {
     })
       .then(response => {})
       .catch(error => {
+
         console.error("Error choosing date and time:", error);
-        
       });
 
     navigate("/occasion-confirmed");
   };
 
   return (
-    <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300">
+    <div
+      className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300"
+      style={{
+        backgroundImage: `url(${whiteballoons})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <h3
-        className="absolute top-24 left-4 font-bold text-center mt-12"
+        className="absolute top-24 left-4 font-bold text-center mt-3"
         style={{ color: "#D4A69E" }}
       >
         Date and Time
