@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import whiteballoons from "../../assets/images/whiteballoons.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -58,7 +58,14 @@ const Date = () => {
   }, [nextClicked, navigate]);
 
   return (
-    <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300">
+    <div
+      className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300"
+      style={{
+        backgroundImage: `url(${whiteballoons})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <h3
         className="absolute top-24 left-4 font-bold text-center mt-3"
         style={{ color: "#D4A69E" }}
