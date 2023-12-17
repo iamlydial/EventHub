@@ -35,27 +35,20 @@ const Date = () => {
 
     setNextClicked(true);
 
-    axios
-      .post("/choose-date", {
-        date: date,
-        time: time,
-        duration: duration,
-      })
-      .then((response) => {
-        console.log(response.data.message);
 
-        navigate("/occasion-confirmed");
-      })
-      .catch((error) => {
+    axios.post("/choose-date", {
+      date: date,
+      time: time,
+      duration: duration,
+    })
+      .then(response => {})
+      .catch(error => {
+
         console.error("Error choosing date and time:", error);
       });
-  };
 
-  useEffect(() => {
-    if (nextClicked) {
-      navigate("/occasion-confirmed");
-    }
-  }, [nextClicked, navigate]);
+    navigate("/occasion-confirmed");
+  };
 
   return (
     <div

@@ -63,7 +63,11 @@ const Login: React.FC = () => {
         console.log("Login successful. Response data:", userData);
 
         // Dispatch setUser action with the user data from the response
-        dispatch(setUser(userData));
+
+        console.log(res.data);
+        dispatch(setUser(res.data));
+
+        
 
         // Set isLoggedIn in localStorage to true
         localStorage.setItem("isLoggedIn", "true");

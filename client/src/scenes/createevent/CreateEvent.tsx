@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import GreySquiggle from "../../assets/images/GreySquiggle.jpg";
+import createEventBg from "../../GalleryComponent/createEventBg.jpg"
 import whiteballoons from "../../assets/images/whiteballoons.jpg";
 import axios from "axios";
 
@@ -38,10 +40,8 @@ const CreateEvent = () => {
 
     setNextClicked(true);
 
-    axios
-      .post("/create-event", { event_name: selectedOption })
-      .then((response) => {
-        console.log(response.data.message);
+    axios.post("/create-event", { event_name: selectedOption })
+      .then(response => {
 
         navigate("/location");
       })
