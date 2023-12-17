@@ -9,7 +9,6 @@ All your event needs under one roof.
 - Jessica Palmer
 - Minka Ansa
 
-- ![image](https://github.com/iamlydial/EventHub/assets/131040199/edfd2a4b-8070-4624-8ee0-86a16c076cfd)
 ## Project Description:
 The EventHub project is an event management platform that facilitates the planning and organization of various events. Users can select the type of event, choose specific details such as themes, locations, date and time, catering, and decorations. The platform aims to streamline the event booking process for different occasions like bridal showers, birthdays, kids' birthdays, and baby showers.
 
