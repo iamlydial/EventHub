@@ -6,8 +6,8 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.18",
-    "@mui/material": "^5.14.18",
+    "@mui/icons-material": "^5.15.0",
+    "@mui/material": "^5.15.0",
     "@react-hook/media-query": "^1.1.1",
     "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/user-event": "^13.5.0",
@@ -73,8 +73,7 @@
     "transform": {
       "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
     },
-
-  "moduleNameMapper": {
+    "moduleNameMapper": {
       "\\.(png|jpg|jpeg|gif|svg)$": "<rootDir>/__mocks__/fileMock.js"
     }
   }
