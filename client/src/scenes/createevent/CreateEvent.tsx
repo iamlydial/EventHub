@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import GreySquiggle from "../../assets/images/GreySquiggle.jpg";
-import axios from 'axios'
-import createEventBg from "../../GalleryComponent/createEventBg.jpg"
-
+import whiteballoons from "../../assets/images/whiteballoons.jpg";
+import axios from "axios";
 
 const CreateEvent = () => {
   const location = useLocation();
@@ -15,11 +13,12 @@ const CreateEvent = () => {
 
   useEffect(() => {
     // Fetch event types for our frontend
-    axios.get("/event-types")
-      .then(response => {
+    axios
+      .get("/event-types")
+      .then((response) => {
         setEventTypes(response.data.eventTypes);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching event types:", error);
       });
   }, []);
@@ -39,15 +38,15 @@ const CreateEvent = () => {
 
     setNextClicked(true);
 
-    axios.post("/create-event", { event_name: selectedOption })
-      .then(response => {
+    axios
+      .post("/create-event", { event_name: selectedOption })
+      .then((response) => {
         console.log(response.data.message);
-        
+
         navigate("/location");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error creating event:", error);
-        
       });
   };
 
@@ -56,16 +55,21 @@ const CreateEvent = () => {
       navigate("/location");
     }
   }, [nextClicked, navigate]);
-   
-   
-  return (
 
-    <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300">
+  return (
+    <div
+      className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300"
+      style={{
+        backgroundImage: `url(${whiteballoons})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <h3
-        className="absolute top-24 left-4 font-bold text-center mt-12"
+        className="absolute top-24 left-4 font-bold text-center mt-3"
         style={{ color: "#D4A69E" }}
       >
-        Occasion
+        Occassion
       </h3>
 
       <ul className="text-center mb-8">
