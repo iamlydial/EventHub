@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import GreySquiggle from "../../assets/images/GreySquiggle.jpg";
-import createEventBg from "../../GalleryComponent/createEventBg.jpg"
-=======
->>>>>>> 6fa1a98c0621c972210deba5ac099b1a82ef9126
 
 const CreateEvent = () => {
   const location = useLocation();
@@ -30,11 +25,7 @@ const CreateEvent = () => {
     navigate("/location");
   };
   return (
-<<<<<<< HEAD
-    <div className="relative pt-20 flex flex-col items-center justify-center h-screen flex flex-col justify-between min-h-screen bg-cover object-fit-none bg center bg-no-repeat" style={{ backgroundImage: `url(${createEventBg})` }}>
-=======
     <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-gray-300">
->>>>>>> 6fa1a98c0621c972210deba5ac099b1a82ef9126
       <h3
         className="absolute top-24 left-4 font-bold text-center mt-12"
         style={{ color: "#D4A69E" }}
