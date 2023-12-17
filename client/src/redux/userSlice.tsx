@@ -68,6 +68,13 @@ export const logoutUser = createAsyncThunk(
       if (response.ok) {
         // Dispatch action to update state after successful logout
         dispatch(setUserLoggedInState(false)); // Update isLoggedIn state to false
+        dispatch(setUser(null)); ; // Reset user data in the state
+
+        // Clear local storage
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userData"); // Adjust this according to your implementation
+
+        // Additional cleanup if needed
       } else {
         throw new Error("Logout failed");
       }
@@ -81,7 +88,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserData>) => {
+    setUser: (state, action: PayloadAction<UserData | null>) => {
       state.userData = action.payload;
     },
     setUserLoggedInState: (state, action: PayloadAction<boolean>) => {
@@ -92,9 +99,9 @@ const userSlice = createSlice({
       // You can add other login logic here if needed
     },
     logout: (state) => {
-      state.isLoggedIn = false; // Set the isLoggedIn state to false upon logout
-      // Clear other user data upon logout if needed
-      state.userData = null; // Example: resetting user data to null
+      state.isLoggedIn = false;
+      state.userData = null; // Resetting user data to null upon logout
+      console.log("User logged out. UserData:", state.userData);
     },
   },
   extraReducers: (builder) => {
