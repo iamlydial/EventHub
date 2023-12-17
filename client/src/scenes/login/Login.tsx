@@ -6,6 +6,7 @@ import { setUser } from "../../redux/userSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { useNavigate } from "react-router-dom";
 import validation from "./LoginValidation";
+
 interface FormValues {
   email: string;
   password: string;
@@ -50,7 +51,12 @@ const Login: React.FC = () => {
       if (userData) {
         console.log("Login successful. Response data:", userData);
         // Dispatch setUser action with the user data from the response
+
         dispatch(setUser(userData));
+
+
+        
+
         // Set isLoggedIn in localStorage to true
         localStorage.setItem("isLoggedIn", "true");
         console.log("User data dispatched and isLoggedIn set in localStorage.");
