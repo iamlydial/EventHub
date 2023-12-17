@@ -50,16 +50,19 @@ Here is our powerpoint doc in which we planned our project before starting it:
    cd EventHub
 
 2. **Frontend Setup:**
+   ```bash
    cd frontend
    npm install
    npm start
 
 4. **Backend Setup:**
+   ```bash
    cd backend
    npm install
    npm start
 
-5. **Open in Browser:**
+6. **Open in Browser:**
+   ```bash
    Frontend: http://localhost:3000
    Backend: http://localhost:5000
    
