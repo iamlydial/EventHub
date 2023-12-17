@@ -1,16 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 import oc from "../../assets/images/oc.jpg";
 
 const OccasionConfirmed = () => {
+  const navigate = useNavigate();
+  const [eventDetails, setEventDetails] = useState(null);
+
+  useEffect(() => {
+    axios
+      .post("/confirm-booking")
+      .then((response) => {
+        setEventDetails(response.data.eventDetails);
+      })
+      .catch((error) => {
+        console.error("Error fetching event details:", error);
+      });
+  }, []);
+
   return (
     <div
-      className="relative pt-20 flex flex-col items-center justify-center h-screen bg-gray-300"
-      style={{
-        backgroundImage: `url(${oc})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300"
+      // style={{
+      //   backgroundImage: `url(${oc})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      // }}
     >
       <h1 className="text-3xl font-bold mb-4" style={{ color: "#000000" }}>
         Occasion Confirmed!

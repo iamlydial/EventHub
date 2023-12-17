@@ -1,8 +1,20 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  combineReducers,
+  getDefaultMiddleware,
+} from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
 import storage from "redux-persist/lib/storage";
-import { persistReducer } from "redux-persist";
-import { combineReducers } from "@reduxjs/toolkit";
+import {
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import thunk from "redux-thunk"; // Import redux-thunk
 
 const persistConfig = {
   key: "root",
@@ -10,15 +22,30 @@ const persistConfig = {
   storage,
 };
 
-const reducer = combineReducers({
+const rootReducer = combineReducers({
   user: userReducer,
+  // Other reducers if any...
 });
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = configureStore({
-  reducer: persistedReducer,
+const middleware = [
+  thunk, // Add thunk middleware
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+];
+
+const store = configureStore({
+  reducer: persistedReducer, // Use only the persisted reducer here
+  middleware,
 });
+
+
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+export default store;

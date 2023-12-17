@@ -6,7 +6,7 @@ const router = express.Router();
 const pool = mysql.createPool({
   host: "127.0.0.1",
   user: "root",
-  password: "123456789",
+  password: "123456",
   database: "eventhub",
   waitForConnections: true,
   connectionLimit: 10,
@@ -16,6 +16,7 @@ const pool = mysql.createPool({
 const getConnection = async () => {
   try {
     const connection = await pool.getConnection();
+    console.log("Connected to the database!");
     return connection;
   } catch (error) {
     throw new Error(`Error getting connection: ${error.message}`);

@@ -1,13 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import GreySquiggle from "../../assets/images/GreySquiggle.jpg";
+import axios from 'axios'
+import createEventBg from "../../GalleryComponent/createEventBg.jpg"
+
 
 const CreateEvent = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  console.log("Current route:", location.pathname);
-
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [eventTypes, setEventTypes] = useState<string[]>([]);
+  const [nextClicked, setNextClicked] = useState(false);
+
+  useEffect(() => {
+    // Fetch event types for our frontend
+    axios.get("/event-types")
+      .then(response => {
+        setEventTypes(response.data.eventTypes);
+      })
+      .catch(error => {
+        console.error("Error fetching event types:", error);
+      });
+  }, []);
+
+  console.log("Current route:", location.pathname);
 
   const handleOptionClick = (option: string) => {
     console.log("Selected Option:", option);
@@ -20,12 +37,30 @@ const CreateEvent = () => {
       return;
     }
 
-    console.log("Selected Option:", selectedOption);
+    setNextClicked(true);
 
-    navigate("/location");
+    axios.post("/create-event", { event_name: selectedOption })
+      .then(response => {
+        console.log(response.data.message);
+        
+        navigate("/location");
+      })
+      .catch(error => {
+        console.error("Error creating event:", error);
+        
+      });
   };
+
+  useEffect(() => {
+    if (nextClicked) {
+      navigate("/location");
+    }
+  }, [nextClicked, navigate]);
+   
+   
   return (
-    <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-gray-300">
+
+    <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300">
       <h3
         className="absolute top-24 left-4 font-bold text-center mt-12"
         style={{ color: "#D4A69E" }}
@@ -46,7 +81,7 @@ const CreateEvent = () => {
         </li>
         <li>
           <h3 className="font-bold mb-4" style={{ color: "#D4A69E" }}>
-            Lets get started
+            Let's get started
           </h3>
         </li>
       </ul>
@@ -66,7 +101,7 @@ const CreateEvent = () => {
           }`}
           onClick={() => handleOptionClick("Kids Birthday")}
         >
-          Kids Birthday
+          Kid's Birthday
         </button>
         <button
           className={`flex items-center justify-center h-28 px-8 bg-sage rounded-md text-gray-800 ${
@@ -99,4 +134,5 @@ const CreateEvent = () => {
     </div>
   );
 };
+
 export default CreateEvent;

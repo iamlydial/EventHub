@@ -1,12 +1,32 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import axios from "axios";
 
 const Theme = () => {
   const navigate = useNavigate();
+
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [themeOptions, setThemeOptions] = useState<string[]>([]);
+  const [nextClicked, setNextClicked] = useState(false);
+
+  useEffect(() => {
+    // Fetch theme options for our frontend
+    axios.get("/theme-options")
+      .then(response => {
+        setThemeOptions(response.data.themeOptions);
+      })
+      .catch(error => {
+        console.error("Error fetching theme options:", error);
+      });
+  }, []);
 
   const handleBackClick = () => {
     navigate(-1);
+  };
+
+  const handleOptionClick = (option: string) => {
+    setSelectedOption(option);
   };
 
   const handleNextClick = () => {
@@ -14,17 +34,30 @@ const Theme = () => {
       alert("Please select a theme before proceeding.");
       return;
     }
-
-    console.log("Selected Theme:", selectedOption);
-    navigate("/date");
+  
+    setNextClicked(true);
+  
+   
+    axios.post("/choose-theme", { theme: selectedOption })
+      .then(response => {
+        console.log(response.data.message);
+        
+        navigate("/date");
+      })
+      .catch(error => {
+        console.error("Error choosing theme:", error);
+      
+      });
   };
 
-  const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
-  };
+  useEffect(() => {
+    if (nextClicked) {
+      navigate("/date");
+    }
+  }, [nextClicked, navigate]);
 
   return (
-    <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-gray-300">
+    <div className="relative pt-20 flex flex-col items-center justify-center h-screen bg-white-300">
       <h3
         className="absolute top-24 left-4 font-bold text-center mt-12"
         style={{ color: "#D4A69E" }}

@@ -38,7 +38,7 @@ function validation(values: FormValues): FormErrors {
     errors.password = "Password should not be empty";
   } else if (!passwordPattern.test(values.password)) {
     errors.password =
-      "Password must contain at least 8 characters including one uppercase letter, one lowercase letter, and one digit";
+      "Password must contain at least 8 characters including one uppercase letter, one lowercase letter, one special character and one number";
   }
 
   if (values.confirmPassword.trim() === "") {
