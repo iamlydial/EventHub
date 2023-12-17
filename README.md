@@ -3,11 +3,11 @@
 All your event needs under one roof.
 
 ## Team Names List:
-- Nasra Hussein 
-- Lydia Lavecchia 
-- Mimi Brown
-- Jessica Palmer
-- Minka Ansa
+- ![image](https://github.com/iamlydial/EventHub/assets/131040199/557f629a-5832-4054-a026-e71884a6a1b0) Nasra Hussein 
+- ![image](https://github.com/iamlydial/EventHub/assets/131040199/e03a6438-4d5b-4c54-a8aa-df30c59dfa53) Lydia Lavecchia 
+- ![image](https://github.com/iamlydial/EventHub/assets/131040199/1d793827-de69-4f03-bbd7-4e70fcce6a52) Mimi Brown
+- ![image](https://github.com/iamlydial/EventHub/assets/131040199/3747203e-7a81-41ef-9737-2aeff4f2008d) Jessica Palmer
+- ![image](https://github.com/iamlydial/EventHub/assets/131040199/edfd2a4b-8070-4624-8ee0-86a16c076cfd) Minka Ansa
 
 ## Project Description:
 The EventHub project is an event management platform that facilitates the planning and organization of various events. Users can select the type of event, choose specific details such as themes, locations, date and time, catering, and decorations. The platform aims to streamline the event booking process for different occasions like bridal showers, birthdays, kids' birthdays, and baby showers.
