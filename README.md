@@ -51,13 +51,13 @@ Here is our powerpoint doc in which we planned our project before starting it:
 
 2. **Frontend Setup:**
    ```bash
-   cd frontend
+   cd client
    npm install
    npm start
 
 4. **Backend Setup:**
    ```bash
-   cd backend
+   cd server
    npm install
    npm start
 
